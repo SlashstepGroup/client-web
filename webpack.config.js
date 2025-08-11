@@ -47,8 +47,12 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.ogg$/,
+        test: /\.(ogg)$/,
         use: "file-loader"
+      },
+      {
+        test: /\.svg$/,
+        type: "asset/inline"
       },
       {
         test: /\.css$/,

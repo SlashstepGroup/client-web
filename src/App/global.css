@@ -1,3 +1,7 @@
+:root {
+  --text: #252525;
+}
+
 @font-face {
   font-family: "Figtree";
   src: url(./Figtree-VariableFont_wght.ttf);
@@ -27,12 +31,16 @@ p {
   line-height: 1.5;
 }
 
-h1, button, p, th, td, a {
+h1, button, p, th, td, a, section, input {
   font-family: "Figtree", sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+p, input[type="text"] {
+  color: var(--text);
 }
 
 h1, p {
@@ -45,6 +53,15 @@ button {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   cursor: pointer;
+  transition: 0.1s;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+button:hover:active {
+  transform: scale(0.95);
 }
 
 .primary-button {
@@ -78,4 +95,28 @@ button {
   color: inherit;
   display: flex;
   flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form > section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"] {
+  border-radius: 5px;
+  padding: 15px;
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  font-size: 1rem;
+}
+
+button {
+  font-size: 1rem;
 }

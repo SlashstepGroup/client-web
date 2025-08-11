@@ -1,7 +1,7 @@
 import React from "react";
 import { main as mainStyle } from "./WorkspaceListPage.module.css";
 import { useNavigate } from "react-router-dom";
-import Tip from "../Tip/Tip";
+import Tip from "../../components/Tip/Tip";
 
 export type WorkspaceProperties = {
   name: string;
@@ -31,7 +31,7 @@ function WorkspaceListPage() {
       <p>Workspaces are groups that you can use to organize your projects.</p>
       <ul className="button-list">
         <li>
-          <button className="primary-button" onClick={() => navigate("?action=create-workspace")}>Create workspace</button>
+          <button className="primary-button" onClick={() => navigate("?action=workspaces.create")}>Create workspace</button>
         </li>
       </ul>
       {
