@@ -1,0 +1,32 @@
+:root {
+  --sidebar: #fafafa;
+}
+
+#sidebar {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--sidebar);
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 360px) {
+
+  #sidebar {
+    width: 360px;
+    border-right: 1px solid var(--border);
+  }
+
+}
+
+@media (prefers-color-scheme: dark) {
+  
+  :root {
+    --sidebar: rgb(8, 8, 8);
+  }
+
+}

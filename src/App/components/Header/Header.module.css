@@ -1,0 +1,35 @@
+:root {
+  --header: #fafafa;
+}
+
+#header {
+  padding: 10px 15px;
+  display: flex;
+  gap: 15px;
+  height: 60px;
+  box-sizing: border-box;
+  background-color: var(--header);
+  border-bottom: 1px solid var(--border);
+}
+
+#scopeButton {
+  background-color: var(--menu-list-button-background);
+  color: var(--text);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#scopeButton > svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text);
+}
+
+@media (prefers-color-scheme: dark) {
+  
+  :root {
+    --header: rgb(8, 8, 8);
+  }
+
+}

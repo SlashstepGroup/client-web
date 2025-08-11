@@ -1,3 +1,11 @@
+#breadcrumbList {
+  background-color: var(--header);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+}
+
 #breadcrumbList > ul {
   display: flex;
   gap: 15px;

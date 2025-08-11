@@ -1,5 +1,8 @@
 :root {
+  --body-background: rgb(247, 247, 247);
   --text: #252525;
+  --menu-list-button-background: #fafafa;
+  --border: #e6e6e6;
 }
 
 @font-face {
@@ -24,7 +27,8 @@ html, #root {
 body {
   margin: 0;
   height: 100%;
-  background-color: rgb(247, 247, 247);
+  background-color: var(--body-background);
+  transition: 0.3s;
 }
 
 p {
@@ -51,7 +55,7 @@ button {
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   cursor: pointer;
   transition: 0.1s;
 }
@@ -90,11 +94,17 @@ button:hover:active {
   margin: 0;
   padding: 15px;
   border-radius: 5px;
-  background-color: #fafafa;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: var(--menu-list-button-background);
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   color: inherit;
   display: flex;
   flex-direction: column;
+  opacity: 0.8;
+  transition: opacity 0.1s;
+}
+
+.menu-list li a:hover {
+  opacity: 1;
 }
 
 form {
@@ -113,7 +123,7 @@ input[type="text"] {
   border-radius: 5px;
   padding: 15px;
   border: none;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   font-size: 1rem;
 }
 
@@ -129,4 +139,30 @@ main {
   box-sizing: border-box;
   max-width: 1080px;
   margin: 0 auto;
+  flex-grow: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+  color: var(--text);
+}
+
+#content {
+  display: flex;
+  height: calc(100% - 60px);
+  box-sizing: border-box;
+}
+
+#main-container {
+  width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  
+  :root {
+    --text: #e0e0e0;
+    --body-background: #121214;
+    --menu-list-button-background: #313131;
+    --border: #272727;
+  }
+
 }

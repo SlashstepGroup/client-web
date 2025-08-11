@@ -1,0 +1,18 @@
+.sidebarSection {
+  width: 100%;
+}
+
+.sidebarSection > h1 {
+  color: gray;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.sidebarSection > ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}

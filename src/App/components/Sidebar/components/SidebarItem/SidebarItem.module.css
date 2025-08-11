@@ -1,0 +1,9 @@
+.sidebarItem > a {
+  border-radius: 5px;
+  background-color: var(--body-background);
+  flex-grow: 1;
+  display: flex;
+  color: inherit;
+  padding: 10px 15px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
