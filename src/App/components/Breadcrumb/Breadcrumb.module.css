@@ -1,0 +1,19 @@
+.breadcrumb {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  gap: 5px;
+}
+
+.breadcrumb > svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text);
+}
+
+.breadcrumb > a {
+  color: var(--text);
+  text-decoration: none;
+}

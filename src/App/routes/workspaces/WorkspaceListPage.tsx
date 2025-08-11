@@ -1,7 +1,7 @@
-import React from "react";
-import { main as mainStyle } from "./WorkspaceListPage.module.css";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Tip from "../../components/Tip/Tip";
+import BreadcrumbList from "../../components/BreadcrumbList/BreadcrumbList";
 
 export type WorkspaceProperties = {
   name: string;
@@ -25,8 +25,15 @@ function WorkspaceListPage() {
     }
   ];
 
+  useEffect(() => {
+  
+    document.title = "Workspaces • Gaze";
+
+  }, []);
+
   return (
-    <main id={mainStyle}>
+    <main>
+      <BreadcrumbList />
       <h1>Workspaces</h1>
       <p>Workspaces are groups that you can use to organize your projects.</p>
       <ul className="button-list">
@@ -40,12 +47,12 @@ function WorkspaceListPage() {
             <ul className="menu-list">
               {workspaces.map(workspace => (
                 <li key={workspace.name}>
-                  <a href={`/workspaces/${workspace.name}`}>
+                  <Link to={`/workspaces/${workspace.name}`}>
                     <b>{workspace.displayName}</b>
                     {
                       workspace.description ? <p>{workspace.description}</p> : null
                     }
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -1,6 +1,6 @@
 import React from "react";
 import { popupHeader as popupHeaderStyle } from "./PopupHeader.module.css";
-import CloseIcon from "./Icons/CloseIcon/CloseIcon";
+import CloseIcon from "../../../../icons/CloseIcon";
 
 function PopupHeader({children, onClose}: {children: React.ReactNode, onClose?: (() => void)}) {
 

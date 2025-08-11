@@ -1,9 +1,0 @@
-#main {
-  display: flex;
-  padding: 15px;
-  gap: 15px;
-  flex-direction: column;
-  box-sizing: border-box;
-  max-width: 1080px;
-  margin: 0 auto;
-}
