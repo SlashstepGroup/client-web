@@ -1,8 +1,7 @@
 #popupFooter {
   padding: 15px;
-  background-color: #f0f0f0;
-  border-top: 1px solid #ccc;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px -7px 29px 0px;
+  background-color: var(--body-background);
+  border-top: 1px solid var(--border);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }

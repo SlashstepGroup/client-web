@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { sidebarSection as sidebarSectionStyle } from "./SidebarSection.module.css";
 
-function SidebarSection({name, children}: {name: string, children?: ReactElement[]}) {
+function SidebarSection({name, children}: {name: string, children?: ReactNode}) {
 
   return (
     <section className={sidebarSectionStyle}>

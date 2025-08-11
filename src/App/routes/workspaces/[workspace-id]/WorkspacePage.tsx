@@ -3,7 +3,6 @@ import BreadcrumbList from "../../../components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
 import WorldIcon from "../../../icons/WorldIcon";
 import { banner as bannerStyle } from "./WorkspacePage.module.css";
-import WorkspaceIcon from "../../../icons/WorkspaceIcon";
 
 export type WorkspaceProperties = {
   name: string;
@@ -22,7 +21,7 @@ function WorkspacePage() {
   return (
     <section id="main-container">
       <BreadcrumbList>
-        <Breadcrumb icon={<WorldIcon />} link="/workspaces">
+        <Breadcrumb icon={<WorldIcon />} link="/workspaces/everyone-destroys-the-world">
           Everyone Destroys the World Group
         </Breadcrumb>
       </BreadcrumbList>

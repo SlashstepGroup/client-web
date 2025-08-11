@@ -12,6 +12,7 @@
   width: 100%;
   background-color: var(--sidebar);
   flex-shrink: 0;
+  overflow-y: auto;
 }
 
 @media screen and (min-width: 360px) {

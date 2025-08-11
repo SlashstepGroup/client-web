@@ -1,8 +1,7 @@
 #popupHeader {
-  background-color: #f0f0f0;
+  background-color: var(--body-background);
   padding: 15px;
-  border-bottom: 1px solid #ccc;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;

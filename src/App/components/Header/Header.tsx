@@ -1,12 +1,14 @@
 import React, { ReactElement } from "react";
-import { header as headerStyle, scopeButton as scopeButtonStyle } from "./Header.module.css";
+import { header as headerStyle, scopeButton as scopeButtonStyle, sidebarButtonToggle as sidebarButtonToggleStyle } from "./Header.module.css";
 import HomeIcon from "../../icons/HomeIcon";
 
-function Header() {
+function Header({onSidebarToggle}: {onSidebarToggle?: () => void}): ReactElement {
 
   return (
     <header id={headerStyle}>
-      <h1>Gaze</h1>
+      <button type="button" onClick={onSidebarToggle} id={sidebarButtonToggleStyle}>
+        Gaze
+      </button>
       <button type="button" id={scopeButtonStyle}>
         <HomeIcon />
         <span>Beastslash</span>

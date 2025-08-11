@@ -6,6 +6,8 @@
   transform: scale(0.3);
   opacity: 0;
   transition: 0.3s;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #popup:has(:global(#PopupFooter-module-popupFooter)) > :global(#PopupContent-module-popupContent) {

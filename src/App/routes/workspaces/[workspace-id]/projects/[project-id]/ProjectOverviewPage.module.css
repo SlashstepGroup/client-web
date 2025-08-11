@@ -1,0 +1,6 @@
+#banner {
+  width: 100%;
+  background-color: gray;
+  border-radius: 5px;
+  aspect-ratio: 4;
+}

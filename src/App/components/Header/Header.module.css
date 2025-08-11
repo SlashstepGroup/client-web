@@ -12,6 +12,15 @@
   border-bottom: 1px solid var(--border);
 }
 
+#sidebarButtonToggle {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0;
+  background-color: var(--header);
+  box-shadow: none;
+  color: var(--text);
+}
+
 #scopeButton {
   background-color: var(--menu-list-button-background);
   color: var(--text);

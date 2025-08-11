@@ -1,12 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { sidebarItem as sidebarItemStyle } from "./SidebarItem.module.css";
 import { Link } from "react-router-dom";
 
-function SidebarItem({link, children}: {link: string, children: React.ReactNode}) {
+function SidebarItem({link, icon, children}: {link: string, icon: ReactNode, children: ReactNode}) {
 
   return (
     <li className={sidebarItemStyle}>
-      <Link to={link}>{children}</Link>
+      <Link to={link}>
+        {icon}
+        {children}
+      </Link>
     </li>
   );
 
