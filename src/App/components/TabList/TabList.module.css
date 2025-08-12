@@ -1,0 +1,12 @@
+.tabList {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.tabList > ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

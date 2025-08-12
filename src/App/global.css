@@ -3,6 +3,9 @@
   --text: #252525;
   --menu-list-button-background: #fafafa;
   --border: #e6e6e6;
+  --secondary-button-background: #f0f0f0;
+  --text-input-background: #ffffff;
+  --primary: #007bff;
 }
 
 @font-face {
@@ -16,7 +19,12 @@ html {
 
 main {
   width: 100%;
-  height: 100%;
+}
+
+main > section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 html, #root {
@@ -36,7 +44,7 @@ p {
   line-height: 1.5;
 }
 
-h1, button, p, th, td, a, section, input {
+h1, button, p, th, td, a, section, input, textarea {
   font-family: "Figtree", sans-serif;
 }
 
@@ -44,11 +52,11 @@ a {
   text-decoration: none;
 }
 
-p, input[type="text"] {
+p {
   color: var(--text);
 }
 
-h1, p {
+h1, h2, p {
   margin: 0;
 }
 
@@ -59,6 +67,16 @@ button {
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   cursor: pointer;
   transition: 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--secondary-button-background);
+  color: var(--text);
+}
+
+button[disabled], input[disabled], textarea[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 button:hover {
@@ -70,7 +88,7 @@ button:hover:active {
 }
 
 .primary-button {
-  background-color: #007bff;
+  background-color: var(--primary);
   color: white;
 }
 
@@ -114,18 +132,24 @@ form {
   gap: 15px;
 }
 
-form > section {
+form > section, .input-section {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-input[type="text"] {
+input[type="text"], textarea {
   border-radius: 5px;
   padding: 15px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   font-size: 1rem;
+  background-color: var(--text-input-background);
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
 }
 
 button {
@@ -144,6 +168,10 @@ main {
   overflow-y: auto;
 }
 
+#scroll-container {
+  overflow-y: auto;
+}
+
 h1, h2, h3, h4, h5, h6, p, li, label, section {
   color: var(--text);
 }
@@ -157,6 +185,19 @@ h1, h2, h3, h4, h5, h6, p, li, label, section {
 
 #main-container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading-with-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label {
+  font-weight: bold;
+  color: var(--text);
 }
 
 @media screen and (min-width: 360px) {
@@ -184,6 +225,8 @@ h1, h2, h3, h4, h5, h6, p, li, label, section {
     --body-background: #121214;
     --menu-list-button-background: #313131;
     --border: #272727;
+    --text-input-background: #0b0b0b;
+    --secondary-button-background: #2d2d2d;
   }
 
 }

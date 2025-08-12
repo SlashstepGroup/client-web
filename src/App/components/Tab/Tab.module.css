@@ -1,0 +1,19 @@
+.tab {
+  opacity: 0.7;
+  transition: 0.1s;
+}
+
+.tab > a {
+  color: var(--text);
+}
+
+.tab:hover {
+  opacity: 1;
+}
+
+.tab.selected > a {
+  color: var(--primary);
+  border-bottom: 1px solid var(--primary);
+  padding-bottom: 10px;
+  opacity: 1;
+}

@@ -6,6 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import HomeIcon from "../../icons/HomeIcon";
 import BadgeIcon from "../../icons/BadgeIcon";
 import GroupIcon from "../../icons/GroupIcon";
+import KeyIcon from "../../icons/KeyIcon";
 
 function DomainSidebar() {
 
@@ -14,6 +15,7 @@ function DomainSidebar() {
       <SidebarSection name="Domain">
         <SidebarItem icon={<HomeIcon />} link="">Overview</SidebarItem>
         <SidebarItem icon={<WorldIcon />} link="/workspaces">Workspaces</SidebarItem>
+        <SidebarItem icon={<KeyIcon />} link="/access">Access</SidebarItem>
         <SidebarItem icon={<BadgeIcon />} link="/users">Users</SidebarItem>
         <SidebarItem icon={<GroupIcon />} link="/groups">Groups</SidebarItem>
         <SidebarItem icon={<BadgeIcon />} link="/users">Fields</SidebarItem>

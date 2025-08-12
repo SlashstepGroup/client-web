@@ -11,22 +11,27 @@ import DomainSidebar from "./components/DomainSidebar/DomainSidebar";
 import DomainOverviewPage from "./routes/DomainOverviewPage";
 import ProjectOverviewPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/ProjectOverviewPage";
 import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
+import UserListPage from "./routes/users/UserListPage";
 
 export type SetState<T> = Dispatch<SetStateAction<T>>;
 
 export default function App() {
 
   const [domain, setDomain] = useState({
-    name: "Beastslash"
+    type: "Domain",
+    name: "Beastslash",
+    description: "Beastslash is an example domain."
   });
   
   const [workspace, setWorkspace] = useState(null);
+  const [project, setProject] = useState(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
 
   const location = useLocation();
   const isWorkspacePage = matchPath("/workspaces/:workspaceID/*", location.pathname) !== null;
   const isProjectPage = matchPath("/workspaces/:workspaceID/projects/:projectID/*", location.pathname) !== null;
+  const scope = isProjectPage ? project : (isWorkspacePage ? workspace : domain); 
 
   return (
     <>
@@ -45,7 +50,8 @@ export default function App() {
           )
         }
         <Routes>
-          <Route path="/" element={<DomainOverviewPage />} />
+          <Route path="/" element={<DomainOverviewPage domain={domain} />} />
+          <Route path="/users" element={<UserListPage />} />
           <Route path="/workspaces" element={<WorkspaceListPage />} />
           <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
           <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />

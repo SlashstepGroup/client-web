@@ -4,3 +4,19 @@
   border-radius: 5px;
   aspect-ratio: 4;
 }
+
+#profileToolbar {
+  border-bottom: 1px solid var(--border);
+  background-color: var(--header);
+  padding: 10px 15px;
+  box-sizing: border-box;
+}
+
+#options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
