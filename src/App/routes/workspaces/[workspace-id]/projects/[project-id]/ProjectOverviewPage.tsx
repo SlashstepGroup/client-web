@@ -15,7 +15,7 @@ function StoryOverviewPage() {
 
   useEffect(() => {
 
-    document.title = "Project • Gaze";
+    document.title = "Project • Waltz";
 
   }, []);
 

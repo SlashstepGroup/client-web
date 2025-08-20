@@ -1,37 +1,30 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Navigate, Route, Routes, matchPath, useLocation } from "react-router-dom";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Route, Routes, matchPath, useLocation } from "react-router-dom";
 import "./global.css";
 import WorkspaceListPage from "./routes/workspaces/WorkspaceListPage";
 import PopupContainer from "./components/PopupContainer/PopupContainer";
 import WorkspacePage from "./routes/workspaces/[workspace-id]/WorkspacePage";
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
 import WorkspaceSidebar from "./components/WorkspaceSidebar/WorkspaceSidebar";
-import DomainSidebar from "./components/DomainSidebar/DomainSidebar";
-import DomainOverviewPage from "./routes/DomainOverviewPage";
+import InstanceSidebar from "./components/InstanceSidebar/InstanceSidebar";
+import InstanceOverviewPage from "./routes/InstanceOverviewPage";
 import ProjectOverviewPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/ProjectOverviewPage";
 import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
 import UserListPage from "./routes/users/UserListPage";
-
-export type SetState<T> = Dispatch<SetStateAction<T>>;
+import { Instance, Project, Workspace } from "@waltzgroup/javascript-sdk"
+import InstanceSetupPage from "./routes/setup/InstanceSetupPage";
 
 export default function App() {
 
-  const [domain, setDomain] = useState({
-    type: "Domain",
-    name: "Beastslash",
-    description: "Beastslash is an example domain."
-  });
-  
-  const [workspace, setWorkspace] = useState(null);
-  const [project, setProject] = useState(null);
-
+  const [instance, setInstance] = useState<Instance | null>(null);
+  const [workspace, setWorkspace] = useState<Workspace | null>(null);
+  const [project, setProject] = useState<Project | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
 
   const location = useLocation();
   const isWorkspacePage = matchPath("/workspaces/:workspaceID/*", location.pathname) !== null;
   const isProjectPage = matchPath("/workspaces/:workspaceID/projects/:projectID/*", location.pathname) !== null;
-  const scope = isProjectPage ? project : (isWorkspacePage ? workspace : domain); 
+  const scope = isProjectPage ? project : (isWorkspacePage ? workspace : instance); 
 
   return (
     <>
@@ -45,16 +38,17 @@ export default function App() {
             isWorkspacePage ? (
               <WorkspaceSidebar />
             ) : (
-              <DomainSidebar />
+              <InstanceSidebar />
             )
           )
         }
         <Routes>
-          <Route path="/" element={<DomainOverviewPage domain={domain} />} />
+          <Route path="/" element={<InstanceOverviewPage instance={instance} />} />
           <Route path="/users" element={<UserListPage />} />
           <Route path="/workspaces" element={<WorkspaceListPage />} />
           <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
           <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />
+          <Route path="/setup" element={<InstanceSetupPage />} />
         </Routes>
       </section>
     </>

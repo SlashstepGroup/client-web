@@ -19,6 +19,7 @@ function WorkspaceSidebar() {
         <SidebarItem icon={<WorkIcon />} link="/workspaces/everyone-destroys-the-world/fields">Fields</SidebarItem>
         <SidebarItem icon={<KeyIcon />} link="/workspaces/everyone-destroys-the-world/access">Access</SidebarItem>
         <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects">Projects</SidebarItem>
+        <SidebarItem icon={<WorkIcon />} link="/workspaces/everyone-destroys-the-world/workspaces">Child workspaces</SidebarItem>
       </SidebarSection>
       <SidebarSection name="Projects">
         <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects/story">Story</SidebarItem>

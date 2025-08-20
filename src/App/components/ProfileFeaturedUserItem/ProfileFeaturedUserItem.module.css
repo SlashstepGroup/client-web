@@ -1,0 +1,31 @@
+.featuredUserItem > figure {
+  display: flex;
+  align-items: center;
+  margin: 15px 30px;
+  gap: 40px;
+}
+
+.profilePicture {
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+}
+
+.name > a {
+  color: var(--text);
+}
+
+@media screen and (min-width: 600px) {
+  
+  .featuredUserItem > figure {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .profilePicture {
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+  }
+  
+}

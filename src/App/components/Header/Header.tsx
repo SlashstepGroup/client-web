@@ -7,7 +7,7 @@ function Header({onSidebarToggle}: {onSidebarToggle?: () => void}): ReactElement
   return (
     <header id={headerStyle}>
       <button type="button" onClick={onSidebarToggle} id={sidebarButtonToggleStyle}>
-        Gaze
+        Waltz
       </button>
       <button type="button" id={scopeButtonStyle}>
         <HomeIcon />

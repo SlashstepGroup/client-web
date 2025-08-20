@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { tab as tabStyle, selected as selectedStyle } from "./Tab.module.css";
 
 export type WorkspaceProperties = {

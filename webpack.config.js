@@ -20,7 +20,7 @@ const config = {
       assert: require.resolve("assert/"),
       util: require.resolve("util/")
     },
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: [".tsx", ".ts", ".js", ".jsx"]
   },
   stats: "errors-warnings",
   devServer: {
@@ -38,7 +38,7 @@ const config = {
   module: {
     rules: [
       { 
-        test: /\.tsx?$/, 
+        test: /\.(tsx|ts)?$/, 
         loader: "ts-loader" 
       },
       {

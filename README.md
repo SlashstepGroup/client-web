@@ -1,2 +1,2 @@
 # client-web
-The official Gaze client
+The official Waltz client

@@ -1,0 +1,40 @@
+.item > a {
+  margin: 0;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--menu-list-button-background);
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  color: inherit;
+  display: flex;
+  opacity: 0.7;
+  transition: 0.1s;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item > a:hover {
+  opacity: 1;
+}
+
+.item > a:hover:active {
+  transform: scale(0.98);
+}
+
+.item > a > svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--text);
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+}
+
+.information > span {
+  color: var(--text-bold);
+}
+
+.information > p {
+  font-size: 0.9rem;
+}

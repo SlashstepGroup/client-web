@@ -30,7 +30,7 @@ function WorkspaceListPage() {
 
   useEffect(() => {
   
-    document.title = "Workspaces • Gaze";
+    document.title = "Workspaces • Waltz";
 
   }, []);
 
@@ -43,7 +43,7 @@ function WorkspaceListPage() {
       </BreadcrumbList>
       <main>
         <h1>Users</h1>
-        <p>Users can interact with workspaces, projects, and other resources in your domain. They all have a set of permissions and roles, and some other information so you can know who they are.</p>
+        <p>Users can interact with workspaces, projects, and other resources in your instance. They all have a set of permissions and roles, and some other information so you can know who they are.</p>
         <ul className="button-list">
           <li>
             <button className="primary-button" onClick={() => navigate("?action=workspaces.create")}>Create user</button>
@@ -67,7 +67,7 @@ function WorkspaceListPage() {
             </section>
           ) : (
             <Tip>
-              <p>This domain doesn't have any workspaces yet. You can create one by clicking the button above.</p>
+              <p>This instance doesn't have any workspaces yet. You can create one by clicking the button above.</p>
             </Tip>
           )
         }

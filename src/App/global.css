@@ -1,6 +1,8 @@
 :root {
   --body-background: rgb(247, 247, 247);
-  --text: #252525;
+  --text: #535353;
+  --text-bold: #252525;
+  --text-button: white;
   --menu-list-button-background: #fafafa;
   --border: #e6e6e6;
   --secondary-button-background: #f0f0f0;
@@ -15,10 +17,6 @@
 
 html {
   font-size: 100%;
-}
-
-main {
-  width: 100%;
 }
 
 main > section {
@@ -60,7 +58,11 @@ h1, h2, p {
   margin: 0;
 }
 
-button {
+b {
+  color: var(--text-bold);
+}
+
+button, input[type="submit"] {
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -87,9 +89,9 @@ button:hover:active {
   transform: scale(0.95);
 }
 
-.primary-button {
+button.primary-button, input[type="submit"].primary-button {
   background-color: var(--primary);
-  color: white;
+  color: var(--text-button);
 }
 
 .button-list {
@@ -98,32 +100,6 @@ button:hover:active {
   margin: 0;
   display: flex;
   gap: 15px;
-}
-
-.menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.menu-list li a {
-  margin: 0;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: var(--menu-list-button-background);
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  opacity: 0.7;
-  transition: opacity 0.1s;
-}
-
-.menu-list li a:hover {
-  opacity: 1;
 }
 
 form {
@@ -138,7 +114,7 @@ form > section, .input-section {
   gap: 15px;
 }
 
-input[type="text"], textarea {
+input[type="text"], input[type="password"], textarea {
   border-radius: 5px;
   padding: 15px;
   border: none;
@@ -159,13 +135,14 @@ button {
 main {
   display: flex;
   padding: 15px;
-  gap: 15px;
+  gap: 30px;
   flex-direction: column;
   box-sizing: border-box;
   max-width: 1080px;
   margin: 0 auto;
   flex-grow: 1;
   overflow-y: auto;
+  width: 100%;
 }
 
 #scroll-container {
@@ -221,7 +198,8 @@ label {
 @media (prefers-color-scheme: dark) {
   
   :root {
-    --text: #e0e0e0;
+    --text: #c5c5c5;
+    --text-bold: #eeeeee;
     --body-background: #121214;
     --menu-list-button-background: #313131;
     --border: #272727;

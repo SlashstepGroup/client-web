@@ -8,11 +8,11 @@ import BadgeIcon from "../../icons/BadgeIcon";
 import GroupIcon from "../../icons/GroupIcon";
 import KeyIcon from "../../icons/KeyIcon";
 
-function DomainSidebar() {
+function InstanceSidebar() {
 
   return (
     <Sidebar>
-      <SidebarSection name="Domain">
+      <SidebarSection name="Instance">
         <SidebarItem icon={<HomeIcon />} link="">Overview</SidebarItem>
         <SidebarItem icon={<WorldIcon />} link="/workspaces">Workspaces</SidebarItem>
         <SidebarItem icon={<KeyIcon />} link="/access">Access</SidebarItem>
@@ -29,4 +29,4 @@ function DomainSidebar() {
 
 }
 
-export default React.memo(DomainSidebar);
+export default React.memo(InstanceSidebar);

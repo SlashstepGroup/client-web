@@ -4,6 +4,8 @@ import Tip from "../../components/Tip/Tip";
 import BreadcrumbList from "../../components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import WorldIcon from "../../icons/WorldIcon";
+import MenuList from "../../components/MenuList/MenuList";
+import MenuListLinkItem from "../../components/MenuListLinkItem/MenuListLinkItem";
 
 export type WorkspaceProperties = {
   name: string;
@@ -29,7 +31,7 @@ function WorkspaceListPage() {
 
   useEffect(() => {
   
-    document.title = "Workspaces • Gaze";
+    document.title = "Workspaces • Waltz";
 
   }, []);
 
@@ -50,23 +52,14 @@ function WorkspaceListPage() {
         </ul>
         {
           workspaces.length > 0 ? (
-            <section>
-              <ul className="menu-list">
-                {workspaces.map(workspace => (
-                  <li key={workspace.name}>
-                    <Link to={`/workspaces/${workspace.name}`}>
-                      <b>{workspace.displayName}</b>
-                      {
-                        workspace.description ? <p>{workspace.description}</p> : null
-                      }
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            <MenuList>
+              {workspaces.map(workspace => (
+                <MenuListLinkItem key={workspace.name} link={`/workspaces/${workspace.name}`} label={workspace.displayName} description={workspace.description} />
+              ))}
+            </MenuList>
           ) : (
             <Tip>
-              <p>This domain doesn't have any workspaces yet. You can create one by clicking the button above.</p>
+              <p>This instance doesn't have any workspaces yet. You can create one by clicking the button above.</p>
             </Tip>
           )
         }

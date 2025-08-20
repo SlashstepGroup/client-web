@@ -14,7 +14,7 @@ function WorkspacePage() {
 
   useEffect(() => {
 
-    document.title = "Workspace • Gaze";
+    document.title = "Workspace • Waltz";
 
   }, []);
 

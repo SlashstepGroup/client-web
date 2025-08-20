@@ -4,6 +4,10 @@
   height: 20px;
 }
 
+button:global(.primary-button) .spinner {
+  stroke: var(--text-button);
+}
+
 .spinner > g {
   transform-origin: center;
   animation: spinner_zKoa 2s linear infinite;
