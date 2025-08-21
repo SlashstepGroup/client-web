@@ -2,7 +2,8 @@
   background-color: var(--header);
   border-bottom: 1px solid var(--border);
   width: 100%;
-  padding: 10px 15px;
+  height: 42px;
+  display: flex;
   box-sizing: border-box;
 }
 
@@ -13,4 +14,17 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-x: auto;
+}
+
+#breadcrumbList > ul > li:first-of-type {
+  margin-left: 15px;
+}
+
+#breadcrumbList > ul > li:last-of-type {
+  margin-right: 15px;
+}
+
+#breadcrumbList > ul > li {
+  flex-shrink: 0;
 }

@@ -22,7 +22,7 @@
 }
 
 #scopeButton {
-  background-color: var(--menu-list-button-background);
+  background-color: var(--body-background);
   color: var(--text);
   display: flex;
   gap: 10px;

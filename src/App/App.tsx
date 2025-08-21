@@ -13,6 +13,7 @@ import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
 import UserListPage from "./routes/users/UserListPage";
 import { Instance, Project, Workspace } from "@waltzgroup/javascript-sdk"
 import InstanceSetupPage from "./routes/setup/InstanceSetupPage";
+import ProjectBoardPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
 
 export default function App() {
 
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/workspaces" element={<WorkspaceListPage />} />
           <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
           <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />
+          <Route path="/workspaces/:workspaceID/projects/:projectID/board" element={<ProjectBoardPage />} />
           <Route path="/setup" element={<InstanceSetupPage />} />
         </Routes>
       </section>

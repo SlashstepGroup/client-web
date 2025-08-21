@@ -15,6 +15,11 @@
   src: url(./Figtree-VariableFont_wght.ttf);
 }
 
+@font-face {
+  font-family: "Roboto Mono";
+  src: url(./RobotoMono-VariableFont_wght.ttf);
+}
+
 html {
   font-size: 100%;
 }
@@ -201,7 +206,7 @@ label {
     --text: #c5c5c5;
     --text-bold: #eeeeee;
     --body-background: #121214;
-    --menu-list-button-background: #313131;
+    --menu-list-button-background: var(--sidebar);
     --border: #272727;
     --text-input-background: #0b0b0b;
     --secondary-button-background: #2d2d2d;
