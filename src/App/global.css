@@ -127,6 +127,7 @@ input[type="text"], input[type="password"], textarea {
   font-size: 1rem;
   background-color: var(--text-input-background);
   color: var(--text);
+  box-sizing: border-box;
 }
 
 textarea {

@@ -4,10 +4,10 @@ import Breadcrumb from "../../../../../../components/Breadcrumb/Breadcrumb";
 import WorldIcon from "../../../../../../icons/WorldIcon";
 import ClipboardIcon from "../../../../../../icons/ClipboardIcon";
 import ListIcon from "../../../../../../icons/ListIcon";
-import { searchBar as searchBarStyle, main as mainStyle, selectAllButtonContainer as selectAllButtonContainerStyle, tableContainer as tableContainerStyle, itemGroup as itemGroupStyle, itemGroupContainer as itemGroupContainerStyle } from "./ProjectBoardPage.module.css";
+import { viewSettingsSection as viewSettingsSectionStyle, searchBar as searchBarStyle, main as mainStyle, selectAllButtonContainer as selectAllButtonContainerStyle, tableContainer as tableContainerStyle, itemGroup as itemGroupStyle, itemGroupContainer as itemGroupContainerStyle, addItemRow as addItemRowStyle } from "./ProjectBoardPage.module.css";
 import TabList from "../../../../../../components/TabList/TabList";
 import Tab from "../../../../../../components/Tab/Tab";
-import CloseIcon from "../../../../../../icons/CloseIcon";
+import Spinner from "../../../../../../components/Spinner/Spinner";
 
 function ProjectBoardPage() {
 
@@ -31,12 +31,17 @@ function ProjectBoardPage() {
         </Breadcrumb>
       </BreadcrumbList>
       <main id={mainStyle}>
-        <TabList>
-          <Tab link="#" isSelected={true}>
-            <span>All items</span>
-          </Tab>
-        </TabList>
-        <input type="text" id={searchBarStyle} placeholder="No filter" />
+        <section id={viewSettingsSectionStyle}>
+          <TabList>
+            <Tab link="#" isSelected={true}>
+              <span>All items</span>
+            </Tab>
+            <Tab link="?action=views.create" isSelected={false}>
+              <span>Create view</span>
+            </Tab>
+          </TabList>
+          <input type="text" id={searchBarStyle} placeholder="No filter" />
+        </section>
         <section id={itemGroupContainerStyle}>
           <section className={itemGroupStyle}>
             <section>
@@ -46,54 +51,6 @@ function ProjectBoardPage() {
               <table cellSpacing={0}>
                 <colgroup />
                 <colgroup />
-                <thead>
-                  <tr>
-                    <th scope="col" id={selectAllButtonContainerStyle}>
-                      <input type="checkbox" />
-                    </th>
-                    <th scope="col">Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <a href="#">Test item 1</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <a href="#">Test item 2</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <a href="#">Test item 3</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={2}>
-                      <input type="text" placeholder="Add a new item" />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
-          </section>
-          <section className={itemGroupStyle}>
-            <section>
-              <span>Field Group #2</span>
-            </section>
-            <section className={tableContainerStyle}>
-              <table cellSpacing={0}>
                 <colgroup />
                 <colgroup />
                 <thead>
@@ -101,7 +58,9 @@ function ProjectBoardPage() {
                     <th scope="col" id={selectAllButtonContainerStyle}>
                       <input type="checkbox" />
                     </th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Summary</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -109,79 +68,44 @@ function ProjectBoardPage() {
                     <td>
                       <input type="checkbox" />
                     </td>
+                    <td></td>
                     <td>
                       <a href="#">Test item 1</a>
                     </td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>
                       <input type="checkbox" />
                     </td>
+                    <td></td>
                     <td>
                       <a href="#">Test item 2</a>
                     </td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>
                       <input type="checkbox" />
                     </td>
+                    <td></td>
                     <td>
                       <a href="#">Test item 3</a>
                     </td>
+                    <td></td>
                   </tr>
-                  <tr>
-                    <td colSpan={2}>
-                      <input type="text" placeholder="Add a new item" />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
-          </section>
-          <section className={itemGroupStyle}>
-            <section>
-              <span>Field Group #2</span>
-            </section>
-            <section className={tableContainerStyle}>
-              <table cellSpacing={0}>
-                <colgroup />
-                <colgroup />
-                <thead>
-                  <tr>
-                    <th scope="col" id={selectAllButtonContainerStyle}>
-                      <input type="checkbox" />
-                    </th>
-                    <th scope="col">Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <a href="#">Test item 1</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <a href="#">Test item 2</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <a href="#">Test item 3</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={2}>
-                      <input type="text" placeholder="Add a new item" />
+                  <tr className={addItemRowStyle}>
+                    <td colSpan={4}>
+                      <section>
+                        <input type="text" placeholder="Add a new item" />
+                        <button>
+                          <span>Task</span>
+                        </button>
+                        <button className="primary-button" disabled>
+                          <span>Create</span>
+                          <Spinner />
+                        </button>
+                      </section>
                     </td>
                   </tr>
                 </tbody>

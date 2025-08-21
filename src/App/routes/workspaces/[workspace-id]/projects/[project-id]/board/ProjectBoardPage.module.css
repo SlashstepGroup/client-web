@@ -27,7 +27,13 @@
 #itemGroupContainer {
   overflow-y: auto;
   margin: 0 -15px -15px;
-  padding: 0 15px 15px;
+  padding: 15px;
+}
+
+#viewSettingsSection {
+  border-bottom: 1px solid var(--border);
+  margin: -15px;
+  padding: 15px;
 }
 
 #main table {
@@ -40,7 +46,7 @@
 }
 
 #main table colgroup:nth-of-type(1) {
-  width: 40px;
+  width: 43px;
 }
 
 #selectAllButtonContainer {
@@ -51,6 +57,37 @@
 
 #main table th, #main table td {
   padding: 10px;
+}
+
+#main table colgroup:nth-of-type(2), #main table colgroup:nth-of-type(4) {
+  width: 150px;
+}
+
+#main table tr {
+  height: 43px;
+}
+
+#main table .addItemRow > td {
+  padding: 0 15px;
+}
+
+.addItemRow td > section {
+  height: 43px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.addItemRow button {
+  padding: 0 15px;
+  height: 30px;
+}
+
+.addItemRow input {
+  padding: 0;
+  box-shadow: none;
+  flex-grow: 1;
+  background: none;
 }
 
 #main table th {
