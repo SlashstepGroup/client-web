@@ -8,6 +8,9 @@ import { viewSettingsSection as viewSettingsSectionStyle, searchBar as searchBar
 import TabList from "../../../../../../components/TabList/TabList";
 import Tab from "../../../../../../components/Tab/Tab";
 import Spinner from "../../../../../../components/Spinner/Spinner";
+import AddIcon from "../../../../../../icons/AddIcon";
+import DropdownArrowIcon from "../../../../../../icons/DropdownArrowIcon";
+import MoreHorizontalIcon from "../../../../../../icons/MoreHorizontalIcon";
 
 function ProjectBoardPage() {
 
@@ -34,12 +37,23 @@ function ProjectBoardPage() {
         <section id={viewSettingsSectionStyle}>
           <TabList>
             <Tab link="#" isSelected={true}>
+              <ListIcon />
               <span>All items</span>
             </Tab>
             <Tab link="?action=views.create" isSelected={false}>
+              <AddIcon />
               <span>Create view</span>
             </Tab>
           </TabList>
+          <section className="horizontal-row">
+            <button>
+              <span>Group by: None</span>
+              <DropdownArrowIcon />
+            </button>
+            <button>
+              <MoreHorizontalIcon />
+            </button>
+          </section>
           <input type="text" id={searchBarStyle} placeholder="No filter" />
         </section>
         <section id={itemGroupContainerStyle}>
@@ -55,10 +69,14 @@ function ProjectBoardPage() {
                 <colgroup />
                 <thead>
                   <tr>
-                    <th scope="col" id={selectAllButtonContainerStyle}>
-                      <input type="checkbox" />
+                    <th scope="col">
+                      <section>
+                        <input type="checkbox" />
+                      </section>
                     </th>
-                    <th scope="col">Type</th>
+                    <th scope="col">
+                      <span>Type</span>
+                    </th>
                     <th scope="col">Summary</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -66,33 +84,23 @@ function ProjectBoardPage() {
                 <tbody>
                   <tr>
                     <td>
-                      <input type="checkbox" />
+                      <section>
+                        <input type="checkbox" />
+                      </section>
                     </td>
-                    <td></td>
+                    <td>
+                      <button disabled>
+                        <span>Task</span>
+                      </button>
+                    </td>
                     <td>
                       <a href="#">Test item 1</a>
                     </td>
-                    <td></td>
-                  </tr>
-                  <tr>
                     <td>
-                      <input type="checkbox" />
+                      <button disabled>
+                        <span>Not started</span>
+                      </button>
                     </td>
-                    <td></td>
-                    <td>
-                      <a href="#">Test item 2</a>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox" />
-                    </td>
-                    <td></td>
-                    <td>
-                      <a href="#">Test item 3</a>
-                    </td>
-                    <td></td>
                   </tr>
                   <tr className={addItemRowStyle}>
                     <td colSpan={4}>
@@ -100,6 +108,7 @@ function ProjectBoardPage() {
                         <input type="text" placeholder="Add a new item" />
                         <button>
                           <span>Task</span>
+                          <DropdownArrowIcon />
                         </button>
                         <button className="primary-button" disabled>
                           <span>Create</span>

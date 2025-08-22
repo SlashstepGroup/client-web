@@ -5,6 +5,9 @@
 
 .tab > a {
   color: var(--text);
+  display: flex;
+  gap: 5px;
+  padding-bottom: 10px;
 }
 
 .tab:hover {
@@ -14,6 +17,15 @@
 .tab.selected > a {
   color: var(--primary);
   border-bottom: 1px solid var(--primary);
-  padding-bottom: 10px;
   opacity: 1;
+}
+
+.tab.selected > a svg {
+  fill: var(--primary);
+}
+
+.tab > a svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text);
 }

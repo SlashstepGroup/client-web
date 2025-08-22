@@ -183,6 +183,17 @@ label {
   color: var(--text);
 }
 
+button svg {
+  fill: var(--text);
+  width: 20px;
+  height: 20px;
+}
+
+.horizontal-row {
+  display: flex;
+  gap: 15px;
+}
+
 @media screen and (min-width: 360px) {
   
   #main-container {

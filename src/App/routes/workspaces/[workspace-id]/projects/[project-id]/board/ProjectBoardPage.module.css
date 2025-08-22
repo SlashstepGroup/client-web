@@ -45,14 +45,8 @@
   table-layout: fixed;
 }
 
-#main table colgroup:nth-of-type(1) {
-  width: 43px;
-}
-
-#selectAllButtonContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#main table colgroup:nth-of-type(1) {  
+  width: 52px;
 }
 
 #main table th, #main table td {
@@ -60,11 +54,16 @@
 }
 
 #main table colgroup:nth-of-type(2), #main table colgroup:nth-of-type(4) {
-  width: 150px;
+  width: 164px;
 }
 
 #main table tr {
-  height: 43px;
+  height: 52px;
+}
+
+#main table button {
+  padding: 0 15px;
+  height: 30px;
 }
 
 #main table .addItemRow > td {
@@ -76,11 +75,6 @@
   display: flex;
   gap: 15px;
   align-items: center;
-}
-
-.addItemRow button {
-  padding: 0 15px;
-  height: 30px;
 }
 
 .addItemRow input {
@@ -102,6 +96,12 @@
   border-top-right-radius: 5px;
 }
 
+#main table th:first-of-type > section, #main table td:first-of-type > section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #main table tbody tr:last-of-type td:first-of-type {
   border-bottom-left-radius: 5px;
 }
@@ -112,6 +112,7 @@
 
 #main table th:first-of-type, #main table td:first-of-type {
   border-left: 1px solid var(--border);
+  
 }
 
 #main table td a {
@@ -121,4 +122,6 @@
 #main table th, #main table td {
   border-bottom: 1px solid var(--border);
   border-right: 1px solid var(--border);
+  height: 52px;
+  box-sizing: border-box;
 }
