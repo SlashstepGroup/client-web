@@ -14,6 +14,7 @@ import { Client, Instance, Project, Workspace } from "@waltzgroup/javascript-sdk
 import InstanceSetupPage from "./routes/setup/InstanceSetupPage";
 import ProjectBoardPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
 import PopupContainer from "./components/PopupContainer/PopupContainer";
+import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
 
 export default function App() {
 
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />
           <Route path="/workspaces/:workspaceID/projects/:projectID/board" element={<ProjectBoardPage />} />
           <Route path="/setup" element={<InstanceSetupPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </section>
     </>

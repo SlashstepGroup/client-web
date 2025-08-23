@@ -15,10 +15,7 @@ function InstanceSidebar() {
       <SidebarSection name="Instance">
         <SidebarItem icon={<HomeIcon />} link="/">Overview</SidebarItem>
         <SidebarItem icon={<WorldIcon />} link="/workspaces">Workspaces</SidebarItem>
-        <SidebarItem icon={<KeyIcon />} link="/access">Access</SidebarItem>
-        <SidebarItem icon={<BadgeIcon />} link="/users">Users</SidebarItem>
-        <SidebarItem icon={<GroupIcon />} link="/groups">Groups</SidebarItem>
-        <SidebarItem icon={<BadgeIcon />} link="/fields">Fields</SidebarItem>
+        <SidebarItem icon={<KeyIcon />} link="/settings">Settings</SidebarItem>
       </SidebarSection>
     </Sidebar>
   );

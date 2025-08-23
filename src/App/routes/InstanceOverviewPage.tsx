@@ -16,11 +16,11 @@ export type WorkspaceProperties = {
 function InstanceOverviewPage({instance}: {instance: Instance | null}) {
 
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [shouldSave, setShouldSave] = React.useState(false);
-  const [newInstanceName, setNewInstanceName] = React.useState(instance?.displayName || "");
-  const [newDescription, setNewDescription] = React.useState(instance?.description || "");
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const [shouldSave, setShouldSave] = React.useState(false);
+  // const [newInstanceName, setNewInstanceName] = React.useState(instance?.displayName || "");
+  // const [newDescription, setNewDescription] = React.useState(instance?.description || "");
 
   const isEditing = searchParams.get("mode") === "edit";
 
@@ -30,7 +30,7 @@ function InstanceOverviewPage({instance}: {instance: Instance | null}) {
 
   }, []);
 
-  const didChange = (newInstanceName && newInstanceName !== instance?.displayName) || (newDescription && newDescription !== instance?.description);
+  // const didChange = (newInstanceName && newInstanceName !== instance?.displayName) || (newDescription && newDescription !== instance?.description);
 
   return (
     <section id="main-container">
