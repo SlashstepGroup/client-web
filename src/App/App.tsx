@@ -15,6 +15,8 @@ import InstanceSetupPage from "./routes/setup/InstanceSetupPage";
 import ProjectBoardPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
 import PopupContainer from "./components/PopupContainer/PopupContainer";
 import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
+import InstanceSettingsPage from "./routes/settings/InstanceSettingsPage";
+import AboutPage from "./routes/settings/about/AboutPage";
 
 export default function App() {
 
@@ -51,7 +53,8 @@ export default function App() {
         }
         <Routes>
           <Route path="/" element={<InstanceOverviewPage instance={instance} />} />
-          {/* <Route path="/users" element={<UserListPage />} /> */}
+          <Route path="/settings" element={<InstanceSettingsPage />} />
+          <Route path="/settings/about" element={<AboutPage />} />
           <Route path="/workspaces" element={<WorkspaceListPage />} />
           <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
           <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />

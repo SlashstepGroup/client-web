@@ -9,6 +9,10 @@ const require = createRequire(import.meta.url);
 const config = {
   mode: "development",
   resolve: {
+    alias: {
+      '#components': resolve(__dirname, 'src/App/components'),
+      '#icons': resolve(__dirname, 'src/App/icons'),
+    },
     fallback: { 
       zlib: require.resolve("browserify-zlib"),
       url: require.resolve("url"),

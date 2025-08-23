@@ -140,9 +140,13 @@ button {
   font-size: 1rem;
 }
 
+ul {
+  margin: 0;
+}
+
 main {
   display: flex;
-  padding: 15px;
+  padding: 30px 15px;
   gap: 30px;
   flex-direction: column;
   box-sizing: border-box;

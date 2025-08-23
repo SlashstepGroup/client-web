@@ -4,9 +4,7 @@ import SidebarItem from "../SidebarItem/SidebarItem";
 import WorldIcon from "../../icons/WorldIcon";
 import Sidebar from "../Sidebar/Sidebar";
 import HomeIcon from "../../icons/HomeIcon";
-import BadgeIcon from "../../icons/BadgeIcon";
-import GroupIcon from "../../icons/GroupIcon";
-import KeyIcon from "../../icons/KeyIcon";
+import SettingsIcon from "#icons/SettingsIcon";
 
 function InstanceSidebar() {
 
@@ -15,7 +13,7 @@ function InstanceSidebar() {
       <SidebarSection name="Instance">
         <SidebarItem icon={<HomeIcon />} link="/">Overview</SidebarItem>
         <SidebarItem icon={<WorldIcon />} link="/workspaces">Workspaces</SidebarItem>
-        <SidebarItem icon={<KeyIcon />} link="/settings">Settings</SidebarItem>
+        <SidebarItem icon={<SettingsIcon />} link="/settings">Settings</SidebarItem>
       </SidebarSection>
     </Sidebar>
   );
