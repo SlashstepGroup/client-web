@@ -1,4 +1,4 @@
-#popup {
+.popup {
   width: 100%;
   height: 100%;
   display: none;
@@ -7,28 +7,28 @@
   opacity: 0;
   transition: 0.3s;
   border-radius: 5px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-#popup:has(:global(#PopupFooter-module-popupFooter)) > :global(#PopupContent-module-popupContent) {
+.popup:has(:global(.PopupFooter-module-popupFooter)) > :global(.PopupContent-module-popupContent) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-#popup.visible {
+.popup.visible {
   display: flex;
 }
 
-#popup.open {
+.popup.open {
   transform: scale(1);
   opacity: 1;
 }
 
 @media screen and (min-width: 380px) {
 
-  #popup {
-    width: 380px;
+  .popup {
+    width: calc(100% - 40px);
     height: initial;
+    max-width: 1080px;
   }
 
 }

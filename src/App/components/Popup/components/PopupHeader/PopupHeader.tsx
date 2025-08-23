@@ -5,8 +5,10 @@ import CloseIcon from "../../../../icons/CloseIcon";
 function PopupHeader({children, onClose}: {children: React.ReactNode, onClose?: (() => void)}) {
 
   return (
-    <section id={popupHeaderStyle}>
-      <section>{children}</section>
+    <section className={popupHeaderStyle}>
+      <section>
+        <b>{children}</b>
+      </section>
       {
         onClose ? (
           <button type="button" onClick={onClose}>

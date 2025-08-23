@@ -20,10 +20,6 @@ function InstanceSidebar() {
         <SidebarItem icon={<GroupIcon />} link="/groups">Groups</SidebarItem>
         <SidebarItem icon={<BadgeIcon />} link="/users">Fields</SidebarItem>
       </SidebarSection>
-      <SidebarSection name="Workspaces">
-        <SidebarItem icon={<WorldIcon />} link="/workspaces/everyone-destroys-the-world">Everyone Destroys the World Group</SidebarItem>
-        <SidebarItem icon={<WorldIcon />} link="/workspaces/beastslash">Beastslash</SidebarItem>
-      </SidebarSection>
     </Sidebar>
   );
 

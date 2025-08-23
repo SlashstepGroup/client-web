@@ -4,7 +4,7 @@ import { popupFooter as popupFooterStyle } from "./PopupFooter.module.css";
 function PopupFooter({children}: {children: React.ReactNode}) {
 
   return (
-    <section id={popupFooterStyle}>
+    <section className={popupFooterStyle}>
       {children}
     </section>
   )

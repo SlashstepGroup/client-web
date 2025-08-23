@@ -1,5 +1,6 @@
 :root {
   --body-background: rgb(247, 247, 247);
+  --popup-background: rgb(247, 247, 247);
   --text: #535353;
   --text-bold: #252525;
   --text-button: white;
@@ -218,6 +219,7 @@ button svg {
     --text: #c5c5c5;
     --text-bold: #eeeeee;
     --body-background: #121214;
+    --popup-background: #121214;
     --menu-list-button-background: var(--sidebar);
     --border: #272727;
     --text-input-background: #0b0b0b;

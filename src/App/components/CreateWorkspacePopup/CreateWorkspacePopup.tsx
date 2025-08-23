@@ -4,21 +4,18 @@ import PopupContent from "../Popup/components/PopupContent/PopupContent";
 import Popup from "../Popup/Popup";
 import PopupFooter from "../Popup/components/PopupFooter/PopupFooter";
 import { useLocation, useNavigate } from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
 
-function CreateWorkspacePopup({isOpen, onClose}: {isOpen: boolean, onClose: () => void}) {
+function CreateWorkspacePopup({shouldOpen, onClose}: {shouldOpen: boolean, onClose: () => void}) {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = React.useState(isOpen);
-
-  useEffect(() => {
-
-    setIsVisible(isOpen);
-
-  }, [isOpen]);
+  const [workspaceName, setWorkspaceName] = React.useState("");
+  const [workspaceDescription, setWorkspaceDescription] = React.useState("");
+  const [shouldCreateWorkspace, setShouldCreateWorkspace] = React.useState(false);
 
   return (
-    <Popup isOpen={isVisible} onClose={onClose}>
+    <Popup shouldOpen={shouldOpen} onClose={onClose}>
       <PopupHeader onClose={() => navigate(location.pathname)}>
         Create workspace
       </PopupHeader>
@@ -26,16 +23,24 @@ function CreateWorkspacePopup({isOpen, onClose}: {isOpen: boolean, onClose: () =
         <form>
           <section>
             <label htmlFor="workspaceName">Workspace name</label>
-            <input type="text" id="workspaceName" name="workspaceName" placeholder="Workspace name" required />
+            <input type="text" id="workspaceName" name="workspaceName" required disabled={shouldCreateWorkspace} onChange={(event) => setWorkspaceName(event.target.value)} />
           </section>
           <section>
             <label htmlFor="workspaceDescription">Workspace description</label>
-            <input type="text" id="workspaceDescription" name="workspaceDescription" placeholder="Workspace description" />
+            <input type="text" id="workspaceDescription" name="workspaceDescription" disabled={shouldCreateWorkspace} onChange={(event) => setWorkspaceDescription(event.target.value)} />
           </section>
         </form>
       </PopupContent>
       <PopupFooter>
-        <button type="submit" className="primary-button">Create</button>
+        <button type="submit" className="primary-button" disabled={!workspaceName.trim() || shouldCreateWorkspace} onClick={() => setShouldCreateWorkspace(true)}>
+          <span>Create</span>
+          {
+            shouldCreateWorkspace ? (
+              <Spinner />
+            ) : null
+          }
+        </button>
+        <button type="button" disabled={shouldCreateWorkspace} onClick={() => navigate(location.pathname)}>Cancel</button>
       </PopupFooter>
     </Popup>
   );

@@ -1,13 +1,13 @@
 import React from "react";
 
-function FlagIcon() {
+function CloseIcon() {
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFF">
-      <path d="M200-120v-680h343l19 86h238v370H544l-18.93-85H260v309h-60Zm300-452Zm95 168h145v-250H511l-19-86H260v251h316l19 85Z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+      <path d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/>
     </svg>
   )
 
 }
 
-export default React.memo(FlagIcon);
+export default React.memo(CloseIcon);

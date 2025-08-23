@@ -44,14 +44,14 @@ function InstanceOverviewPage({instance}: {instance: Instance}) {
           <p>{instance.description}</p>
         </section>
       </section>
-      <ProfileFeaturedUserList label="Instance admins">
+      {/* <ProfileFeaturedUserList label="Instance admins">
         <ProfileFeaturedUserItem link="/users/1" name="Christian Toney" />
         <ProfileFeaturedUserItem link="/users/2" name="Jane Doe" />
         <ProfileFeaturedUserItem link="/users/3" name="Jane Doe" />
       </ProfileFeaturedUserList>
       <ProfileLinkList>
         <ProfileLinkItem link="https://discord.gg/xgTSXab5jz" label="Community Discord server" />
-      </ProfileLinkList>
+      </ProfileLinkList> */}
     </main>
   );
 

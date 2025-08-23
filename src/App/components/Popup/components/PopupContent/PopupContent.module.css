@@ -1,12 +1,12 @@
-#popupContent {
-  background-color: var(--body-background);
+.popupContent {
+  background-color: var(--popup-background);
   padding: 15px;
   flex-grow: 1;
 }
 
 @media screen and (min-width: 380px) {
 
-  #popupContent {
+  .popupContent {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }

@@ -35,7 +35,7 @@ function InstanceOverviewPage({instance}: {instance: Instance | null}) {
   return (
     <section id="main-container">
       <BreadcrumbList />
-      <section id={profileToolbarStyle}>
+      {/* <section id={profileToolbarStyle}>
         <ul id={optionsStyle}>
           {
             isEditing ? (
@@ -59,7 +59,7 @@ function InstanceOverviewPage({instance}: {instance: Instance | null}) {
             )
           }
         </ul>
-      </section>
+      </section> */}
       <section id="scroll-container">
         {
           instance ? (

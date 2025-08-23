@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Tip from "../../components/Tip/Tip";
 import BreadcrumbList from "../../components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import WorldIcon from "../../icons/WorldIcon";
 import MenuList from "../../components/MenuList/MenuList";
 import MenuListLinkItem from "../../components/MenuListLinkItem/MenuListLinkItem";
+import CreateWorkspacePopup from "../../components/CreateWorkspacePopup/CreateWorkspacePopup";
 
 export type WorkspaceProperties = {
   name: string;
@@ -29,42 +30,42 @@ function WorkspaceListPage() {
     }
   ];
 
-  useEffect(() => {
-  
-    document.title = "Workspaces • Waltz";
-
-  }, []);
+  const [searchParams] = useSearchParams();
+  const action = searchParams.get("action");
+  const location = useLocation();
 
   return (
-    <section id="main-container">
-      <BreadcrumbList>
-        <Breadcrumb icon={<WorldIcon />} link="/workspaces">
-          Workspaces
-        </Breadcrumb>
-      </BreadcrumbList>
-      <main>
-        <h1>Workspaces</h1>
-        <p>Workspaces are groups that you can use to organize your projects.</p>
-        <ul className="button-list">
-          <li>
-            <button className="primary-button" onClick={() => navigate("?action=workspaces.create")}>Create workspace</button>
-          </li>
-        </ul>
-        {
-          workspaces.length > 0 ? (
-            <MenuList>
-              {workspaces.map(workspace => (
-                <MenuListLinkItem key={workspace.name} link={`/workspaces/${workspace.name}`} label={workspace.displayName} description={workspace.description} />
-              ))}
-            </MenuList>
-          ) : (
-            <Tip>
-              <p>This instance doesn't have any workspaces yet. You can create one by clicking the button above.</p>
-            </Tip>
-          )
-        }
-      </main>
-    </section>
+    <>
+      <section id="main-container">
+        <BreadcrumbList>
+          <Breadcrumb icon={<WorldIcon />} link="/workspaces">
+            Workspaces
+          </Breadcrumb>
+        </BreadcrumbList>
+        <main>
+          <h1>Workspaces</h1>
+          <p>Workspaces are groups that you can use to organize your projects.</p>
+          <ul className="button-list">
+            <li>
+              <button className="primary-button" onClick={() => navigate("?action=workspaces.create")}>Create workspace</button>
+            </li>
+          </ul>
+          {
+            workspaces.length > 0 ? (
+              <MenuList>
+                {workspaces.map(workspace => (
+                  <MenuListLinkItem key={workspace.name} link={`/workspaces/${workspace.name}`} label={workspace.displayName} description={workspace.description} />
+                ))}
+              </MenuList>
+            ) : (
+              <Tip>
+                <p>This instance doesn't have any workspaces yet. You can create one by clicking the button above.</p>
+              </Tip>
+            )
+          }
+        </main>
+      </section>
+    </>
   );
 
 }

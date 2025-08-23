@@ -5,7 +5,6 @@ import WorldIcon from "../../icons/WorldIcon";
 import ActivityIcon from "../../icons/ActivityIcon";
 import ClipboardIcon from "../../icons/ClipboardIcon";
 import Sidebar from "../Sidebar/Sidebar";
-import WorkIcon from "../../icons/WorkIcon";
 import KeyIcon from "../../icons/KeyIcon";
 
 function WorkspaceSidebar() {
@@ -17,12 +16,6 @@ function WorkspaceSidebar() {
         <SidebarItem icon={<ActivityIcon />} link="/workspaces/everyone-destroys-the-world/activity">Activity</SidebarItem>
         <SidebarItem icon={<KeyIcon />} link="/workspaces/everyone-destroys-the-world/access">Access</SidebarItem>
         <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects">Projects</SidebarItem>
-      </SidebarSection>
-      <SidebarSection name="Projects">
-        <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects/story">Story</SidebarItem>
-        <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects/design">Design</SidebarItem>
-        <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects/turf-war">Turf War</SidebarItem>
-        <SidebarItem icon={<ClipboardIcon />} link="/workspaces/everyone-destroys-the-world/projects/stage-maker">Stage Maker</SidebarItem>
       </SidebarSection>
     </Sidebar>
   );

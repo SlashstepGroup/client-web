@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect } from "react";
-import { popup as popupStyle, open as openStyle, visible as visibleStyle } from "./Popup.module.css";
+import { popup as popupStyle, open as openStyle, visible as visibleStyle, popupContainer as popupContainerStyle } from "./Popup.module.css";
 
-function Popup({isOpen, children, onClose}: {isOpen: boolean, children: React.ReactNode, onClose: () => void}) {
+function Popup({shouldOpen, children, onClose}: {shouldOpen: boolean, children: React.ReactNode, onClose: () => void}) {
 
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
 
   useEffect(() => {
 
-    if (isOpen) {
+    if (shouldOpen) {
 
       setIsVisible(true);
       setTimeout(() => {
@@ -23,7 +23,7 @@ function Popup({isOpen, children, onClose}: {isOpen: boolean, children: React.Re
 
     }
 
-  }, [isVisible, isExpanded, isOpen]);
+  }, [isVisible, isExpanded, shouldOpen]);
 
   const handleTransitionEnd = useCallback(() => {
 
@@ -37,7 +37,7 @@ function Popup({isOpen, children, onClose}: {isOpen: boolean, children: React.Re
   }, [isExpanded]);
 
   return (
-    <section id={popupStyle} className={`${isExpanded ? openStyle : ""} ${isVisible ? visibleStyle : ""}`} onTransitionEnd={handleTransitionEnd}>
+    <section className={`${popupStyle} ${isExpanded ? openStyle : ""} ${isVisible ? visibleStyle : ""}`} onTransitionEnd={handleTransitionEnd}>
       {children}
     </section>
   );

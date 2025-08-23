@@ -4,7 +4,7 @@ import { popupContent as popupContentStyle } from "./PopupContent.module.css";
 function PopupContent({children}: {children: React.ReactNode}) {
 
   return (
-    <section id={popupContentStyle}>
+    <section className={popupContentStyle}>
       {children}
     </section>
   )

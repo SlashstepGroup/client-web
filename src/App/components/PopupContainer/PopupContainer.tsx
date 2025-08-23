@@ -1,45 +1,55 @@
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
-import { popupContainer as popupContainerStyle } from "./PopupContainer.module.css";
-import { useSearchParams } from "react-router";
+import React, { ReactElement, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import CreateWorkspacePopup from "../CreateWorkspacePopup/CreateWorkspacePopup";
+import { popupContainer as popupContainerStyle, open as openStyle } from "./PopupContainer.module.css";
 
 function PopupContainer() {
-
+  
   const [searchParams] = useSearchParams();
   const action = searchParams.get("action");
+  const [shouldShowContainer, setShouldShowContainer] = React.useState(false);
+  const popups: { [key: string]: ReactElement } = {
+    "workspaces.create": <CreateWorkspacePopup shouldOpen={shouldShowContainer} onClose={() => setSelectedAction(null)} />
+  }
 
-  const [currentAction, setCurrentAction] = useState(action);
-  const [shouldShowPopup, setShouldShowPopup] = useState(true);
+  const navigate = useNavigate();
+  const [shouldMount, setShouldMount] = React.useState(false);
+  const [selectedAction, setSelectedAction] = React.useState<string | null>(null);
 
-  const popups: Record<string, ReactElement> = {
-    "workspaces.create": <CreateWorkspacePopup isOpen={shouldShowPopup} onClose={() => setIsLocked(false)} />
-  };
-  const popup = useMemo(() => currentAction ? popups[currentAction] : null, [currentAction, popups]);
+  useEffect(() => {
 
-  const [isLocked, setIsLocked] = useState(!!popup);
+    const newPopup = action ? popups[action] ?? null : null;
+    const isUnmounted = newPopup && !shouldMount;
+    const isNewContentMounted = !shouldShowContainer && newPopup && selectedAction === action;
+    const isNewContentWaiting = shouldShowContainer && selectedAction !== action;
 
-  useEffect(function() {
+    if (isUnmounted) {
+      
+      setShouldMount(true);
+      setSelectedAction(action);
 
-    if (isLocked && (action !== currentAction)) {
+    } else if (isNewContentMounted) {
 
-      setShouldShowPopup(false);
+      setTimeout(() => setShouldShowContainer(true), 50);
 
-    } else {
+    } else if (isNewContentWaiting) {
 
-      setCurrentAction(action);
-      setShouldShowPopup(true);
-      setIsLocked(!!popup)
+      setShouldShowContainer(false);
+
+    } else if (!newPopup && !selectedAction) {
+
+      setShouldMount(false);
 
     }
 
-  }, [action, currentAction, popup, isLocked]);
+  }, [popups, action, selectedAction, shouldShowContainer, shouldMount]);
 
-  return popup ? (
-    <section id={popupContainerStyle}>
-      {popup}
+  return shouldMount ? (
+    <section className={`${popupContainerStyle} ${shouldShowContainer ? openStyle : ""}`}>
+      {selectedAction ? popups[selectedAction] : null}
     </section>
   ) : null;
-  
+
 }
 
 export default React.memo(PopupContainer);

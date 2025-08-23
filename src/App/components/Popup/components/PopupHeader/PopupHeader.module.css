@@ -1,5 +1,5 @@
-#popupHeader {
-  background-color: var(--body-background);
+.popupHeader {
+  background-color: var(--popup-background);
   padding: 15px;
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -7,14 +7,14 @@
   align-items: center;
 }
 
-#popupHeader > button {
+.popupHeader > button {
   box-shadow: none;
   padding: 0;
   width: 25px;
   height: 25px;
 }
 
-#popupHeader > button > svg {
+.popupHeader > button > svg {
   width: 100%;
   height: 100%;
   fill: var(--text);
@@ -23,7 +23,7 @@
 
 @media screen and (min-width: 380px) {
 
-  #popupHeader {
+  .popupHeader {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
