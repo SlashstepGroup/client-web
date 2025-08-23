@@ -13,12 +13,12 @@ function InstanceSidebar() {
   return (
     <Sidebar>
       <SidebarSection name="Instance">
-        <SidebarItem icon={<HomeIcon />} link="">Overview</SidebarItem>
+        <SidebarItem icon={<HomeIcon />} link="/">Overview</SidebarItem>
         <SidebarItem icon={<WorldIcon />} link="/workspaces">Workspaces</SidebarItem>
         <SidebarItem icon={<KeyIcon />} link="/access">Access</SidebarItem>
         <SidebarItem icon={<BadgeIcon />} link="/users">Users</SidebarItem>
         <SidebarItem icon={<GroupIcon />} link="/groups">Groups</SidebarItem>
-        <SidebarItem icon={<BadgeIcon />} link="/users">Fields</SidebarItem>
+        <SidebarItem icon={<BadgeIcon />} link="/fields">Fields</SidebarItem>
       </SidebarSection>
     </Sidebar>
   );

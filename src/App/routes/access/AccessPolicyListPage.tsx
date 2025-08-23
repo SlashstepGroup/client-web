@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tip from "../../components/Tip/Tip";
 import BreadcrumbList from "../../components/BreadcrumbList/BreadcrumbList";
@@ -6,33 +6,22 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import WorldIcon from "../../icons/WorldIcon";
 import MenuList from "../../components/MenuList/MenuList";
 import MenuListLinkItem from "../../components/MenuListLinkItem/MenuListLinkItem";
-import { Client, Workspace } from "@waltzgroup/javascript-sdk";
 
-export type WorkspaceProperties = {
-  name: string;
-  displayName: string;
-  description?: string;
-}
-
-function WorkspaceListPage() {
+function AccessPolicyListPage() {
 
   const navigate = useNavigate();
-  const [workspaces, setWorkspaces] = useState<Workspace[]>([
-    new Workspace({
-      id: "everyone-destroys-the-world",
+  const workspaces: WorkspaceProperties[] = [
+    {
       name: "everyone-destroys-the-world",
       displayName: "Everyone Destroys the World Group",
       description: "Workspace for anything related to Everyone Destroys the World."
-    }, {} as Client)
-  ]);
-
-  useEffect(() => {
-
-    document.title = "Workspaces • Waltz";
-
-    // TODO: Get workspaces from API
-
-  }, []);
+    },
+    {
+      name: "Beastslash",
+      displayName: "Beastslash",
+      description: "Workspace for general Beastslash projects."
+    }
+  ];
 
   return (
     <>

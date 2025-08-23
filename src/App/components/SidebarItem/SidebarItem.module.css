@@ -11,6 +11,14 @@
   transition: 0.1s;
 }
 
+.sidebarItem.selected > a {
+  color: var(--primary);
+}
+
+.sidebarItem.selected > a > svg {
+  fill: var(--primary);
+}
+
 .sidebarItem > a:hover {
   opacity: 1;
 }
