@@ -2,7 +2,7 @@ import React from "react";
 import { popupHeader as popupHeaderStyle } from "./PopupHeader.module.css";
 import CloseIcon from "../../../../icons/CloseIcon";
 
-function PopupHeader({children, onClose}: {children: React.ReactNode, onClose?: (() => void)}) {
+function PopupHeader({children, onClose, canClose}: {children: React.ReactNode, onClose?: (() => void), canClose?: boolean}) {
 
   return (
     <section className={popupHeaderStyle}>
@@ -11,7 +11,7 @@ function PopupHeader({children, onClose}: {children: React.ReactNode, onClose?: 
       </section>
       {
         onClose ? (
-          <button type="button" onClick={onClose}>
+          <button type="button" onClick={onClose} disabled={!canClose}>
             <CloseIcon />
           </button>
         ) : null

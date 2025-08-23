@@ -14,9 +14,24 @@ function CreateWorkspacePopup({shouldOpen, onClose}: {shouldOpen: boolean, onClo
   const [workspaceDescription, setWorkspaceDescription] = React.useState("");
   const [shouldCreateWorkspace, setShouldCreateWorkspace] = React.useState(false);
 
+  useEffect(() => {
+
+    (async () => {
+
+      // TODO: Add API call to create workspace
+      if (shouldCreateWorkspace) {
+
+        navigate("/workspaces/everyone-destroys-the-world");
+
+      }
+
+    })();
+
+  }, [shouldCreateWorkspace]);
+
   return (
     <Popup shouldOpen={shouldOpen} onClose={onClose}>
-      <PopupHeader onClose={() => navigate(location.pathname)}>
+      <PopupHeader onClose={() => navigate(location.pathname)} canClose={!shouldCreateWorkspace}>
         Create workspace
       </PopupHeader>
       <PopupContent>
