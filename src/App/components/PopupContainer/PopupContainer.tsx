@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import CreateWorkspacePopup from "../CreateWorkspacePopup/CreateWorkspacePopup";
 import { popupContainer as popupContainerStyle, open as openStyle } from "./PopupContainer.module.css";
+import EditAccessPolicyPopup from "#components/EditAccessPolicyPopup/EditAccessPolicyPopup";
 
 function PopupContainer() {
   
@@ -9,10 +10,10 @@ function PopupContainer() {
   const action = searchParams.get("action");
   const [shouldShowContainer, setShouldShowContainer] = React.useState(false);
   const popups: { [key: string]: ReactElement } = {
-    "workspaces.create": <CreateWorkspacePopup shouldOpen={shouldShowContainer} onClose={() => setSelectedAction(null)} />
+    "workspaces.create": <CreateWorkspacePopup shouldOpen={shouldShowContainer} onClose={() => setSelectedAction(null)} />,
+    "accessPolicies.edit": <EditAccessPolicyPopup shouldOpen={shouldShowContainer} onClose={() => setSelectedAction(null)} />,
   }
 
-  const navigate = useNavigate();
   const [shouldMount, setShouldMount] = React.useState(false);
   const [selectedAction, setSelectedAction] = React.useState<string | null>(null);
 

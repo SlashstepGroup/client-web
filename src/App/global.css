@@ -3,6 +3,7 @@
   --popup-background: rgb(247, 247, 247);
   --text: #535353;
   --text-bold: #252525;
+  --popup-container-background: rgba(0, 0, 0, 0.5);
   --text-button: white;
   --menu-list-button-background: #fafafa;
   --border: #e6e6e6;
@@ -54,6 +55,7 @@ h1, button, p, th, td, a, section, input, textarea {
 
 a {
   text-decoration: none;
+  color: var(--primary)
 }
 
 p {
@@ -107,6 +109,7 @@ button.primary-button, input[type="submit"].primary-button {
   display: flex;
   flex-direction: row;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 form {
@@ -198,6 +201,111 @@ button svg {
 .horizontal-row {
   display: flex;
   gap: 15px;
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+table {
+  text-align: left;
+  border-spacing: 0;
+  border-radius: 5px;
+  width: max-content;
+  min-width: 100%;
+  table-layout: fixed;
+}
+
+table th, table td {
+  padding: 10px;
+}
+
+table button {
+  padding: 0 15px;
+  height: 30px;
+}
+
+table .icon-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.checkbox-colgroup {
+  width: 52px;
+}
+
+.checkbox-cell > section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table tr {
+  height: 52px;
+}
+
+table th {
+  border-top: 1px solid var(--border);
+}
+
+table th:first-of-type {
+  border-top-left-radius: 5px;
+}
+
+.icon-button {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.item-description {
+  font-size: 0.8rem;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.account-type {
+  font-size: 0.9rem;
+}
+
+table th:last-of-type {
+  border-top-right-radius: 5px;
+}
+
+table tbody tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 5px;
+}
+
+table tbody tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 5px;
+}
+
+table th:first-of-type, table td:first-of-type {
+  border-left: 1px solid var(--border);
+}
+
+table td a {
+  color: var(--text);
+}
+
+table th, table td {
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  height: 52px;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 360px) {

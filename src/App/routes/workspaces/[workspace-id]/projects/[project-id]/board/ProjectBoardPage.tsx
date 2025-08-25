@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import BreadcrumbList from "../../../../../../components/BreadcrumbList/BreadcrumbList";
-import Breadcrumb from "../../../../../../components/Breadcrumb/Breadcrumb";
-import WorldIcon from "../../../../../../icons/WorldIcon";
-import ClipboardIcon from "../../../../../../icons/ClipboardIcon";
-import ListIcon from "../../../../../../icons/ListIcon";
-import { viewSettingsSection as viewSettingsSectionStyle, searchBar as searchBarStyle, main as mainStyle, selectAllButtonContainer as selectAllButtonContainerStyle, tableContainer as tableContainerStyle, itemGroup as itemGroupStyle, itemGroupContainer as itemGroupContainerStyle, addItemRow as addItemRowStyle } from "./ProjectBoardPage.module.css";
-import TabList from "../../../../../../components/TabList/TabList";
-import Tab from "../../../../../../components/Tab/Tab";
-import Spinner from "../../../../../../components/Spinner/Spinner";
-import AddIcon from "../../../../../../icons/AddIcon";
-import DropdownArrowIcon from "../../../../../../icons/DropdownArrowIcon";
-import MoreHorizontalIcon from "../../../../../../icons/MoreHorizontalIcon";
+import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
+import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
+import WorldIcon from "#icons/WorldIcon";
+import ClipboardIcon from "#icons/ClipboardIcon";
+import ListIcon from "#icons/ListIcon";
+import { viewSettingsSection as viewSettingsSectionStyle, searchBar as searchBarStyle, main as mainStyle, itemGroup as itemGroupStyle, itemGroupContainer as itemGroupContainerStyle, addItemRow as addItemRowStyle } from "./ProjectBoardPage.module.css";
+import TabList from "#components/TabList/TabList";
+import Tab from "#components/Tab/Tab";
+import Spinner from "#components/Spinner/Spinner";
+import AddIcon from "#icons/AddIcon";
+import DropdownArrowIcon from "#icons/DropdownArrowIcon";
+import MoreHorizontalIcon from "#icons/MoreHorizontalIcon";
 
 function ProjectBoardPage() {
 
@@ -61,7 +61,7 @@ function ProjectBoardPage() {
             <section>
               <span>Field Group #1</span>
             </section>
-            <section className={tableContainerStyle}>
+            <section className="table-container">
               <table cellSpacing={0}>
                 <colgroup />
                 <colgroup />

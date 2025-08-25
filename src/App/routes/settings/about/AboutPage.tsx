@@ -1,15 +1,17 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import KeyIcon from "#icons/KeyIcon";
 import AboutIcon from "#icons/AboutIcon";
 import packageInfo from "../../../../../package.json";
 import SettingsIcon from "#icons/SettingsIcon";
 
 function AboutPage() {
 
-  const navigate = useNavigate();
+  useEffect(() => {
+  
+    document.title = "About • Waltz";
+
+  }, []);
 
   return (
     <>

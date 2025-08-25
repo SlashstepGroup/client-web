@@ -9,11 +9,6 @@
   overflow-y: hidden;
 }
 
-.tableContainer {
-  overflow-x: auto;
-  width: 100%;
-}
-
 .itemGroup {
   display: flex;
   flex-direction: column;
@@ -36,34 +31,10 @@
   padding: 15px;
 }
 
-#main table {
-  text-align: left;
-  border-spacing: 0;
-  border-radius: 5px;
-  width: max-content;
-  min-width: 100%;
-  table-layout: fixed;
-}
-
-#main table colgroup:nth-of-type(1) {  
-  width: 52px;
-}
-
-#main table th, #main table td {
-  padding: 10px;
-}
+#main 
 
 #main table colgroup:nth-of-type(2), #main table colgroup:nth-of-type(4) {
   width: 164px;
-}
-
-#main table tr {
-  height: 52px;
-}
-
-#main table button {
-  padding: 0 15px;
-  height: 30px;
 }
 
 #main table .addItemRow > td {
@@ -82,46 +53,4 @@
   box-shadow: none;
   flex-grow: 1;
   background: none;
-}
-
-#main table th {
-  border-top: 1px solid var(--border);
-}
-
-#main table th:first-of-type {
-  border-top-left-radius: 5px;
-}
-
-#main table th:last-of-type {
-  border-top-right-radius: 5px;
-}
-
-#main table th:first-of-type > section, #main table td:first-of-type > section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#main table tbody tr:last-of-type td:first-of-type {
-  border-bottom-left-radius: 5px;
-}
-
-#main table tbody tr:last-of-type td:last-of-type {
-  border-bottom-right-radius: 5px;
-}
-
-#main table th:first-of-type, #main table td:first-of-type {
-  border-left: 1px solid var(--border);
-  
-}
-
-#main table td a {
-  color: var(--text);
-}
-
-#main table th, #main table td {
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  height: 52px;
-  box-sizing: border-box;
 }

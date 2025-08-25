@@ -1,0 +1,17 @@
+td.actionCell > section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#actionHeaderCell {
+  width: 60%;
+}
+
+#permissionLevelHeaderCell, #inheritanceHeaderCell {
+  min-width: 240px;
+}
+
+.pendingDeleteRow {
+  opacity: 0.5;
+}
