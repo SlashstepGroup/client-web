@@ -1,0 +1,10 @@
+
+.pendingDeleteRow {
+  opacity: 0.5;
+}
+
+td.actionCell > section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

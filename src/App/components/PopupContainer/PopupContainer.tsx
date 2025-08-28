@@ -1,53 +1,49 @@
 import React, { ReactElement, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import CreateWorkspacePopup from "../CreateWorkspacePopup/CreateWorkspacePopup";
 import { popupContainer as popupContainerStyle, open as openStyle } from "./PopupContainer.module.css";
-import EditAccessPolicyPopup from "#components/EditAccessPolicyPopup/EditAccessPolicyPopup";
+import UserDeletionConfirmationPopup from "#components/UserDeletionConfirmationPopup/UserDeletionConfirmationPopup";
+import { DeleteUsersPopupConfig, PopupConfig } from "../../App";
 
-function PopupContainer() {
+function PopupContainer({popupConfig, setPopupConfig}: {popupConfig: PopupConfig | null, setPopupConfig: (popupConfig: PopupConfig | null) => void}) {
   
-  const [searchParams] = useSearchParams();
-  const action = searchParams.get("action");
   const [shouldShowContainer, setShouldShowContainer] = React.useState(false);
-  const popups: { [key: string]: ReactElement } = {
-    "workspaces.create": <CreateWorkspacePopup shouldOpen={shouldShowContainer} onClose={() => setSelectedAction(null)} />,
-    "accessPolicies.edit": <EditAccessPolicyPopup shouldOpen={shouldShowContainer} onClose={() => setSelectedAction(null)} />,
+  const [shownPopupConfig, setShownPopupConfig] = React.useState<PopupConfig | null>(null);
+  const popups = {
+    "delete-users": shownPopupConfig ? <UserDeletionConfirmationPopup popupConfig={shownPopupConfig} shouldOpen={shouldShowContainer} onCloseRequest={() => setPopupConfig(null)} onClose={() => setShownPopupConfig(null)} /> : null,
   }
 
   const [shouldMount, setShouldMount] = React.useState(false);
-  const [selectedAction, setSelectedAction] = React.useState<string | null>(null);
 
   useEffect(() => {
 
-    const newPopup = action ? popups[action] ?? null : null;
-    const isUnmounted = newPopup && !shouldMount;
-    const isNewContentMounted = !shouldShowContainer && newPopup && selectedAction === action;
-    const isNewContentWaiting = shouldShowContainer && selectedAction !== action;
-
-    if (isUnmounted) {
+    const popup = popupConfig ? popups[popupConfig.action] !== undefined : null;
+    if (popup) {
       
-      setShouldMount(true);
-      setSelectedAction(action);
+      if (!shownPopupConfig) {
 
-    } else if (isNewContentMounted) {
+        setShownPopupConfig(popupConfig);
+        setShouldMount(true);
+      
+      } else if (!shouldShowContainer) {
 
-      setTimeout(() => setShouldShowContainer(true), 50);
+        setTimeout(() => setShouldShowContainer(true), 10);
 
-    } else if (isNewContentWaiting) {
+      }
+
+    } else if (shouldShowContainer) {
 
       setShouldShowContainer(false);
 
-    } else if (!newPopup && !selectedAction) {
+    } else if (!shownPopupConfig) {
 
       setShouldMount(false);
 
     }
 
-  }, [popups, action, selectedAction, shouldShowContainer, shouldMount]);
+  }, [popupConfig, shownPopupConfig, shouldShowContainer]);
 
   return shouldMount ? (
     <section className={`${popupContainerStyle} ${shouldShowContainer ? openStyle : ""}`}>
-      {selectedAction ? popups[selectedAction] : null}
+      {shownPopupConfig ? popups[shownPopupConfig.action] : null}
     </section>
   ) : null;
 

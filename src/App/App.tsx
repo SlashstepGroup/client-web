@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Route, Routes, matchPath, useLocation } from "react-router-dom";
 import "./global.css";
 import WorkspaceListPage from "./routes/workspaces/WorkspaceListPage";
@@ -9,15 +9,22 @@ import InstanceSidebar from "./components/InstanceSidebar/InstanceSidebar";
 import InstanceOverviewPage from "./routes/InstanceOverviewPage";
 import ProjectOverviewPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/ProjectOverviewPage";
 import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
-import UserListPage from "./routes/users/UserListPage";
-import { Client, Instance, Project, Workspace } from "@waltzgroup/javascript-sdk"
+import { Client, Instance, Project, User, Workspace } from "@waltzgroup/javascript-sdk"
 import InstanceSetupPage from "./routes/setup/InstanceSetupPage";
 import ProjectBoardPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
 import PopupContainer from "./components/PopupContainer/PopupContainer";
 import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
 import InstanceSettingsPage from "./routes/settings/InstanceSettingsPage";
 import AboutPage from "./routes/settings/about/AboutPage";
-import AccessPage from "./routes/settings/access-policies/AccessPoliciesPage";
+import UserListPage from "./routes/settings/users/UserListPage";
+import SettingsNotFoundPage from "./routes/settings/[wildcard]/SettingsNotFoundPage";
+
+export type DeleteUsersPopupConfig = {
+  action: "delete-users";
+  users: User[];
+}
+
+export type PopupConfig = DeleteUsersPopupConfig;
 
 export default function App() {
 
@@ -30,15 +37,15 @@ export default function App() {
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [project, setProject] = useState<Project | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
+  const [popupConfig, setPopupConfig] = useState<DeleteUsersPopupConfig | null>(null);
 
   const location = useLocation();
   const isWorkspacePage = matchPath("/workspaces/:workspaceID/*", location.pathname) !== null;
   const isProjectPage = matchPath("/workspaces/:workspaceID/projects/:projectID/*", location.pathname) !== null;
-  const scope = isProjectPage ? project : (isWorkspacePage ? workspace : instance); 
 
   return (
     <>
-      <PopupContainer />
+      <PopupContainer popupConfig={popupConfig} setPopupConfig={setPopupConfig} />
       <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
       <section id="content" className={isSidebarOpen ? "sidebar-open" : ""}>
         {
@@ -56,7 +63,8 @@ export default function App() {
           <Route path="/" element={<InstanceOverviewPage instance={instance} />} />
           <Route path="/settings" element={<InstanceSettingsPage />} />
           <Route path="/settings/about" element={<AboutPage />} />
-          <Route path="/settings/access-policies" element={<AccessPage />} />
+          <Route path="/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
+          <Route path="/settings/*" element={<SettingsNotFoundPage />} />
           <Route path="/workspaces" element={<WorkspaceListPage />} />
           <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
           <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />

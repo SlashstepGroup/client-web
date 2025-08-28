@@ -5,12 +5,11 @@ import Popup from "../Popup/Popup";
 import PopupFooter from "../Popup/components/PopupFooter/PopupFooter";
 import { useLocation, useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
-import { AccessPolicy, AccessPolicyPermissionLevel, Client, User } from "@waltzgroup/javascript-sdk";
+import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, User } from "@waltzgroup/javascript-sdk";
 import Tip from "#components/Tip/Tip";
-import DropdownArrowIcon from "#icons/DropdownArrowIcon";
-import PermissionLevelDropdown from "#components/PermissionLevelDropdown/PermissionLevelDropdown";
 import { actionCell as actionCellStyle, actionHeaderCell as actionHeaderCellStyle, inheritanceHeaderCell as inheritanceHeaderCellStyle, permissionLevelHeaderCell as permissionLevelHeaderCellStyle, pendingDeleteRow as pendingDeleteRowStyle } from "./EditAccessPolicyPopup.module.css";
 import Dropdown from "#components/Dropdown/Dropdown";
+import AccessPolicyTableRow from "#components/AccessPolicyTableRow/AccessPolicyTableRow";
 
 function EditAccessPolicyPopup({shouldOpen, onClose}: { shouldOpen: boolean, onClose: () => void }) {
 
@@ -34,12 +33,19 @@ function EditAccessPolicyPopup({shouldOpen, onClose}: { shouldOpen: boolean, onC
         scopeID: "workspace1",
         scopeType: "Workspace",
         actionID: "action1",
-        permissionLevel: 0,
+        permissionLevel: AccessPolicyPermissionLevel.None,
+        inheritanceLevel: AccessPolicyInheritanceLevel.Disabled,
         principal: new User({
           id: "user1",
           username: "user1",
           displayName: "User 1"
-        }, {} as Client)
+        }, {} as Client),
+        action: new Action({
+          id: "xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          name: "waltz.accessPolicies.edit",
+          displayName: "Edit access policies",
+          description: "Allows the user to edit access policies on a resource."
+        }, {} as Client),
       }, {} as Client)]);
 
       setIsSearchingForAccessPolicy(false);
@@ -110,7 +116,7 @@ function EditAccessPolicyPopup({shouldOpen, onClose}: { shouldOpen: boolean, onC
                 <section>
                   <label>Principal</label>
                   <section className="account">
-                    <section>{accessPolicies[0].principal.displayName}</section>
+                    <section>{accessPolicies[0].principal?.displayName}</section>
                     <section className="account-type">{accessPolicies[0].principal instanceof User ? "User" : "Group"}</section>
                   </section>
                 </section>
@@ -124,7 +130,7 @@ function EditAccessPolicyPopup({shouldOpen, onClose}: { shouldOpen: boolean, onC
                 <section>
                   <label>Access policies</label>
                   <section className="button-list">
-                    <Dropdown isOpen={false} selectedItem="Add action" onClick={() => null}>
+                    <Dropdown name="Add action" isOpen={false} selectedItem="Add action" onClick={() => null}>
 
                     </Dropdown>
                     {
@@ -152,66 +158,29 @@ function EditAccessPolicyPopup({shouldOpen, onClose}: { shouldOpen: boolean, onC
                           </th>
                           <th scope="col" id={actionHeaderCellStyle}>Action</th>
                           <th scope="col" id={permissionLevelHeaderCellStyle}>Permission level</th>
-                          <th scope="col" id={inheritanceHeaderCellStyle}>Inheritance</th>
+                          <th scope="col" id={inheritanceHeaderCellStyle}>Inheritance level</th>
                         </tr>
                       </thead>
                       <tbody>
                         {
                           accessPolicies.map((accessPolicy) => (
-                            <tr key={accessPolicy.id} className={newAccessPolicies[accessPolicy.id] === null ? pendingDeleteRowStyle : null}>
-                              <td className="checkbox-cell">
-                                <section>
-                                  <input type="checkbox" checked={selectedAccessPolicyIDs.includes(accessPolicy.id)} onClick={() => selectedAccessPolicyIDs.includes(accessPolicy.id) ? setSelectedAccessPolicyIDs(selectedAccessPolicyIDs.filter((selectedAccessPolicyID) => selectedAccessPolicyID !== accessPolicy.id)) : setSelectedAccessPolicyIDs([...selectedAccessPolicyIDs, accessPolicy.id])} />
-                                </section>
-                              </td>
-                              <td className={actionCellStyle}>
-                                <section>
-                                  <section>
-                                    <span>Edit access policies</span>
-                                  </section>
-                                  <p className="item-description">waltz.accessPolicies.edit</p>
-                                </section>
-                              </td>
-                              <td>
-                                <PermissionLevelDropdown selectedPermissionLevel={newAccessPolicies[accessPolicy.id]?.permissionLevel ?? accessPolicy.permissionLevel} onChange={(newPermissionLevel) => {
+                            <AccessPolicyTableRow accessPolicy={accessPolicy} isSelected={selectedAccessPolicyIDs.includes(accessPolicy.id)} onSelectionBoxClick={() => selectedAccessPolicyIDs.includes(accessPolicy.id) ? setSelectedAccessPolicyIDs(selectedAccessPolicyIDs.filter((selectedAccessPolicyID) => selectedAccessPolicyID !== accessPolicy.id)) : setSelectedAccessPolicyIDs([...selectedAccessPolicyIDs, accessPolicy.id])} isMarkedForDeletion={newAccessPolicies[accessPolicy.id] === null} newAccessPolicy={newAccessPolicies[accessPolicy.id]} onChange={(newAccessPolicy) => {
+                              
+                              const updatedNewAccessPolicies = {...newAccessPolicies};
 
-                                  setNewAccessPolicies((newAccessPolicies) => {
+                              if (newAccessPolicy.permissionLevel === accessPolicy.permissionLevel && newAccessPolicy.inheritanceLevel === accessPolicy.inheritanceLevel) {
 
-                                    newAccessPolicies = { ...newAccessPolicies };
-                                    const oldAccessPolicy = newAccessPolicies[accessPolicy.id] ?? accessPolicy;
-                                    const newAccessPolicy = new AccessPolicy({ 
-                                      ...oldAccessPolicy,
-                                      permissionLevel: newPermissionLevel
-                                    }, {} as Client);
+                                delete updatedNewAccessPolicies[accessPolicy.id];
 
-                                    if (newAccessPolicy.permissionLevel === accessPolicy.permissionLevel) {
+                              } else {
 
-                                      delete newAccessPolicies[accessPolicy.id];
+                                updatedNewAccessPolicies[accessPolicy.id] = newAccessPolicy;
 
-                                    } else {
+                              }
 
-                                      newAccessPolicies[accessPolicy.id] = newAccessPolicy;
+                              setNewAccessPolicies(updatedNewAccessPolicies);
 
-                                    }
-
-                                    return newAccessPolicies;
-
-                                  });
-
-                                }} isDisabled={newAccessPolicies[accessPolicy.id] === null}/>
-                                {
-                                  newAccessPolicies[accessPolicy.id] && newAccessPolicies[accessPolicy.id]?.permissionLevel !== accessPolicy.permissionLevel ? (
-                                    <p className="item-description">Preivously set to <b>{accessPolicy.permissionLevel === AccessPolicyPermissionLevel.None ? "None" : accessPolicy.permissionLevel === AccessPolicyPermissionLevel.User ? "User" : "Admin"}</b></p>
-                                  ) : null
-                                }
-                              </td>
-                              <td>
-                                <button type="button" disabled={newAccessPolicies[accessPolicy.id] === null}>
-                                  <span>Default</span>
-                                  <DropdownArrowIcon />
-                                </button>
-                              </td>
-                            </tr>
+                            }}/>
                           ))
                         }
                       </tbody>

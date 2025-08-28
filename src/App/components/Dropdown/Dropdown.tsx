@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { dropdown as dropdownStyle, dropdownBackground as dropdownBackgroundStyle, dropdownTitle as dropdownTitleStyle } from "./Dropdown.module.css";
 import DropdownArrowIcon from "#icons/DropdownArrowIcon";
 
-function Dropdown({isOpen, onClick, selectedItem, children, isDisabled = false}: { isOpen: boolean, onClick: () => void, selectedItem?: ReactNode, children?: React.ReactNode, isDisabled?: boolean }) {
+function Dropdown({name, isOpen, onClick, selectedItem, children, isDisabled = false}: { name: string, isOpen: boolean, onClick: () => void, selectedItem?: ReactNode, children?: React.ReactNode, isDisabled?: boolean }) {
 
   const buttonContainerRef = React.useRef<HTMLElement>(null);
   const [buttonBoundingClientRect, setButtonBoundingClientRect] = useState<DOMRect | null>(null);
@@ -52,7 +52,7 @@ function Dropdown({isOpen, onClick, selectedItem, children, isDisabled = false}:
         isOpen && buttonBoundingClientRect !== null ? createPortal(
           <section className={dropdownBackgroundStyle} ref={dropdownBackgroundRef} style={{ "--dropdown-left-offset": `${buttonBoundingClientRect.x}px`, "--dropdown-top-offset": `${buttonBoundingClientRect.y + buttonBoundingClientRect.height + 15}px` } as React.CSSProperties}>
             <section className={dropdownStyle}>
-              <b className={dropdownTitleStyle}>Permission level</b>
+              <b className={dropdownTitleStyle}>{name}</b>
               <ul className="dropdown-items">
                 {children}
               </ul>

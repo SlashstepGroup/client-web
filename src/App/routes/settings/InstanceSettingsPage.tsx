@@ -23,8 +23,8 @@ function InstanceSettingsPage() {
       <main>
         <h1>Settings</h1>
         <MenuList>
-          <MenuListLinkItem link={`/settings/access-policies`} label={"Access policies"} description={"Manage access to your instance's resources."} />
           <MenuListLinkItem link={`/settings/users`} label={"Users"} description={"Create, manage, and delete users of your instance."} />
+          <MenuListLinkItem link={`/settings/roles`} label={"Roles"} description={"Create, manage, and delete roles for your instance."} />
           <MenuListLinkItem link={`/settings/about`} label={"About"} description={"Learn about your instance and its capabilities."} />
         </MenuList>
       </main>

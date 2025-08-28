@@ -102,6 +102,15 @@ button.primary-button, input[type="submit"].primary-button {
   color: var(--text-button);
 }
 
+button.destructive-button, input[type="submit"].destructive-button {
+  color: rgb(255, 85, 85);
+}
+
+button.destructive-button-filled, input[type="submit"].destructive-button-filled {
+  background-color: rgb(255, 85, 85);
+  color: var(--text-button);
+}
+
 .button-list {
   list-style: none;
   padding: 0;
@@ -295,10 +304,6 @@ table tbody tr:last-of-type td:last-of-type {
 
 table th:first-of-type, table td:first-of-type {
   border-left: 1px solid var(--border);
-}
-
-table td a {
-  color: var(--text);
 }
 
 table th, table td {
