@@ -61,7 +61,7 @@ function ManageUserProfilePage() {
           <Breadcrumb icon={<UserSettingsIcon />} link={`/settings/users/manage/${username}`}>
             Manage {user ? (user.displayName ?? user.username) : username}
           </Breadcrumb>
-          <Breadcrumb icon={<PersonIcon />} link={`/settings/users/manage/${username}`}>
+          <Breadcrumb icon={<PersonIcon />} link={`/settings/users/manage/${username}/profile`}>
             Profile
           </Breadcrumb>
         </BreadcrumbList>

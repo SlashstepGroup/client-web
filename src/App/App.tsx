@@ -22,6 +22,7 @@ import CreateUserPage from "./routes/settings/users/create/CreateUserPage";
 import ManageUserPage from "./routes/settings/users/manage/[username]/ManageUserPage";
 import ManageUserProfilePage from "./routes/settings/users/manage/[username]/profile/ManageUserProfilePage";
 import UserSettingsNotFoundPage from "./routes/settings/users/manage/[username]/[wildcard]/UserSettingsNotFoundPage";
+import ManageUserRolesPage from "./routes/settings/users/manage/[username]/roles/ManageUserRolesPage";
 
 export type DeleteUsersPopupConfig = {
   action: "delete-users";
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="/settings/users/manage" element={<Navigate to="/settings/users" />} />
           <Route path="/settings/users/manage/:username" element={<ManageUserPage />} />
           <Route path="/settings/users/manage/:username/profile" element={<ManageUserProfilePage />} />
+          <Route path="/settings/users/manage/:username/roles" element={<ManageUserRolesPage />} />
           <Route path="/settings/users/manage/:username/*" element={<UserSettingsNotFoundPage />} />
           <Route path="/settings/*" element={<SettingsNotFoundPage />} />
           <Route path="/workspaces" element={<WorkspaceListPage />} />

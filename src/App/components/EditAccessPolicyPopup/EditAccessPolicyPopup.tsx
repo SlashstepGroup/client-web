@@ -128,64 +128,7 @@ function EditAccessPolicyPopup({shouldOpen, onClose}: { shouldOpen: boolean, onC
                   </section>
                 </section>
                 <section>
-                  <label>Access policies</label>
-                  <section className="button-list">
-                    <Dropdown name="Add action" isOpen={false} selectedItem="Add action" onClick={() => null}>
-
-                    </Dropdown>
-                    {
-                      selectedAccessPolicyIDs.length > 0 ? (
-                        areAllSelectedAccessPoliciesMarkedForDeletion ? (
-                          <button type="button" disabled={selectedAccessPolicyIDs.length === 0} onClick={restoreSelectedAccessPolicies}>Restore selected access policies</button>
-                        ) : (
-                          <button type="button" disabled={selectedAccessPolicyIDs.length === 0} onClick={markSelectedAccessPoliciesForDeletion}>Delete selected access policies</button>
-                        )
-                      ) : null
-                    }
-                  </section>
-                  <section className="table-container">
-                    <table>
-                      <colgroup />
-                      <colgroup />
-                      <colgroup />
-                      <colgroup />
-                      <thead>
-                        <tr>
-                          <th scope="col" className="checkbox-cell">
-                            <section>
-                              <input type="checkbox" checked={areAllAccessPoliciesSelected} onClick={() => setSelectedAccessPolicyIDs(areAllAccessPoliciesSelected ? [] : accessPolicies.map((accessPolicy) => accessPolicy.id))} />
-                            </section>
-                          </th>
-                          <th scope="col" id={actionHeaderCellStyle}>Action</th>
-                          <th scope="col" id={permissionLevelHeaderCellStyle}>Permission level</th>
-                          <th scope="col" id={inheritanceHeaderCellStyle}>Inheritance level</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          accessPolicies.map((accessPolicy) => (
-                            <AccessPolicyTableRow accessPolicy={accessPolicy} isSelected={selectedAccessPolicyIDs.includes(accessPolicy.id)} onSelectionBoxClick={() => selectedAccessPolicyIDs.includes(accessPolicy.id) ? setSelectedAccessPolicyIDs(selectedAccessPolicyIDs.filter((selectedAccessPolicyID) => selectedAccessPolicyID !== accessPolicy.id)) : setSelectedAccessPolicyIDs([...selectedAccessPolicyIDs, accessPolicy.id])} isMarkedForDeletion={newAccessPolicies[accessPolicy.id] === null} newAccessPolicy={newAccessPolicies[accessPolicy.id]} onChange={(newAccessPolicy) => {
-                              
-                              const updatedNewAccessPolicies = {...newAccessPolicies};
-
-                              if (newAccessPolicy.permissionLevel === accessPolicy.permissionLevel && newAccessPolicy.inheritanceLevel === accessPolicy.inheritanceLevel) {
-
-                                delete updatedNewAccessPolicies[accessPolicy.id];
-
-                              } else {
-
-                                updatedNewAccessPolicies[accessPolicy.id] = newAccessPolicy;
-
-                              }
-
-                              setNewAccessPolicies(updatedNewAccessPolicies);
-
-                            }}/>
-                          ))
-                        }
-                      </tbody>
-                    </table>
-                  </section>
+                  
                 </section>
               </form>
             ) : (

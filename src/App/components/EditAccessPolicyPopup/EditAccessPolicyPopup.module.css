@@ -1,7 +1,0 @@
-#actionHeaderCell {
-  width: 60%;
-}
-
-#permissionLevelHeaderCell, #inheritanceHeaderCell {
-  min-width: 240px;
-}

@@ -38,7 +38,13 @@
   align-items: center;
 }
 
-.toggle > section > svg {
+.iconContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.iconContainer svg {
   width: 30px;
   height: 30px;
   fill: var(--text);

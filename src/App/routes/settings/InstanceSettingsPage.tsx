@@ -4,12 +4,15 @@ import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
 import SettingsIcon from "#icons/SettingsIcon";
+import PersonIcon from "#icons/PersonIcon";
+import KeyIcon from "#icons/KeyIcon";
+import AboutIcon from "#icons/AboutIcon";
 
 function InstanceSettingsPage() {
 
   useEffect(() => {
 
-    document.title = "Settings • Waltz";
+    document.title = "Instance settings • Waltz";
 
   }, []);
 
@@ -17,15 +20,15 @@ function InstanceSettingsPage() {
     <section id="main-container">
       <BreadcrumbList>
         <Breadcrumb icon={<SettingsIcon />} link="/settings">
-          Settings
+          Instance settings
         </Breadcrumb>
       </BreadcrumbList>
       <main>
         <h1>Settings</h1>
         <MenuList>
-          <MenuListLinkItem link={`/settings/users`} label={"Users"} description={"Create, manage, and delete users of your instance."} />
-          <MenuListLinkItem link={`/settings/roles`} label={"Roles"} description={"Create, manage, and delete roles for your instance."} />
-          <MenuListLinkItem link={`/settings/about`} label={"About"} description={"Learn about your instance and its capabilities."} />
+          <MenuListLinkItem icon={<PersonIcon />} link={`/settings/users`} label={"Users"} description={"Create, manage, and delete users of your instance."} />
+          <MenuListLinkItem icon={<KeyIcon />} link={`/settings/roles`} label={"Roles"} description={"Create, manage, and delete roles for your instance."} />
+          <MenuListLinkItem icon={<AboutIcon />} link={`/settings/about`} label={"About"} description={"Learn about your instance and its capabilities."} />
         </MenuList>
       </main>
     </section>
