@@ -3,13 +3,14 @@
   padding: 15px;
   border-radius: 5px;
   background-color: var(--menu-list-button-background);
-  box-shadow: var(--default-box-shadow);
+  border: 1px solid var(--border);
   color: inherit;
   display: flex;
   opacity: 0.7;
   transition: 0.1s;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .item > a:hover {
@@ -21,6 +22,19 @@
 }
 
 .item > a > svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--text);
+  flex-shrink: 0;
+}
+
+.item > a > section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.item > a > section > svg {
   width: 30px;
   height: 30px;
   fill: var(--text);
