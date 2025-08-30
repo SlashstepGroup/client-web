@@ -27,6 +27,8 @@ function ManageUserRolesPage() {
   const [searchingForUser, setSearchingForUser] = useState(true);
   const [roles, setRoles] = useState<Role[] | null>(null);
   const [selectedRoleIDs, setSelectedRoleIDs] = useState<string[]>([]);
+  const [shouldRemoveSelectedRoles, setShouldRemoveSelectedRoles] = useState(false);
+  const [isAddRoleDropdownOpen, setIsAddRoleDropdownOpen] = useState(false);
   const areAllRolesSelected = roles ? selectedRoleIDs.length === roles.length : false;
 
   useEffect(() => {
@@ -47,7 +49,6 @@ function ManageUserRolesPage() {
         description: "People who can manage most instance resources and bypass most permission checks."
       }, {} as Client)
     ]);
-
 
   }, []);
 
@@ -75,10 +76,15 @@ function ManageUserRolesPage() {
                 <>
                   <h1>Manage {user.displayName}'s roles</h1>
                   <section className="button-list">
-                    <Dropdown name="Add role" isOpen={false} selectedItem="Add role" onClick={() => null}>
-
+                    <Dropdown name="Add role" isOpen={isAddRoleDropdownOpen} selectedItem="Add role" onClick={() => setIsAddRoleDropdownOpen(!isAddRoleDropdownOpen)}>
+                      <li>
+                        <Spinner />
+                      </li>
                     </Dropdown>
-                    <button type="button" className="destructive-button" disabled={selectedRoleIDs.length === 0}>Remove selected roles</button>
+                    <button type="button" className="destructive-button" disabled={selectedRoleIDs.length === 0 || shouldRemoveSelectedRoles} onClick={() => setShouldRemoveSelectedRoles(true)}>
+                      <span>Remove selected roles</span>
+                      {shouldRemoveSelectedRoles ? <Spinner /> : null}
+                    </button>
                   </section>
                   {
                     roles ? (
@@ -92,7 +98,7 @@ function ManageUserRolesPage() {
                             <tr>
                               <th scope="col" className="checkbox-cell">
                                 <section>
-                                  <input type="checkbox" checked={areAllRolesSelected} onClick={() => setSelectedRoleIDs(areAllRolesSelected ? [] : roles.map((role) => role.id))} />
+                                  <input type="checkbox" checked={areAllRolesSelected} onClick={() => setSelectedRoleIDs(areAllRolesSelected ? [] : roles.map((role) => role.id))} disabled={shouldRemoveSelectedRoles} />
                                 </section>
                               </th>
                               <th scope="col">Role name</th>
@@ -102,7 +108,7 @@ function ManageUserRolesPage() {
                           <tbody>
                             {
                               roles.map((role) => (
-                                <UserRoleTableBodyRow key={role.id} role={role} isSelected={selectedRoleIDs.includes(role.id)} onSelectionBoxClick={() => selectedRoleIDs.includes(user.id) ? setSelectedRoleIDs(selectedRoleIDs.filter((selectedRoleID) => selectedRoleID !== role.id)) : setSelectedRoleIDs([...selectedRoleIDs, user.id])} />
+                                <UserRoleTableBodyRow key={role.id} role={role} isSelected={selectedRoleIDs.includes(role.id)} onSelectionBoxClick={() => selectedRoleIDs.includes(user.id) ? setSelectedRoleIDs(selectedRoleIDs.filter((selectedRoleID) => selectedRoleID !== role.id)) : setSelectedRoleIDs([...selectedRoleIDs, user.id])} isSelectionDisabled={shouldRemoveSelectedRoles} />
                               ))
                             }
                           </tbody>

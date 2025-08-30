@@ -7,9 +7,10 @@ export type UserTableBodyRowProperties = {
   role: Role;
   isSelected: boolean;
   onSelectionBoxClick: () => void;
+  isSelectionDisabled: boolean;
 }
 
-function UserRoleTableBodyRow({role, isSelected, onSelectionBoxClick}: UserTableBodyRowProperties) {
+function UserRoleTableBodyRow({role, isSelected, onSelectionBoxClick, isSelectionDisabled}: UserTableBodyRowProperties) {
 
   const { id, name, description } = role;
 
@@ -17,7 +18,7 @@ function UserRoleTableBodyRow({role, isSelected, onSelectionBoxClick}: UserTable
     <tr>
       <td className="checkbox-cell">
         <section>
-          <input type="checkbox" checked={isSelected} onClick={onSelectionBoxClick} />
+          <input type="checkbox" checked={isSelected} onClick={onSelectionBoxClick} disabled={isSelectionDisabled} />
         </section>
       </td>
       <td>

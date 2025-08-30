@@ -8,7 +8,7 @@ import { Client, User } from "@waltzgroup/javascript-sdk";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-function SettingsNotFoundPage() {
+function UserManagementSettingsNotFoundPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,4 +67,4 @@ function SettingsNotFoundPage() {
 
 }
 
-export default React.memo(SettingsNotFoundPage);
+export default React.memo(UserManagementSettingsNotFoundPage);
