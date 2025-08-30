@@ -14,6 +14,7 @@ import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplay
 import KeyIcon from "#icons/KeyIcon";
 import WorldIcon from "#icons/WorldIcon";
 import OpenDoorIcon from "#icons/OpenDoorIcon";
+import UserSettingsIcon from "#icons/UserSettingsIcon";
 
 function CreateUserPage() {
 
@@ -53,7 +54,7 @@ function CreateUserPage() {
           <Breadcrumb icon={<PersonIcon />} link="/settings/users">
             Users
           </Breadcrumb>
-          <Breadcrumb icon={<PersonIcon />} link={`/settings/users/manage/${username}`}>
+          <Breadcrumb icon={<UserSettingsIcon />} link={`/settings/users/manage/${username}`}>
             Manage {user ? (user.displayName ?? user.username) : username}
           </Breadcrumb>
         </BreadcrumbList>

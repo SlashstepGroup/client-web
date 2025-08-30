@@ -18,6 +18,7 @@ import NoAccountIcon from "#icons/NoAccountIcon";
 import SignatureIcon from "#icons/SignatureIcon";
 import PhotoCameraFrontIcon from "#icons/PhotoCameraFrontIcon";
 import AtIcon from "#icons/AtIcon";
+import UserSettingsIcon from "#icons/UserSettingsIcon";
 
 function ManageUserProfilePage() {
 
@@ -57,10 +58,10 @@ function ManageUserProfilePage() {
           <Breadcrumb icon={<PersonIcon />} link="/settings/users">
             Users
           </Breadcrumb>
-          <Breadcrumb icon={<AddPersonIcon />} link={`/settings/users/manage/${username}`}>
+          <Breadcrumb icon={<UserSettingsIcon />} link={`/settings/users/manage/${username}`}>
             Manage {user ? (user.displayName ?? user.username) : username}
           </Breadcrumb>
-          <Breadcrumb icon={<AddPersonIcon />} link={`/settings/users/manage/${username}`}>
+          <Breadcrumb icon={<PersonIcon />} link={`/settings/users/manage/${username}`}>
             Profile
           </Breadcrumb>
         </BreadcrumbList>
