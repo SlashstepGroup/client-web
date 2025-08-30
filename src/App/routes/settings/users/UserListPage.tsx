@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import KeyIcon from "#icons/KeyIcon";
 import SettingsIcon from "#icons/SettingsIcon";
 import { Client, User } from "@waltzgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
 import PrincipalTableBodyRow from "#components/UserTableBodyRow/UserTableBodyRow";
 import { PopupConfig } from "../../../App";
+import PersonIcon from "#icons/PersonIcon";
 
 function UserListPage({setPopupConfig}: {setPopupConfig: (popupConfig: PopupConfig) => void}) {
 
@@ -46,7 +46,7 @@ function UserListPage({setPopupConfig}: {setPopupConfig: (popupConfig: PopupConf
           <Breadcrumb icon={<SettingsIcon />} link="/settings">
             Settings
           </Breadcrumb>
-          <Breadcrumb icon={<KeyIcon />} link="/settings/users">
+          <Breadcrumb icon={<PersonIcon />} link="/settings/users">
             Users
           </Breadcrumb>
         </BreadcrumbList>

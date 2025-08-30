@@ -4,11 +4,9 @@ import { list as listStyle } from "./MenuList.module.css";
 function MenuList({children}: {children: React.ReactNode}) {
 
   return (
-    <section>
-      <ul className={listStyle}>
-        {children}
-      </ul>
-    </section>
+    <ul className={listStyle}>
+      {children}
+    </ul>
   );
 
 }

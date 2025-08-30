@@ -1,0 +1,80 @@
+.item {
+  /* Styles for the list item */
+}
+
+.children > :global(.MenuList-module-list) {
+  gap: 0;
+}
+
+.children > :global(.MenuList-module-list) > li {
+  border-radius: 0;
+  border-top: none;
+}
+
+.children > :global(.MenuList-module-list) > li:last-of-type {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.toggle {
+  margin: 0;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--menu-list-button-background);
+  border: 1px solid var(--border);
+  color: inherit;
+  display: flex;
+  opacity: 0.7;
+  transition: 0.1s;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  position: relative;
+}
+
+.toggle > section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.toggle > section > svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--text);
+  flex-shrink: 0;
+}
+
+.toggle:hover {
+  opacity: 1;
+}
+
+.toggle.open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.toggle.open > svg {
+  rotate: -180deg;
+}
+
+.toggle > svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--text);
+  transition: 0.1s;
+  flex-shrink: 0;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+}
+
+.information > span {
+  color: var(--text-bold);
+}
+
+.information > p {
+  font-size: 0.9rem;
+}

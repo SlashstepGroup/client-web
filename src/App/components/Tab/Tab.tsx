@@ -12,7 +12,7 @@ function Tab({children, link, isSelected}: {children: React.ReactNode, link: str
 
   return (
     <li className={`${tabStyle} ${isSelected ? selectedStyle : ""}`}>
-      <Link to={link} >{children}</Link>
+      <Link to={link}>{children}</Link>
     </li>
   );
 

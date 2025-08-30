@@ -5,6 +5,7 @@
   height: 42px;
   display: flex;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 #breadcrumbList > ul {

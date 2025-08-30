@@ -10,6 +10,7 @@
   --secondary-button-background: #f0f0f0;
   --text-input-background: #ffffff;
   --primary: #007bff;
+  --default-box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 @font-face {
@@ -66,8 +67,10 @@ h1, h2, p {
   margin: 0;
 }
 
-b {
-  color: var(--text-bold);
+code {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
 }
 
 button, input[type="submit"] {
@@ -82,6 +85,7 @@ button, input[type="submit"] {
   gap: 10px;
   background-color: var(--secondary-button-background);
   color: var(--text);
+  justify-content: center;
 }
 
 button[disabled], input[disabled], textarea[disabled] {

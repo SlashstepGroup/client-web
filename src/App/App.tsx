@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes, matchPath, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, matchPath, useLocation } from "react-router-dom";
 import "./global.css";
 import WorkspaceListPage from "./routes/workspaces/WorkspaceListPage";
 import WorkspacePage from "./routes/workspaces/[workspace-id]/WorkspacePage";
@@ -18,6 +18,9 @@ import InstanceSettingsPage from "./routes/settings/InstanceSettingsPage";
 import AboutPage from "./routes/settings/about/AboutPage";
 import UserListPage from "./routes/settings/users/UserListPage";
 import SettingsNotFoundPage from "./routes/settings/[wildcard]/SettingsNotFoundPage";
+import CreateUserPage from "./routes/settings/users/create/CreateUserPage";
+import ManageUserPage from "./routes/settings/users/manage/[username]/ManageUserPage";
+import ManageUserProfilePage from "./routes/settings/users/manage/[username]/profile/ManageUserProfilePage";
 
 export type DeleteUsersPopupConfig = {
   action: "delete-users";
@@ -64,6 +67,10 @@ export default function App() {
           <Route path="/settings" element={<InstanceSettingsPage />} />
           <Route path="/settings/about" element={<AboutPage />} />
           <Route path="/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
+          <Route path="/settings/users/create" element={<CreateUserPage />} />
+          <Route path="/settings/users/manage" element={<Navigate to="/settings/users" />} />
+          <Route path="/settings/users/manage/:username" element={<ManageUserPage />} />
+          <Route path="/settings/users/manage/:username/profile" element={<ManageUserProfilePage />} />
           <Route path="/settings/*" element={<SettingsNotFoundPage />} />
           <Route path="/workspaces" element={<WorkspaceListPage />} />
           <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
