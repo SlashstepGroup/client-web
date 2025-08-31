@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
@@ -11,6 +11,9 @@ import UserSettingsIcon from "#icons/UserSettingsIcon";
 import KeyIcon from "#icons/KeyIcon";
 import UserRoleTableBodyRow from "#components/UserRoleTableBodyRow/UserRoleTableBodyRow";
 import Dropdown from "#components/Dropdown/Dropdown";
+import DropdownItem from "#components/DropdownItem/DropdownItem";
+import DropdownItemList from "#components/DropdownItemList/DropdownItemList";
+import RoleDropdown from "#components/RoleDropdown/RoleDropdown";
 
 function ManageUserRolesPage() {
 
@@ -29,6 +32,7 @@ function ManageUserRolesPage() {
   const [selectedRoleIDs, setSelectedRoleIDs] = useState<string[]>([]);
   const [shouldRemoveSelectedRoles, setShouldRemoveSelectedRoles] = useState(false);
   const [isAddRoleDropdownOpen, setIsAddRoleDropdownOpen] = useState(false);
+  const [roleToAdd, setRoleToAdd] = useState<Role | null>(null);
   const areAllRolesSelected = roles ? selectedRoleIDs.length === roles.length : false;
 
   useEffect(() => {
@@ -75,13 +79,22 @@ function ManageUserRolesPage() {
               user ? (
                 <>
                   <h1>Manage {user.displayName}'s roles</h1>
+                  {/* <Tip type="Error">
+                    {user.displayName} already has that role.
+                  </Tip> */}
                   <section className="button-list">
-                    <Dropdown name="Add role" isOpen={isAddRoleDropdownOpen} selectedItem="Add role" onClick={() => setIsAddRoleDropdownOpen(!isAddRoleDropdownOpen)}>
-                      <li>
+                    <RoleDropdown selectedItem={roleToAdd ? (
+                      <>
+                        {roleToAdd.name}
                         <Spinner />
-                      </li>
-                    </Dropdown>
-                    <button type="button" className="destructive-button" disabled={selectedRoleIDs.length === 0 || shouldRemoveSelectedRoles} onClick={() => setShouldRemoveSelectedRoles(true)}>
+                      </>
+                    ) : "Add role"} isOpen={isAddRoleDropdownOpen} onClick={() => setIsAddRoleDropdownOpen(!isAddRoleDropdownOpen)} onChange={(role) => {
+                      
+                      setRoleToAdd(role);
+                      setIsAddRoleDropdownOpen(false);
+                    
+                    }} isDisabled={roleToAdd !== null || shouldRemoveSelectedRoles} />
+                    <button type="button" className="destructive-button" disabled={selectedRoleIDs.length === 0 || shouldRemoveSelectedRoles || roleToAdd !== null} onClick={() => setShouldRemoveSelectedRoles(true)}>
                       <span>Remove selected roles</span>
                       {shouldRemoveSelectedRoles ? <Spinner /> : null}
                     </button>
@@ -98,7 +111,7 @@ function ManageUserRolesPage() {
                             <tr>
                               <th scope="col" className="checkbox-cell">
                                 <section>
-                                  <input type="checkbox" checked={areAllRolesSelected} onClick={() => setSelectedRoleIDs(areAllRolesSelected ? [] : roles.map((role) => role.id))} disabled={shouldRemoveSelectedRoles} />
+                                  <input type="checkbox" checked={areAllRolesSelected} onClick={() => setSelectedRoleIDs(areAllRolesSelected ? [] : roles.map((role) => role.id))} disabled={shouldRemoveSelectedRoles || roleToAdd !== null} />
                                 </section>
                               </th>
                               <th scope="col">Role name</th>
@@ -108,7 +121,7 @@ function ManageUserRolesPage() {
                           <tbody>
                             {
                               roles.map((role) => (
-                                <UserRoleTableBodyRow key={role.id} role={role} isSelected={selectedRoleIDs.includes(role.id)} onSelectionBoxClick={() => selectedRoleIDs.includes(user.id) ? setSelectedRoleIDs(selectedRoleIDs.filter((selectedRoleID) => selectedRoleID !== role.id)) : setSelectedRoleIDs([...selectedRoleIDs, user.id])} isSelectionDisabled={shouldRemoveSelectedRoles} />
+                                <UserRoleTableBodyRow key={role.id} role={role} isSelected={selectedRoleIDs.includes(role.id)} onSelectionBoxClick={() => selectedRoleIDs.includes(user.id) ? setSelectedRoleIDs(selectedRoleIDs.filter((selectedRoleID) => selectedRoleID !== role.id)) : setSelectedRoleIDs([...selectedRoleIDs, user.id])} isSelectionDisabled={shouldRemoveSelectedRoles || roleToAdd !== null} />
                               ))
                             }
                           </tbody>

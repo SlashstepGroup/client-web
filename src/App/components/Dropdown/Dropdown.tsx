@@ -1,7 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { dropdown as dropdownStyle, dropdownBackground as dropdownBackgroundStyle, dropdownTitle as dropdownTitleStyle } from "./Dropdown.module.css";
+import { dropdown as dropdownStyle, dropdownBackground as dropdownBackgroundStyle, dropdownTitle as dropdownTitleStyle, toggleButton as toggleButtonStyle } from "./Dropdown.module.css";
 import DropdownArrowIcon from "#icons/DropdownArrowIcon";
+import Spinner from "#components/Spinner/Spinner";
 
 function Dropdown({name, isOpen, onClick, selectedItem, children, isDisabled = false}: { name: string, isOpen: boolean, onClick: () => void, selectedItem?: ReactNode, children?: React.ReactNode, isDisabled?: boolean }) {
 
@@ -44,7 +45,7 @@ function Dropdown({name, isOpen, onClick, selectedItem, children, isDisabled = f
      * making it not reliable for positioning the dropdown. 
      */
     <section ref={buttonContainerRef}>
-      <button type="button" onClick={onClick} disabled={isDisabled || !children}>
+      <button type="button" onClick={onClick} disabled={isDisabled || !children} className={toggleButtonStyle}>
         <span>{selectedItem ?? (children ? "Select an item" : "No items available")}</span>
         <DropdownArrowIcon />
       </button>
@@ -53,9 +54,7 @@ function Dropdown({name, isOpen, onClick, selectedItem, children, isDisabled = f
           <section className={dropdownBackgroundStyle} ref={dropdownBackgroundRef} style={{ "--dropdown-left-offset": `${buttonBoundingClientRect.x}px`, "--dropdown-top-offset": `${buttonBoundingClientRect.y + buttonBoundingClientRect.height + 15}px` } as React.CSSProperties}>
             <section className={dropdownStyle}>
               <b className={dropdownTitleStyle}>{name}</b>
-              <ul className="dropdown-items">
-                {children}
-              </ul>
+              {children}
             </section>
           </section>, document.getElementById("root") as HTMLElement
         ) : null

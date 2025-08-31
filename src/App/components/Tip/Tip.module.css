@@ -18,6 +18,19 @@
 }
 
 .warning {
-  background-color: rgba(255, 136, 0, 0.32);
+  background-color: rgba(255, 136, 0, 0.12);
   border-color: rgba(255, 136, 0, 0.32);
+}
+
+.warning > svg {
+  fill: rgb(255, 136, 0);
+}
+
+.error {
+  background-color: rgba(255, 72, 0, 0.137);
+  border-color: rgba(255, 72, 0, 0.521);
+}
+
+.error > svg {
+  fill: rgb(255, 72, 0);
 }

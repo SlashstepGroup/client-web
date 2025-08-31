@@ -12,6 +12,12 @@
   max-width: 360px;
 }
 
+.toggleButton > span {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
 .dropdown ul {
   list-style: none;
   padding: 0;
