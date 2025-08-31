@@ -14,6 +14,9 @@ import Dropdown from "#components/Dropdown/Dropdown";
 import DropdownItem from "#components/DropdownItem/DropdownItem";
 import DropdownItemList from "#components/DropdownItemList/DropdownItemList";
 import RoleDropdown from "#components/RoleDropdown/RoleDropdown";
+import MenuList from "#components/MenuList/MenuList";
+import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
+import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
 
 function ManageUserRolesPage() {
 
@@ -70,7 +73,7 @@ function ManageUserRolesPage() {
             Manage {user ? (user.displayName ?? user.username) : username}
           </Breadcrumb>
           <Breadcrumb icon={<KeyIcon />} link={`/settings/users/manage/${username}/permissions`}>
-            Roles
+            Permissions
           </Breadcrumb>
         </BreadcrumbList>
         <main>
@@ -78,60 +81,70 @@ function ManageUserRolesPage() {
             searchingForUser ? <Spinner /> : (
               user ? (
                 <>
-                  <h1>Manage {user.displayName}'s roles</h1>
-                  {/* <Tip type="Error">
-                    {user.displayName} already has that role.
-                  </Tip> */}
-                  <section className="button-list">
-                    <RoleDropdown selectedItem={roleToAdd ? (
-                      <>
-                        {roleToAdd.name}
-                        <Spinner />
-                      </>
-                    ) : "Add role"} isOpen={isAddRoleDropdownOpen} onClick={() => setIsAddRoleDropdownOpen(!isAddRoleDropdownOpen)} onChange={(role) => {
-                      
-                      setRoleToAdd(role);
-                      setIsAddRoleDropdownOpen(false);
-                    
-                    }} isDisabled={roleToAdd !== null || shouldRemoveSelectedRoles} />
-                    <button type="button" className="destructive-button" disabled={selectedRoleIDs.length === 0 || shouldRemoveSelectedRoles || roleToAdd !== null} onClick={() => setShouldRemoveSelectedRoles(true)}>
-                      <span>Remove selected roles</span>
-                      {shouldRemoveSelectedRoles ? <Spinner /> : null}
-                    </button>
-                  </section>
-                  {
-                    roles ? (
-                      <section className="table-container">
-                        <table cellSpacing={0}>
-                          <colgroup className="checkbox-colgroup" />
-                          <colgroup />
-                          <colgroup />
-                          <colgroup />
-                          <thead>
-                            <tr>
-                              <th scope="col" className="checkbox-cell">
-                                <section>
-                                  <input type="checkbox" checked={areAllRolesSelected} onClick={() => setSelectedRoleIDs(areAllRolesSelected ? [] : roles.map((role) => role.id))} disabled={shouldRemoveSelectedRoles || roleToAdd !== null} />
-                                </section>
-                              </th>
-                              <th scope="col">Role name</th>
-                              <th scope="col">Role description</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {
-                              roles.map((role) => (
-                                <UserRoleTableBodyRow key={role.id} role={role} isSelected={selectedRoleIDs.includes(role.id)} onSelectionBoxClick={() => selectedRoleIDs.includes(user.id) ? setSelectedRoleIDs(selectedRoleIDs.filter((selectedRoleID) => selectedRoleID !== role.id)) : setSelectedRoleIDs([...selectedRoleIDs, user.id])} isSelectionDisabled={shouldRemoveSelectedRoles || roleToAdd !== null} />
-                              ))
-                            }
-                          </tbody>
-                        </table>
-                      </section>
-                    ) : (
-                      <Spinner />
-                    )
-                  }
-                  
+                  <h1>Manage {user.displayName}'s permissions</h1>
+                  <Tip>This information is based on your current scope, which is the entire instance.</Tip>
+                  <MenuList>
+                    <MenuListDropdownItem icon={<KeyIcon />} label={"Roles"} description={"Use roles to give pre-defined permissions to this user."}>
+                      <MenuList>
+                        <MenuListDisplayItem>
+                          {/* <Tip type="Error">
+                            {user.displayName} already has that role.
+                          </Tip> */}
+                          <section className="button-list">
+                            <RoleDropdown selectedItem={roleToAdd ? (
+                              <>
+                                {roleToAdd.name}
+                                <Spinner />
+                              </>
+                            ) : "Add role"} isOpen={isAddRoleDropdownOpen} onClick={() => setIsAddRoleDropdownOpen(!isAddRoleDropdownOpen)} onChange={(role) => {
+                              
+                              setRoleToAdd(role);
+                              setIsAddRoleDropdownOpen(false);
+                            
+                            }} isDisabled={roleToAdd !== null || shouldRemoveSelectedRoles} />
+                            <button type="button" className="destructive-button" disabled={selectedRoleIDs.length === 0 || shouldRemoveSelectedRoles || roleToAdd !== null} onClick={() => setShouldRemoveSelectedRoles(true)}>
+                              <span>Remove selected roles</span>
+                              {shouldRemoveSelectedRoles ? <Spinner /> : null}
+                            </button>
+                          </section>
+                          {
+                            roles ? (
+                              <section className="table-container">
+                                <table cellSpacing={0}>
+                                  <colgroup className="checkbox-colgroup" />
+                                  <colgroup />
+                                  <colgroup />
+                                  <colgroup />
+                                  <thead>
+                                    <tr>
+                                      <th scope="col" className="checkbox-cell">
+                                        <section>
+                                          <input type="checkbox" checked={areAllRolesSelected} onClick={() => setSelectedRoleIDs(areAllRolesSelected ? [] : roles.map((role) => role.id))} disabled={shouldRemoveSelectedRoles || roleToAdd !== null} />
+                                        </section>
+                                      </th>
+                                      <th scope="col">Role name</th>
+                                      <th scope="col">Role description</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {
+                                      roles.map((role) => (
+                                        <UserRoleTableBodyRow key={role.id} role={role} isSelected={selectedRoleIDs.includes(role.id)} onSelectionBoxClick={() => selectedRoleIDs.includes(user.id) ? setSelectedRoleIDs(selectedRoleIDs.filter((selectedRoleID) => selectedRoleID !== role.id)) : setSelectedRoleIDs([...selectedRoleIDs, user.id])} isSelectionDisabled={shouldRemoveSelectedRoles || roleToAdd !== null} />
+                                      ))
+                                    }
+                                  </tbody>
+                                </table>
+                              </section>
+                            ) : (
+                              <Spinner />
+                            )
+                          }
+                        </MenuListDisplayItem>
+                      </MenuList>
+                    </MenuListDropdownItem>
+                    <MenuListDropdownItem icon={<PersonIcon />} label={"Direct access policies"} description={"Directly manage access policies for this user. These policies take priority over roles."}>
+                    </MenuListDropdownItem>
+                  </MenuList>
                 </>
               ) : (
                 <Tip type="Warning">User not found. Maybe that user was deleted, or the URL you came from may be incorrect.</Tip>

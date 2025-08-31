@@ -81,13 +81,13 @@ function ManageUserProfilePage() {
                         <section>{user.username}</section>
                       </section>
                     </MenuListDisplayItem>
-                    <MenuListDropdownItem icon={<PhotoCameraFrontIcon />} label={"Profile photo"} description={`Manage ${user.displayName}'s profile photo.`}>
+                    {/* <MenuListDropdownItem icon={<PhotoCameraFrontIcon />} label={"Profile photo"} description={`Manage ${user.displayName}'s profile photo.`}>
                       <MenuList>
                         <MenuListDisplayItem>
                           <Tip type="Warning">You can't do this yet.</Tip>
                         </MenuListDisplayItem>
                       </MenuList>
-                    </MenuListDropdownItem>
+                    </MenuListDropdownItem> */}
                     <MenuListDropdownItem icon={<SignatureIcon />} label={"Display name"} description={`Manage ${user.displayName}'s display name.`}>
                       <MenuList>
                         <MenuListDisplayItem>
