@@ -73,6 +73,12 @@ code {
   border: 1px solid var(--border);
 }
 
+.column-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .toolbar {
   background-color: var(--header);
   border-bottom: 1px solid var(--border);
