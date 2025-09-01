@@ -16,7 +16,7 @@ function Separator() {
 function BreadcrumbList({children}: {children?: ReactNode}) {
   
   return (
-    <nav id={breadcrumbListStyle}>
+    <nav id={breadcrumbListStyle} className="toolbar">
       <ul>
         <Breadcrumb icon={<HomeIcon />} link="/">
           Home

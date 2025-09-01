@@ -65,6 +65,10 @@ function ManageUserProfilePage() {
             Profile
           </Breadcrumb>
         </BreadcrumbList>
+        <section className="toolbar">
+          <button type="button" className="primary-button" disabled>Save</button>
+          <button type="button" disabled>Cancel</button>
+        </section>
         <main>
           {
             searchingForUser ? <Spinner /> : (
@@ -97,11 +101,6 @@ function ManageUserProfilePage() {
                               <label htmlFor="display-name">Display name</label>
                               <input id="display-name" type="text" placeholder={user.displayName} onChange={e => null} />
                             </section>
-                            <section>
-                              <span>
-                                <button type="submit" className="primary-button" disabled>Save</button>
-                              </span>
-                            </section>
                           </form>
                         </MenuListDisplayItem>
                       </MenuList>
@@ -114,11 +113,6 @@ function ManageUserProfilePage() {
                             <section>
                               <label htmlFor="username">Username</label>
                               <input id="username" type="text" placeholder={user.username} onChange={e => null} />
-                            </section>
-                            <section>
-                              <span>
-                                <button type="submit" className="primary-button" disabled>Save</button>
-                              </span>
                             </section>
                           </form>
                         </MenuListDisplayItem>

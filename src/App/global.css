@@ -8,7 +8,7 @@
   --menu-list-button-background: #fafafa;
   --border: #e6e6e6;
   --secondary-button-background: #f0f0f0;
-  --text-input-background: #ffffff;
+  --text-input-background: var(--secondary-button-background);
   --primary: #007bff;
   --default-box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
@@ -24,7 +24,7 @@
 }
 
 html {
-  font-size: 100%;
+  font-size: 16px;
 }
 
 main > section {
@@ -73,11 +73,22 @@ code {
   border: 1px solid var(--border);
 }
 
+.toolbar {
+  background-color: var(--header);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 10px 15px;
+  transition: 0.3s;
+  gap: 10px;
+}
+
 button, input[type="submit"] {
   border: none;
   padding: 10px 15px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  border-radius: 25px;
   cursor: pointer;
   transition: 0.1s;
   display: flex;
@@ -86,6 +97,7 @@ button, input[type="submit"] {
   background-color: var(--secondary-button-background);
   color: var(--text);
   justify-content: center;
+  border: 1px solid var(--border);
 }
 
 button[disabled], input[disabled], textarea[disabled] {
@@ -344,8 +356,7 @@ table th, table td {
     --popup-background: #121214;
     --menu-list-button-background: var(--sidebar);
     --border: #272727;
-    --text-input-background: #0b0b0b;
-    --secondary-button-background: #2d2d2d;
+    --secondary-button-background: #19191a;
   }
 
 }

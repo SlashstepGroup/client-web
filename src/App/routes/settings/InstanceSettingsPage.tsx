@@ -7,6 +7,7 @@ import SettingsIcon from "#icons/SettingsIcon";
 import PersonIcon from "#icons/PersonIcon";
 import KeyIcon from "#icons/KeyIcon";
 import AboutIcon from "#icons/AboutIcon";
+import GroupIcon from "#icons/GroupIcon";
 
 function InstanceSettingsPage() {
 
@@ -26,8 +27,9 @@ function InstanceSettingsPage() {
       <main>
         <h1>Settings</h1>
         <MenuList>
+          <MenuListLinkItem icon={<KeyIcon />} link={`/settings/access-policies`} label={"Access policies"} description={"Manage access policies for your instance."} />
           <MenuListLinkItem icon={<PersonIcon />} link={`/settings/users`} label={"Users"} description={"Create, manage, and delete users of your instance."} />
-          <MenuListLinkItem icon={<KeyIcon />} link={`/settings/roles`} label={"Roles"} description={"Create, manage, and delete roles for your instance."} />
+          <MenuListLinkItem icon={<GroupIcon />} link={`/settings/roles`} label={"Roles"} description={"Create, manage, and delete roles for your instance."} />
           <MenuListLinkItem icon={<AboutIcon />} link={`/settings/about`} label={"About"} description={"Learn about your instance and its capabilities."} />
         </MenuList>
       </main>
