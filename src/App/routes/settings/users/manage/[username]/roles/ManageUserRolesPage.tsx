@@ -107,11 +107,11 @@ function ManageUserRolesPage() {
           </Breadcrumb>
         </BreadcrumbList>
         <section className="toolbar">
-          <button type="button" className="primary-button" disabled={areNewRolesEqual || shouldUpdateRoles} onClick={() => setShouldUpdateRoles(true)}>
+          <button type="button" className="primary-button" disabled={!roles || !newRoles || areNewRolesEqual || shouldUpdateRoles} onClick={() => setShouldUpdateRoles(true)}>
             <span>Save</span>
             {shouldUpdateRoles ? <Spinner /> : null}
           </button>
-          <button type="button" disabled={areNewRolesEqual || shouldUpdateRoles} onClick={() => setNewRoles(roles)}>Cancel</button>
+          <button type="button" disabled={!roles || !newRoles || areNewRolesEqual || shouldUpdateRoles} onClick={() => setNewRoles(roles)}>Cancel</button>
         </section>
         <main>
           {
