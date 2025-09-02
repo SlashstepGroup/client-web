@@ -36,7 +36,7 @@ function AccessPolicyTableRow({accessPolicy, isMarkedForDeletion, newAccessPolic
     <tr key={accessPolicy.id} className={isMarkedForDeletion ? pendingDeleteRowStyle : null}>
       <td className="checkbox-cell">
         <section>
-          <input type="checkbox" checked={isSelected} onClick={onSelectionBoxClick} />
+          <input type="checkbox" checked={isSelected} onChange={onSelectionBoxClick} />
         </section>
       </td>
       <td className={actionCellStyle}>

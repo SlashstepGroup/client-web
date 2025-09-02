@@ -26,6 +26,7 @@ import ManageUserRolesPage from "./routes/instances/[instance-id]/settings/users
 import UserSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/users/[wildcard]/UserSettingsNotFoundPage";
 import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/sessions/ManageUserSessionsPage";
 import HomePage from "./routes/HomePage";
+import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
 
 export type DeleteUsersPopupConfig = {
   action: "delete-users";
@@ -103,7 +104,7 @@ export default function App() {
           <Route path="/instances/:instanceID" element={<InstanceOverviewPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings" element={<InstanceSettingsPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/about" element={<InstanceAboutPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
-          <Route path="/instances/:instanceID/settings/access-policies" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings/access-policies" element={<InstanceAccessPoliciesPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/encryption" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
           <Route path="/instances/:instanceID/settings/users/create" element={<CreateUserPage />} />
