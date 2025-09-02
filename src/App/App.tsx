@@ -15,7 +15,7 @@ import ProjectBoardPage from "./routes/instances/[instance-id]/workspaces/[works
 import PopupContainer from "./components/PopupContainer/PopupContainer";
 import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
 import InstanceSettingsPage from "./routes/instances/[instance-id]/settings/InstanceSettingsPage";
-import AboutPage from "./routes/instances/[instance-id]/settings/about/AboutPage";
+import InstanceAboutPage from "./routes/instances/[instance-id]/settings/about/InstanceAboutPage";
 import UserListPage from "./routes/instances/[instance-id]/settings/users/UserListPage";
 import SettingsNotFoundPage from "./routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
 import CreateUserPage from "./routes/instances/[instance-id]/settings/users/create/CreateUserPage";
@@ -101,8 +101,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/instances/:instanceID" element={<InstanceOverviewPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
-          <Route path="/instances/:instanceID/settings" element={<InstanceSettingsPage />} />
-          <Route path="/instances/:instanceID/settings/about" element={<AboutPage />} />
+          <Route path="/instances/:instanceID/settings" element={<InstanceSettingsPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings/about" element={<InstanceAboutPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings/access-policies" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings/encryption" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
           <Route path="/instances/:instanceID/settings/users/create" element={<CreateUserPage />} />
           <Route path="/instances/:instanceID/settings/users/manage" element={<Navigate to="/settings/users" />} />
@@ -112,7 +114,8 @@ export default function App() {
           <Route path="/instances/:instanceID/settings/users/manage/:username/sessions" element={<ManageUserSessionsPage />} />
           <Route path="/instances/:instanceID/settings/users/manage/:username/*" element={<UserManagementSettingsNotFoundPage />} />
           <Route path="/instances/:instanceID/settings/users/*" element={<UserSettingsNotFoundPage />} />
-          <Route path="/instances/:instanceID/settings/*" element={<SettingsNotFoundPage />} />
+          <Route path="/instances/:instanceID/settings/roles" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings/*" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/workspaces" element={<WorkspaceListPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/workspaces/:workspaceID" element={<WorkspacePage />} />
           <Route path="/instances/:instanceID/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />

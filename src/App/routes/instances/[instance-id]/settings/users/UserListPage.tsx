@@ -22,7 +22,6 @@ function UserListPage({setPopupConfig}: {setPopupConfig: (popupConfig: PopupConf
 
   const [users, setUsers] = React.useState<User[] | null>(null);
   const [selectedUserIDs, setSelectedUserIDs] = useState<string[]>([]);
-  const [isDeletionPopupOpen, setIsDeletionPopupOpen] = useState(false);
 
   useEffect(() => {
 

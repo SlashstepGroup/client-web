@@ -1,14 +1,17 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
+import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 import QuestionMarkIcon from "#icons/QuestionMarkIcon";
 import SettingsIcon from "#icons/SettingsIcon";
+import { Instance } from "@waltzgroup/javascript-sdk";
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-function SettingsNotFoundPage() {
+function SettingsNotFoundPage({instance, isLoadingResources}: {instance: Instance | null, isLoadingResources: boolean}) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { instanceID } = useParams();
 
   useEffect(() => {
 
@@ -16,17 +19,12 @@ function SettingsNotFoundPage() {
 
   }, []);
 
-  // const didChange = (newInstanceName && newInstanceName !== instance?.displayName) || (newDescription && newDescription !== instance?.description);
-
   return (
     <section id="main-container">
       <BreadcrumbList>
-        <Breadcrumb icon={<SettingsIcon />} link="/settings">
-          Settings
-        </Breadcrumb>
-        <Breadcrumb icon={<QuestionMarkIcon />} link={location.pathname}>
-          Not found
-        </Breadcrumb>
+        <InstanceBreadcrumb instance={instance} instanceID={instanceID!} isLoadingResources={isLoadingResources} />
+        <Breadcrumb icon={<SettingsIcon />} link={`/instances/${instanceID}/settings`}>Settings</Breadcrumb>
+        <Breadcrumb icon={<QuestionMarkIcon />} link={location.pathname}>Not found</Breadcrumb>
       </BreadcrumbList>
       <main>
         <h1>Not found</h1>
