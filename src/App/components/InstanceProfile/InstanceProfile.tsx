@@ -6,6 +6,7 @@ import ProfileFeaturedUserItem from "../ProfileFeaturedUserItem/ProfileFeaturedU
 import ProfileLinkList from "../MenuList/MenuList";
 import ProfileLinkItem from "../MenuListLinkItem/MenuListLinkItem";
 import { Instance } from "@waltzgroup/javascript-sdk";
+import Skeleton from "#components/Skeleton/Skeleton";
 
 export type WorkspaceProperties = {
   name: string;
@@ -13,25 +14,7 @@ export type WorkspaceProperties = {
   description?: string;
 }
 
-function InstanceOverviewPage({instance}: {instance: Instance}) {
-
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [shouldSave, setShouldSave] = React.useState(false);
-  const [newInstanceName, setNewInstanceName] = React.useState(instance.displayName);
-  const [newDescription, setNewDescription] = React.useState(instance.description);
-
-  const isEditing = searchParams.get("mode") === "edit";
-  const currentTab = searchParams.get("tab");
-
-  useEffect(() => {
-
-    document.title = "Instance overview • Waltz";
-
-  }, []);
-
-  const didChange = (newInstanceName && newInstanceName !== instance.displayName) || (newDescription && newDescription !== instance.description);
+function InstanceOverviewPage({instance}: {instance: Instance | null}) {
 
   return (
     <main>
@@ -39,9 +22,11 @@ function InstanceOverviewPage({instance}: {instance: Instance}) {
   
       </section>
       <section>
-        <h1>{instance.displayName}</h1>
+        {
+          instance ? <h1>{instance.displayName}</h1> : <Skeleton width={300} height={30} />
+        }
         <section>
-          <p>{instance.description}</p>
+          {instance ? <p>{instance.description}</p> : <Skeleton width={500} height={20} />}
         </section>
       </section>
       {/* <ProfileFeaturedUserList label="Instance admins">

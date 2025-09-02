@@ -1,2 +1,2 @@
 # client-web
-The official Waltz client
+The official Slashstep client

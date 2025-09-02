@@ -1,6 +1,6 @@
 import { Role } from "@waltzgroup/javascript-sdk";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { permissionCell as permissionCellStyle } from "./UserRoleTableBodyRow.module.css";
 
 export type UserTableBodyRowProperties = {
@@ -12,6 +12,7 @@ export type UserTableBodyRowProperties = {
 
 function UserRoleTableBodyRow({role, isSelected, onSelectionBoxClick, isSelectionDisabled}: UserTableBodyRowProperties) {
 
+  const { instanceID } = useParams();
   const { id, name, description } = role;
 
   return (
@@ -22,7 +23,7 @@ function UserRoleTableBodyRow({role, isSelected, onSelectionBoxClick, isSelectio
         </section>
       </td>
       <td>
-        <Link to={`/settings/roles/manage/${id}`}>{name}</Link>
+        <Link to={`/instances/${instanceID}/settings/roles/manage/${id}`}>{name}</Link>
       </td>
       <td className={permissionCellStyle}>{description}</td>
     </tr>

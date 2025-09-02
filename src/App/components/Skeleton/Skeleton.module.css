@@ -1,0 +1,40 @@
+:root {
+  --skeleton-background: rgba(0, 0, 0, 0.05);
+  --skeleton-highlight: rgba(0, 0, 0, 0.1);
+  --skeleton-animation-duration: 1.5s;
+}
+
+.skeleton {
+  background-color: var(--skeleton-background);
+  border-radius: 5px;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.skeleton::after {
+  content: "";
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
+  animation: shimmer var(--skeleton-animation-duration) infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    --skeleton-background: rgba(255, 255, 255, 0.05);
+    --skeleton-highlight: rgba(255, 255, 255, 0.1);
+  }
+
+}

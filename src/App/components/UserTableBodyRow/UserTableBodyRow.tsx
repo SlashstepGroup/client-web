@@ -1,7 +1,7 @@
 import PencilIcon from "#icons/PencilIcon";
 import { AccessPolicy, Group, User } from "@waltzgroup/javascript-sdk";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { permissionCell as permissionCellStyle } from "./UserTableBodyRow.module.css";
 
 export type UserTableBodyRowProperties = {
@@ -14,6 +14,7 @@ function UserTableBodyRow({user, isSelected, onSelectionBoxClick}: UserTableBody
 
   const { id, username, displayName } = user;
   const navigate = useNavigate();
+  const { instanceID } = useParams();
 
   return (
     <tr>
@@ -23,7 +24,7 @@ function UserTableBodyRow({user, isSelected, onSelectionBoxClick}: UserTableBody
         </section>
       </td>
       <td>
-        <Link to={`/settings/users/manage/${username}`}>{displayName ?? ""}</Link>
+        <Link to={`/instances/${instanceID}/settings/users/manage/${username}`}>{displayName ?? ""}</Link>
       </td>
       <td>{username}</td>
       <td className={permissionCellStyle}>

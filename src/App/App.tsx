@@ -1,30 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, matchPath, useLocation } from "react-router-dom";
 import "./global.css";
-import WorkspaceListPage from "./routes/workspaces/WorkspaceListPage";
-import WorkspacePage from "./routes/workspaces/[workspace-id]/WorkspacePage";
+import WorkspaceListPage from "./routes/instances/[instance-id]/workspaces/WorkspaceListPage";
+import WorkspacePage from "./routes/instances/[instance-id]/workspaces/[workspace-id]/WorkspacePage";
 import Header from "./components/Header/Header";
 import WorkspaceSidebar from "./components/WorkspaceSidebar/WorkspaceSidebar";
 import InstanceSidebar from "./components/InstanceSidebar/InstanceSidebar";
-import InstanceOverviewPage from "./routes/InstanceOverviewPage";
-import ProjectOverviewPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/ProjectOverviewPage";
+import InstanceOverviewPage from "./routes/instances/[instance-id]/InstanceOverviewPage";
+import ProjectOverviewPage from "./routes/instances/[instance-id]/workspaces/[workspace-id]/projects/[project-id]/ProjectOverviewPage";
 import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
 import { Client, Instance, Project, User, Workspace } from "@waltzgroup/javascript-sdk"
-import InstanceSetupPage from "./routes/setup/InstanceSetupPage";
-import ProjectBoardPage from "./routes/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
+import InstanceSetupPage from "./routes/instances/[instance-id]/setup/InstanceSetupPage";
+import ProjectBoardPage from "./routes/instances/[instance-id]/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
 import PopupContainer from "./components/PopupContainer/PopupContainer";
 import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
-import InstanceSettingsPage from "./routes/settings/InstanceSettingsPage";
-import AboutPage from "./routes/settings/about/AboutPage";
-import UserListPage from "./routes/settings/users/UserListPage";
-import SettingsNotFoundPage from "./routes/settings/[wildcard]/SettingsNotFoundPage";
-import CreateUserPage from "./routes/settings/users/create/CreateUserPage";
-import ManageUserPage from "./routes/settings/users/manage/[username]/ManageUserPage";
-import ManageUserProfilePage from "./routes/settings/users/manage/[username]/profile/ManageUserProfilePage";
-import UserManagementSettingsNotFoundPage from "./routes/settings/users/manage/[username]/[wildcard]/UserManagementSettingsNotFoundPage";
-import ManageUserRolesPage from "./routes/settings/users/manage/[username]/roles/ManageUserRolesPage";
-import UserSettingsNotFoundPage from "./routes/settings/users/[wildcard]/UserSettingsNotFoundPage";
-import ManageUserSessionsPage from "./routes/settings/users/manage/[username]/sessions/ManageUserSessionsPage";
+import InstanceSettingsPage from "./routes/instances/[instance-id]/settings/InstanceSettingsPage";
+import AboutPage from "./routes/instances/[instance-id]/settings/about/AboutPage";
+import UserListPage from "./routes/instances/[instance-id]/settings/users/UserListPage";
+import SettingsNotFoundPage from "./routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
+import CreateUserPage from "./routes/instances/[instance-id]/settings/users/create/CreateUserPage";
+import ManageUserPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/ManageUserPage";
+import ManageUserProfilePage from "./routes/instances/[instance-id]/settings/users/manage/[username]/profile/ManageUserProfilePage";
+import UserManagementSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/[wildcard]/UserManagementSettingsNotFoundPage";
+import ManageUserRolesPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/roles/ManageUserRolesPage";
+import UserSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/users/[wildcard]/UserSettingsNotFoundPage";
+import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/sessions/ManageUserSessionsPage";
+import HomePage from "./routes/HomePage";
 
 export type DeleteUsersPopupConfig = {
   action: "delete-users";
@@ -35,56 +36,88 @@ export type PopupConfig = DeleteUsersPopupConfig;
 
 export default function App() {
 
-  const [instance, setInstance] = useState<Instance | null>(new Instance({
-    displayName: "Beastslash",
-    description: "A Waltz instance for Beastslash.",
-    creationTime: new Date(),
-    updateTime: new Date(),
-  }, {} as Client));
+  const [instance, setInstance] = useState<Instance | null>(null);
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [project, setProject] = useState<Project | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
   const [popupConfig, setPopupConfig] = useState<DeleteUsersPopupConfig | null>(null);
 
   const location = useLocation();
-  const isWorkspacePage = matchPath("/workspaces/:workspaceID/*", location.pathname) !== null;
-  const isProjectPage = matchPath("/workspaces/:workspaceID/projects/:projectID/*", location.pathname) !== null;
+  const instanceID = matchPath("/instances/:instanceID/*", location.pathname)?.params.instanceID;
+  const workspaceID = matchPath("/instances/:instanceID/workspaces/:workspaceID/*", location.pathname)?.params.workspaceID;
+  const projectID = matchPath("/instances/:instanceID/workspaces/:workspaceID/projects/:projectID/*", location.pathname)?.params.projectID;
+  const [shouldUpdateResources, setShouldUpdateResources] = useState(true);
+
+  useEffect(() => {
+
+    setShouldUpdateResources(true);
+
+  }, [instanceID, workspaceID, projectID]);
+
+  useEffect(() => {
+
+    if (!shouldUpdateResources) return;
+
+    (async () => {
+
+      if (instanceID) {
+
+        setInstance(new Instance({
+          name: "beastslash.com",
+          displayName: "Beastslash",
+          description: "A Slashstep instance for Beastslash.",
+          creationTime: new Date(),
+          updateTime: new Date(),
+        }, {} as Client));
+
+      } else {
+
+        setInstance(null);
+
+      }
+
+      setShouldUpdateResources(false);
+
+    })();
+
+  }, [shouldUpdateResources, instanceID, workspaceID, projectID]);
 
   return (
     <>
       <PopupContainer popupConfig={popupConfig} setPopupConfig={setPopupConfig} />
-      <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+      <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} scope={project ?? workspace ?? instance} isUpdatingResources={shouldUpdateResources} />
       <section id="content" className={isSidebarOpen ? "sidebar-open" : ""}>
         {
-          isProjectPage ? (
+          projectID ? (
             <ProjectSidebar />
           ) : (
-            isWorkspacePage ? (
+            workspaceID ? (
               <WorkspaceSidebar />
             ) : (
-              <InstanceSidebar />
+              instanceID ? <InstanceSidebar /> : null
             )
           )
         }
         <Routes>
-          <Route path="/" element={<InstanceOverviewPage instance={instance} />} />
-          <Route path="/settings" element={<InstanceSettingsPage />} />
-          <Route path="/settings/about" element={<AboutPage />} />
-          <Route path="/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
-          <Route path="/settings/users/create" element={<CreateUserPage />} />
-          <Route path="/settings/users/manage" element={<Navigate to="/settings/users" />} />
-          <Route path="/settings/users/manage/:username" element={<ManageUserPage />} />
-          <Route path="/settings/users/manage/:username/profile" element={<ManageUserProfilePage />} />
-          <Route path="/settings/users/manage/:username/roles" element={<ManageUserRolesPage />} />
-          <Route path="/settings/users/manage/:username/sessions" element={<ManageUserSessionsPage />} />
-          <Route path="/settings/users/manage/:username/*" element={<UserManagementSettingsNotFoundPage />} />
-          <Route path="/settings/users/*" element={<UserSettingsNotFoundPage />} />
-          <Route path="/settings/*" element={<SettingsNotFoundPage />} />
-          <Route path="/workspaces" element={<WorkspaceListPage />} />
-          <Route path="/workspaces/:workspaceID" element={<WorkspacePage />} />
-          <Route path="/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />
-          <Route path="/workspaces/:workspaceID/projects/:projectID/board" element={<ProjectBoardPage />} />
-          <Route path="/setup" element={<InstanceSetupPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/instances/:instanceID" element={<InstanceOverviewPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings" element={<InstanceSettingsPage />} />
+          <Route path="/instances/:instanceID/settings/about" element={<AboutPage />} />
+          <Route path="/instances/:instanceID/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
+          <Route path="/instances/:instanceID/settings/users/create" element={<CreateUserPage />} />
+          <Route path="/instances/:instanceID/settings/users/manage" element={<Navigate to="/settings/users" />} />
+          <Route path="/instances/:instanceID/settings/users/manage/:username" element={<ManageUserPage />} />
+          <Route path="/instances/:instanceID/settings/users/manage/:username/profile" element={<ManageUserProfilePage />} />
+          <Route path="/instances/:instanceID/settings/users/manage/:username/roles" element={<ManageUserRolesPage />} />
+          <Route path="/instances/:instanceID/settings/users/manage/:username/sessions" element={<ManageUserSessionsPage />} />
+          <Route path="/instances/:instanceID/settings/users/manage/:username/*" element={<UserManagementSettingsNotFoundPage />} />
+          <Route path="/instances/:instanceID/settings/users/*" element={<UserSettingsNotFoundPage />} />
+          <Route path="/instances/:instanceID/settings/*" element={<SettingsNotFoundPage />} />
+          <Route path="/instances/:instanceID/workspaces" element={<WorkspaceListPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/workspaces/:workspaceID" element={<WorkspacePage />} />
+          <Route path="/instances/:instanceID/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />
+          <Route path="/instances/:instanceID/workspaces/:workspaceID/projects/:projectID/board" element={<ProjectBoardPage />} />
+          <Route path="/instances/:instanceID/setup" element={<InstanceSetupPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </section>

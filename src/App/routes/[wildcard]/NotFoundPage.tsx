@@ -7,7 +7,7 @@ function NotFoundPage() {
 
   useEffect(() => {
 
-    document.title = "Not found • Waltz";
+    document.title = "Not found • Slashstep";
 
   }, []);
 

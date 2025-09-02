@@ -3,12 +3,12 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WaltzGroup/client-web.git"
+    "url": "https://github.com/SlashstepGroup/client-web.git"
   },
   "type": "module",
-  "homepage": "https://github.com/WaltzGroup/client-web",
+  "homepage": "https://github.com/SlashstepGroup/client-web",
   "bugs": {
-    "url": "https://github.com/WaltzGroup/client-web/issues",
+    "url": "https://github.com/SlashstepGroup/client-web/issues",
     "email": "staff@waltz.beastslash.com"
   },
   "version": "0.1.0",

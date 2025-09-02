@@ -4,7 +4,6 @@
   align-items: center;
   list-style: none;
   padding: 0;
-  gap: 5px;
 }
 
 .breadcrumb > svg {
@@ -16,4 +15,6 @@
 .breadcrumb > a {
   color: var(--text);
   text-decoration: none;
+  display: flex;
+  gap: 5px;
 }

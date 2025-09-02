@@ -11,9 +11,16 @@
   background-color: var(--header);
   border-bottom: 1px solid var(--border);
   transition: 0.3s;
+  align-items: center;
 }
 
 #sidebarButtonToggle {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+#homeButton {
   font-size: 2rem;
   font-weight: bold;
   padding: 0;
