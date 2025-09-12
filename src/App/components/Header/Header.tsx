@@ -28,16 +28,40 @@ function Header({onSidebarToggle, scope, isUpdatingResources, fallbackBackPathna
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [shouldGoBack, setShouldGoBack] = useState<boolean>(false);
+  const [cachedPathname, setCachedPathname] = useState<string>(pathname);
 
   useEffect(() => {
 
-  }, [pathname, backURLStack]);
+    const shouldResetStack = pathname === "/";
+    const shouldAddToCache = cachedPathname !== pathname && fallbackBackPathname;
+
+    if (shouldGoBack) {
+
+      const backPathname = backURLStack[backURLStack.length - 1] ?? fallbackBackPathname;
+      navigate(backPathname);
+      setShouldGoBack(false);
+
+    } else if (shouldResetStack) {
+      
+      setBackURLStack([]);
+
+    } else if (shouldAddToCache) {
+
+      const newBackURLStack = [...backURLStack, cachedPathname];
+      setBackURLStack(newBackURLStack);
+
+    }
+
+    setCachedPathname(pathname);
+
+  }, [shouldGoBack, pathname]);
 
   return (
     <header id={headerStyle}>
       {
         backURLStack.length > 0 || fallbackBackPathname ? (
-          <button type="button" onClick={() => navigate(backURLStack[backURLStack.length - 1] ?? fallbackBackPathname)} id={backButtonStyle}>
+          <button type="button" onClick={() => setShouldGoBack(true)} id={backButtonStyle}>
             <BackArrowIcon />
           </button>
         ) : null
