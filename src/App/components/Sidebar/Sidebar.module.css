@@ -2,11 +2,13 @@
   display: none;
 }
 
-:global(.sidebar-open) #sidebar {
-  width: 100%;
-}
-
 @media screen and (min-width: 400px) {
+
+  :global(.sidebar-open) #sidebar {
+    position: relative;
+    transform: translateX(0px);
+    width: 360px;
+  }
 
   #sidebar {
     padding: 10px 15px;
@@ -15,16 +17,12 @@
     gap: 15px;
     height: 100%;
     box-sizing: border-box;
-    width: 360px;
     background-color: var(--body-background);
     flex-shrink: 0;
     overflow-y: auto;
     transition: 0.3s;
-  }
-
-  #sidebar, :global(.sidebar-open) #sidebar {
-    width: 360px;
     border-right: 1px solid var(--border);
+    width: 70px;
   }
 
 }

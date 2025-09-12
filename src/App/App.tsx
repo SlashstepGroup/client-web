@@ -26,6 +26,7 @@ import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/us
 import HomePage from "./routes/HomePage";
 import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
 import HomeSidebar from "#components/HomeSidebar/HomeSidebar";
+import HomeOverviewPage from "./routes/overview/HomeOverviewPage";
 
 export default function App() {
 
@@ -95,6 +96,7 @@ export default function App() {
         }
         <Routes>
           <Route path="/" element={<HomePage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="/overview" element={<HomeOverviewPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="/instances" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="/instances/:instanceID" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="/instances/:instanceID/groups" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />

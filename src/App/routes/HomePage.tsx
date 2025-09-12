@@ -1,9 +1,11 @@
 import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
 import CloudIcon from "#icons/CloudIcon";
+import ContractIcon from "#icons/ContractIcon";
 import DashboardIcon from "#icons/DashboardIcon";
 import HomeIcon from "#icons/HomeIcon";
 import SettingsIcon from "#icons/SettingsIcon";
+import ShieldIcon from "#icons/ShieldIcon";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -37,6 +39,10 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (n
         </MenuList>
         <MenuList>
           <MenuListLinkItem icon={<SettingsIcon />} link={`/settings`} label={"Client settings"} />
+        </MenuList>
+        <MenuList>
+          <MenuListLinkItem icon={<ShieldIcon />} link={`/privacy-policy`} label={"Privacy policy"} />
+          <MenuListLinkItem icon={<ContractIcon />} link={`/terms-of-service`} label={"Terms of service"} />
         </MenuList>
       </main>
     </section>

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { sidebarItem as sidebarItemStyle, selected as selectedStyle } from "./SidebarItem.module.css";
+import { sidebarItem as sidebarItemStyle, selected as selectedStyle, label as labelStyle } from "./SidebarItem.module.css";
 import { Link, useLocation } from "react-router-dom";
 
 function SidebarItem({link, icon, children}: {link: string, icon: ReactNode, children: ReactNode}) {
@@ -10,7 +10,7 @@ function SidebarItem({link, icon, children}: {link: string, icon: ReactNode, chi
     <li className={`${sidebarItemStyle} ${location.pathname === link ? selectedStyle : ""}`}>
       <Link to={link} className="button">
         {icon}
-        {children}
+        <span className={labelStyle}>{children}</span>
       </Link>
     </li>
   );

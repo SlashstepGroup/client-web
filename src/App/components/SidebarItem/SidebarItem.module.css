@@ -1,7 +1,13 @@
 .sidebarItem > a {
-  justify-content: left;
   opacity: 0.7;
   border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
 .sidebarItem.selected > a {
@@ -25,4 +31,19 @@
   width: 20px;
   height: 20px;
   fill: var(--text);
+}
+
+.label {
+  display: none;
+}
+
+:global(.sidebar-open) .sidebarItem > a {
+  justify-content: left;
+  height: initial;
+  width: initial;
+  padding: 10px 15px;
+}
+
+:global(.sidebar-open) .label {
+  display: inline;
 }

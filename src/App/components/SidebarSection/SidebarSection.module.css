@@ -6,6 +6,11 @@
 }
 
 .sidebarSection > h1 {
+  display: none;
+}
+
+:global(.sidebar-open) .sidebarSection > h1 {
+  display: block;
   color: gray;
   font-size: 0.8rem;
   text-transform: uppercase;

@@ -24,7 +24,7 @@ function Header({onSidebarToggle, scope, isUpdatingResources, fallbackBackPathna
     scope instanceof Project ? scope.displayName : (
       scope instanceof Workspace ? scope.displayName : scope.displayName
     )
-  ) : "Select a resource";
+  ) : "Home";
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
