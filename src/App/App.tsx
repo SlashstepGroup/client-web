@@ -25,6 +25,7 @@ import UserSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/
 import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/users/[username]/sessions/ManageUserSessionsPage";
 import HomePage from "./routes/HomePage";
 import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
+import HomeSidebar from "#components/HomeSidebar/HomeSidebar";
 
 export default function App() {
 
@@ -88,7 +89,7 @@ export default function App() {
             workspaceID ? (
               <WorkspaceSidebar />
             ) : (
-              instanceID ? <InstanceSidebar /> : null
+              instanceID ? <InstanceSidebar /> : <HomeSidebar />
             )
           )
         }

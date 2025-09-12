@@ -33,7 +33,7 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (n
         <MenuList>
           <MenuListLinkItem icon={<HomeIcon />} link={`/overview`} label={"Overview"} />
           <MenuListLinkItem icon={<CloudIcon />} link={`/instances`} label={"Instances"} />
-          <MenuListLinkItem icon={<DashboardIcon />} link={`/overview`} label={"Dashboards"} />
+          {/* <MenuListLinkItem icon={<DashboardIcon />} link={`/dashboards`} label={"Dashboards"} /> */}
         </MenuList>
         <MenuList>
           <MenuListLinkItem icon={<SettingsIcon />} link={`/settings`} label={"Client settings"} />
