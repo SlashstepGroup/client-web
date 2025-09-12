@@ -5,8 +5,11 @@ import DashboardIcon from "#icons/DashboardIcon";
 import HomeIcon from "#icons/HomeIcon";
 import SettingsIcon from "#icons/SettingsIcon";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (newHeaderTitle: string | null) => void, setFallbackBackPathname: (newPathname: string | null) => void}) {
+
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -16,6 +19,13 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (n
     setFallbackBackPathname(null);
 
   }, [setHeaderTitle, setFallbackBackPathname]);
+
+  if (window.screen.width > 400) {
+
+    navigate("/overview", {replace: true});
+    return null;
+
+  }
 
   return (
     <section id="main-container">
