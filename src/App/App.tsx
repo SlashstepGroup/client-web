@@ -19,12 +19,12 @@ import InstanceAboutPage from "./routes/instances/[instance-id]/settings/about/I
 import UserListPage from "./routes/instances/[instance-id]/settings/users/UserListPage";
 import SettingsNotFoundPage from "./routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
 import CreateUserPage from "./routes/instances/[instance-id]/settings/users/create/CreateUserPage";
-import ManageUserPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/ManageUserPage";
-import ManageUserProfilePage from "./routes/instances/[instance-id]/settings/users/manage/[username]/profile/ManageUserProfilePage";
-import UserManagementSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/[wildcard]/UserManagementSettingsNotFoundPage";
-import ManageUserRolesPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/roles/ManageUserRolesPage";
+import ManageUserPage from "./routes/instances/[instance-id]/settings/users/[username]/ManageUserPage";
+import ManageUserProfilePage from "./routes/instances/[instance-id]/settings/users/[username]/profile/ManageUserProfilePage";
+import UserManagementSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/users/[username]/[wildcard]/UserManagementSettingsNotFoundPage";
+import ManageUserGroupsPage from "./routes/instances/[instance-id]/settings/users/[username]/groups/ManageUserGroupsPage";
 import UserSettingsNotFoundPage from "./routes/instances/[instance-id]/settings/users/[wildcard]/UserSettingsNotFoundPage";
-import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/users/manage/[username]/sessions/ManageUserSessionsPage";
+import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/users/[username]/sessions/ManageUserSessionsPage";
 import HomePage from "./routes/HomePage";
 import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
 
@@ -108,14 +108,13 @@ export default function App() {
           <Route path="/instances/:instanceID/settings/encryption" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
           <Route path="/instances/:instanceID/settings/users/create" element={<CreateUserPage />} />
-          <Route path="/instances/:instanceID/settings/users/manage" element={<Navigate to="/settings/users" />} />
-          <Route path="/instances/:instanceID/settings/users/manage/:username" element={<ManageUserPage />} />
-          <Route path="/instances/:instanceID/settings/users/manage/:username/profile" element={<ManageUserProfilePage />} />
-          <Route path="/instances/:instanceID/settings/users/manage/:username/roles" element={<ManageUserRolesPage />} />
-          <Route path="/instances/:instanceID/settings/users/manage/:username/sessions" element={<ManageUserSessionsPage />} />
-          <Route path="/instances/:instanceID/settings/users/manage/:username/*" element={<UserManagementSettingsNotFoundPage />} />
+          <Route path="/instances/:instanceID/settings/users/:username" element={<ManageUserPage />} />
+          <Route path="/instances/:instanceID/settings/users/:username/profile" element={<ManageUserProfilePage />} />
+          <Route path="/instances/:instanceID/settings/users/:username/groups" element={<ManageUserGroupsPage />} />
+          <Route path="/instances/:instanceID/settings/users/:username/sessions" element={<ManageUserSessionsPage />} />
+          <Route path="/instances/:instanceID/settings/users/:username/*" element={<UserManagementSettingsNotFoundPage />} />
           <Route path="/instances/:instanceID/settings/users/*" element={<UserSettingsNotFoundPage />} />
-          <Route path="/instances/:instanceID/settings/roles" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/instances/:instanceID/settings/groups" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/*" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/workspaces" element={<WorkspaceListPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/workspaces/:workspaceID" element={<WorkspacePage />} />

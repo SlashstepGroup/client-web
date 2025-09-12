@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 function RoleDropdown({isOpen, onClick, onChange, isDisabled = false, selectedItem}: { isOpen: boolean, onClick: () => void, onChange: (role: Role) => void, isDisabled?: boolean, selectedItem?: ReactNode }) {
 
   const [query, setQuery] = React.useState("");
-  const [roles, setRoles] = React.useState<Role[] | null>(null);
+  const [groups, setGroups] = React.useState<Role[] | null>(null);
 
   useEffect(() => {
 
-    // TODO: Get roles from API
-    setRoles([
+    // TODO: Get groups from API
+    setGroups([
       new Role({
         id: "123",
         name: "Instance admins",
@@ -30,17 +30,17 @@ function RoleDropdown({isOpen, onClick, onChange, isDisabled = false, selectedIt
         <input style={{width: "100%"}} type="text" placeholder="Search for a role" value={query} onChange={(event) => setQuery(event.target.value)} />
       </section>
       {
-        roles ? (
-          roles.length > 0 ? (
+        groups ? (
+          groups.length > 0 ? (
             <DropdownItemList>
               {
-                roles.map((role) => (
+                groups.map((role) => (
                   <DropdownItem key={role.id} label={role.name} description={role.description} onClick={() => onChange(role)} />
                 ))
               }
             </DropdownItemList>
           ) : (
-            <p>No roles found. Go to your <Link to="/settings/roles">role settings</Link> to create one.</p>
+            <p>No groups found. Go to your <Link to="/settings/groups">role settings</Link> to create one.</p>
           )
         ) : <Spinner />
       }

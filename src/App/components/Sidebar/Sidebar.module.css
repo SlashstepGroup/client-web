@@ -1,34 +1,30 @@
-:root {
-  --sidebar: #fafafa;
-}
-
 #sidebar {
-  padding: 10px 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  height: 100%;
-  box-sizing: border-box;
-  width: 100%;
-  background-color: var(--sidebar);
-  flex-shrink: 0;
-  overflow-y: auto;
-  transition: 0.3s;
+  display: none;
 }
 
-@media screen and (min-width: 360px) {
+:global(.sidebar-open) #sidebar {
+  width: 100%;
+}
+
+@media screen and (min-width: 400px) {
 
   #sidebar {
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    box-sizing: border-box;
     width: 360px;
-    border-right: 1px solid var(--border);
+    background-color: var(--body-background);
+    flex-shrink: 0;
+    overflow-y: auto;
+    transition: 0.3s;
   }
 
-}
-
-@media (prefers-color-scheme: dark) {
-  
-  :root {
-    --sidebar: rgb(8, 8, 8);
+  #sidebar, :global(.sidebar-open) #sidebar {
+    width: 360px;
+    border-right: 1px solid var(--border);
   }
 
 }

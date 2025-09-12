@@ -1,5 +1,5 @@
 :root {
-  --body-background: rgb(247, 247, 247);
+  --body-background: white;
   --popup-background: rgb(247, 247, 247);
   --text: #535353;
   --text-bold: #252525;
@@ -7,7 +7,7 @@
   --text-button: white;
   --menu-list-button-background: #fafafa;
   --border: #e6e6e6;
-  --secondary-button-background: #f0f0f0;
+  --secondary-button-background: #f0f0f0c9;
   --text-input-background: var(--secondary-button-background);
   --primary: #007bff;
   --default-box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -84,7 +84,6 @@ code {
 }
 
 .toolbar {
-  background-color: var(--header);
   border-bottom: 1px solid var(--border);
   width: 100%;
   display: flex;
@@ -95,7 +94,7 @@ code {
   gap: 10px;
 }
 
-button, input[type="submit"] {
+button, input[type="submit"], .button {
   border: none;
   padding: 10px 15px;
   border-radius: 25px;
@@ -115,11 +114,11 @@ button[disabled], input[disabled], textarea[disabled] {
   opacity: 0.5;
 }
 
-button:hover {
+button:hover, .button:hover {
   filter: brightness(0.9);
 }
 
-button:hover:active {
+button:hover:active, .button:hover:active {
   transform: scale(0.95);
 }
 
@@ -184,7 +183,7 @@ ul {
 
 main {
   display: flex;
-  padding: 30px 15px;
+  padding: 15px;
   gap: 30px;
   flex-direction: column;
   box-sizing: border-box;
@@ -339,8 +338,12 @@ table th, table td {
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 360px) {
+@media screen and (min-width: 400px) {
   
+  main {
+    padding: 30px 15px;
+  }
+
   #main-container {
     width: calc(100% - 360px);
   }
@@ -362,11 +365,11 @@ table th, table td {
   :root {
     --text: #c5c5c5;
     --text-bold: #eeeeee;
-    --body-background: #121214;
+    --body-background: rgb(8, 8, 8);
     --popup-background: #121214;
-    --menu-list-button-background: var(--sidebar);
-    --border: #272727;
-    --secondary-button-background: #19191a;
+    --menu-list-button-background: rgb(18, 18, 20);
+    --border: rgb(27, 27, 27);
+    --secondary-button-background: rgb(18, 18, 20);
   }
 
 }

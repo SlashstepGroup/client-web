@@ -23,7 +23,7 @@ function UserRoleTableBodyRow({role, isSelected, onSelectionBoxClick, isSelectio
         </section>
       </td>
       <td>
-        <Link to={`/instances/${instanceID}/settings/roles/manage/${id}`}>{name}</Link>
+        <Link to={`/instances/${instanceID}/settings/groups/manage/${id}`}>{name}</Link>
       </td>
       <td className={permissionCellStyle}>{description}</td>
     </tr>

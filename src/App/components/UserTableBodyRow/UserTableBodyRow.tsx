@@ -24,7 +24,7 @@ function UserTableBodyRow({user, isSelected, onSelectionBoxClick}: UserTableBody
         </section>
       </td>
       <td>
-        <Link to={`/instances/${instanceID}/settings/users/manage/${username}`}>{displayName ?? ""}</Link>
+        <Link to={`/instances/${instanceID}/settings/users/${username}`}>{displayName ?? ""}</Link>
       </td>
       <td>{username}</td>
       <td className={permissionCellStyle}>

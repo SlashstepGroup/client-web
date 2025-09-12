@@ -1,50 +1,70 @@
-:root {
-  --header: #fafafa;
-}
-
 #header {
   padding: 10px 15px;
   display: flex;
   gap: 15px;
   height: 60px;
   box-sizing: border-box;
-  background-color: var(--header);
-  border-bottom: 1px solid var(--border);
   transition: 0.3s;
   align-items: center;
 }
 
-#sidebarButtonToggle {
+#backButton, #sidebarButtonToggle {
   width: 40px;
   height: 40px;
   padding: 0;
 }
 
-#homeButton {
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 0;
-  background-color: var(--header);
-  border: none;
-  box-shadow: none;
-  color: var(--text);
-  border-radius: 5px;
-  padding: 0 5px;
-  margin: 0 -5px;
+#sidebarButtonToggle, #homeButton, #scopeButton {
+  display: none;
 }
 
-#scopeButton {
-  background-color: var(--secondary-button-background);
-  color: var(--text);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+@media screen and (min-width: 400px) {
 
-#scopeButton > svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--text);
+  #backButton {
+    display: none;
+  }
+
+  #sidebarButtonToggle {
+    display: flex;
+  }
+  
+  #homeButton {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0;
+    background-color: var(--body-background);
+    border: none;
+    box-shadow: none;
+    color: var(--text);
+    display: flex;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin: 0 -5px;
+    transition: 0.15s;
+  }
+
+  #homeButton:hover {
+    filter: brightness(0.9);
+  }
+
+  #header {
+    border-bottom: 1px solid var(--border);
+  }
+  
+  #scopeButton {
+    background-color: var(--secondary-button-background);
+    color: var(--text);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  #scopeButton > svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--text);
+  }
+
 }
 
 @media (prefers-color-scheme: dark) {

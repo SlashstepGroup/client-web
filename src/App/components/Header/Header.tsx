@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { header as headerStyle, scopeButton as scopeButtonStyle, sidebarButtonToggle as sidebarButtonToggleStyle, homeButton as homeButtonStyle } from "./Header.module.css";
+import { header as headerStyle, scopeButton as scopeButtonStyle, sidebarButtonToggle as sidebarButtonToggleStyle, homeButton as homeButtonStyle, backButton as backButtonStyle } from "./Header.module.css";
 import CloudIcon from "#icons/CloudIcon";
 import Skeleton from "#components/Skeleton/Skeleton";
 import MenuIcon from "#icons/MenuIcon";
@@ -8,6 +8,7 @@ import HomeIcon from "#icons/HomeIcon";
 import { Instance, Project, Workspace } from "@waltzgroup/javascript-sdk";
 import ClipboardIcon from "#icons/ClipboardIcon";
 import WorldIcon from "#icons/WorldIcon";
+import BackArrowIcon from "#icons/BackArrowIcon";
 
 function Header({onSidebarToggle, scope, isUpdatingResources}: {onSidebarToggle?: () => void, scope: Instance | Workspace | Project | null, isUpdatingResources: boolean}): ReactElement {
 
@@ -25,6 +26,9 @@ function Header({onSidebarToggle, scope, isUpdatingResources}: {onSidebarToggle?
 
   return (
     <header id={headerStyle}>
+      <button type="button" onClick={onSidebarToggle} id={backButtonStyle}>
+        <BackArrowIcon />
+      </button>
       <button type="button" onClick={onSidebarToggle} id={sidebarButtonToggleStyle}>
         <MenuIcon />
       </button>

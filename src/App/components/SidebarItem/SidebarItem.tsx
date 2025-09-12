@@ -8,7 +8,7 @@ function SidebarItem({link, icon, children}: {link: string, icon: ReactNode, chi
 
   return (
     <li className={`${sidebarItemStyle} ${location.pathname === link ? selectedStyle : ""}`}>
-      <Link to={link}>
+      <Link to={link} className="button">
         {icon}
         {children}
       </Link>

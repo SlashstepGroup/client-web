@@ -6,6 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import SettingsIcon from "#icons/SettingsIcon";
 import { matchPath, useLocation, useParams } from "react-router-dom";
 import CloudIcon from "#icons/CloudIcon";
+import GroupIcon from "#icons/GroupIcon";
 
 function InstanceSidebar() {
 
@@ -20,6 +21,7 @@ function InstanceSidebar() {
     <Sidebar>
       <SidebarSection name="Instance">
         <SidebarItem icon={<CloudIcon />} link={`/instances/${instanceID}`}>Overview</SidebarItem>
+        <SidebarItem icon={<GroupIcon />} link={`/instances/${instanceID}/groups`}>Groups</SidebarItem>
         <SidebarItem icon={<WorldIcon />} link={`/instances/${instanceID}/workspaces`}>Workspaces</SidebarItem>
         <SidebarItem icon={<SettingsIcon />} link={`/instances/${instanceID}/settings`}>Settings</SidebarItem>
       </SidebarSection>

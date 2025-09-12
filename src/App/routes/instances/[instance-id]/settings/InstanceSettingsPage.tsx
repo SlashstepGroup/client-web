@@ -40,7 +40,6 @@ function InstanceSettingsPage({instance, isLoadingResources}: {instance: Instanc
                 <MenuListLinkItem icon={<KeyIcon />} link={`/instances/${instanceID}/settings/access-policies`} label={"Access policies"} description={"Manage access policies for your instance."} />
                 <MenuListLinkItem icon={<EncryptedIcon />} link={`/instances/${instanceID}/settings/encryption`} label={"Encryption"} description={"Manage encryption settings for your instance."} />
                 <MenuListLinkItem icon={<PersonIcon />} link={`/instances/${instanceID}/settings/users`} label={"Users"} description={"Create, manage, and delete users of your instance."} />
-                <MenuListLinkItem icon={<GroupIcon />} link={`/instances/${instanceID}/settings/roles`} label={"Roles"} description={"Create, manage, and delete roles for your instance."} />
                 <MenuListLinkItem icon={<AboutIcon />} link={`/instances/${instanceID}/settings/about`} label={"About"} description={"Learn about your instance and its capabilities."} />
               </MenuList>
             ) : <Tip>Couldn't find that instance.</Tip>

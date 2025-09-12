@@ -1,3 +1,7 @@
+.item > button {
+  border: none;
+}
+
 .item > button > section {
   display: flex;
   flex-direction: column;

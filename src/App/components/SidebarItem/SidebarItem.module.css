@@ -1,18 +1,12 @@
 .sidebarItem > a {
-  border-radius: 5px;
-  background-color: var(--secondary-button-background);
-  flex-grow: 1;
-  display: flex;
-  color: inherit;
-  padding: 10px 15px;
-  border: 1px solid var(--border);
-  gap: 10px;
+  justify-content: left;
   opacity: 0.7;
-  transition: 0.3s;
+  border-radius: 5px;
 }
 
 .sidebarItem.selected > a {
   color: var(--primary);
+  opacity: 1;
 }
 
 .sidebarItem.selected > a > svg {

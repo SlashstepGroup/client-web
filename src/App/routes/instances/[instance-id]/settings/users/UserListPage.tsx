@@ -49,7 +49,7 @@ function UserListPage({setPopupConfig}: {setPopupConfig: (popupConfig: PopupConf
         </BreadcrumbList>
         <main>
           <h1>Users</h1>
-          <p>Users can interact with workspaces, projects, and other resources in your instance. They all have a set of permissions and roles, and some other information so you can know who they are.</p>
+          <p>Users can interact with workspaces, projects, and other resources in your instance. They all have a set of permissions and groups, and some other information so you can know who they are.</p>
           <section className="button-list">
             <button className="primary-button" onClick={() => navigate(`/instances/${instanceID}/settings/users/create`)}>Create user</button>
             <button onClick={() => setPopupConfig({
