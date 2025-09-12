@@ -1,9 +1,21 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NotFoundPage() {
+function NotFoundPage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (newHeaderTitle: string | null) => void, setFallbackBackPathname: (newPathname: string | null) => void}) {
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    setHeaderTitle("Not found");
+
+  }, [setHeaderTitle]);
+
+  useEffect(() => {
+
+    setFallbackBackPathname("/");
+
+  }, [setFallbackBackPathname]);
 
   useEffect(() => {
 

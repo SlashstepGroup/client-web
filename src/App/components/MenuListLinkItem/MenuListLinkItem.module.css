@@ -1,7 +1,6 @@
 .item > a {
   margin: 0;
   padding: 15px;
-  border-radius: 5px;
   background-color: var(--menu-list-button-background);
   border: 1px solid var(--border);
   color: inherit;

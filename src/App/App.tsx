@@ -12,11 +12,9 @@ import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
 import { Client, Instance, Project, User, Workspace } from "@waltzgroup/javascript-sdk"
 import InstanceSetupPage from "./routes/instances/[instance-id]/setup/InstanceSetupPage";
 import ProjectBoardPage from "./routes/instances/[instance-id]/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
-import PopupContainer from "./components/PopupContainer/PopupContainer";
 import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
 import InstanceSettingsPage from "./routes/instances/[instance-id]/settings/InstanceSettingsPage";
 import InstanceAboutPage from "./routes/instances/[instance-id]/settings/about/InstanceAboutPage";
-import UserListPage from "./routes/instances/[instance-id]/settings/users/UserListPage";
 import SettingsNotFoundPage from "./routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
 import CreateUserPage from "./routes/instances/[instance-id]/settings/users/create/CreateUserPage";
 import ManageUserPage from "./routes/instances/[instance-id]/settings/users/[username]/ManageUserPage";
@@ -28,20 +26,15 @@ import ManageUserSessionsPage from "./routes/instances/[instance-id]/settings/us
 import HomePage from "./routes/HomePage";
 import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
 
-export type DeleteUsersPopupConfig = {
-  action: "delete-users";
-  users: User[];
-}
-
-export type PopupConfig = DeleteUsersPopupConfig;
-
 export default function App() {
 
   const [instance, setInstance] = useState<Instance | null>(null);
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [project, setProject] = useState<Project | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
-  const [popupConfig, setPopupConfig] = useState<DeleteUsersPopupConfig | null>(null);
+  const [openPopupIDs, setOpenPopupIDs] = useState<string[]>([]);
+  const [headerTitle, setHeaderTitle] = useState<string | null>(null);
+  const [fallbackBackPathname, setFallbackBackPathname] = useState<string | null>(null);
 
   const location = useLocation();
   const instanceID = matchPath("/instances/:instanceID/*", location.pathname)?.params.instanceID;
@@ -85,8 +78,8 @@ export default function App() {
 
   return (
     <>
-      <PopupContainer popupConfig={popupConfig} setPopupConfig={setPopupConfig} />
-      <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} scope={project ?? workspace ?? instance} isUpdatingResources={shouldUpdateResources} />
+      {/* <PopupContainer openPopupIDs={openPopupIDs} setPopupConfig={setOpenPopupIDs} /> */}
+      <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} scope={project ?? workspace ?? instance} isUpdatingResources={shouldUpdateResources} title={headerTitle} fallbackBackPathname={fallbackBackPathname} />
       <section id="content" className={isSidebarOpen ? "sidebar-open" : ""}>
         {
           projectID ? (
@@ -100,13 +93,16 @@ export default function App() {
           )
         }
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/instances/:instanceID" element={<InstanceOverviewPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
+          <Route path="/" element={<HomePage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="/instances" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="/instances/:instanceID" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="/instances/:instanceID/groups" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="/instances/:instanceID/overview" element={<InstanceOverviewPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings" element={<InstanceSettingsPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/about" element={<InstanceAboutPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/access-policies" element={<InstanceAccessPoliciesPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
           <Route path="/instances/:instanceID/settings/encryption" element={<SettingsNotFoundPage instance={instance} isLoadingResources={shouldUpdateResources} />} />
-          <Route path="/instances/:instanceID/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} />
+          {/* <Route path="/instances/:instanceID/settings/users" element={<UserListPage setPopupConfig={setPopupConfig} />} /> */}
           <Route path="/instances/:instanceID/settings/users/create" element={<CreateUserPage />} />
           <Route path="/instances/:instanceID/settings/users/:username" element={<ManageUserPage />} />
           <Route path="/instances/:instanceID/settings/users/:username/profile" element={<ManageUserProfilePage />} />
@@ -121,7 +117,7 @@ export default function App() {
           <Route path="/instances/:instanceID/workspaces/:workspaceID/projects/:projectID" element={<ProjectOverviewPage />} />
           <Route path="/instances/:instanceID/workspaces/:workspaceID/projects/:projectID/board" element={<ProjectBoardPage />} />
           <Route path="/instances/:instanceID/setup" element={<InstanceSetupPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
         </Routes>
       </section>
     </>

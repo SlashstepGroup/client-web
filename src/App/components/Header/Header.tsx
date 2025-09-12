@@ -1,16 +1,18 @@
-import React, { ReactElement } from "react";
-import { header as headerStyle, scopeButton as scopeButtonStyle, sidebarButtonToggle as sidebarButtonToggleStyle, homeButton as homeButtonStyle, backButton as backButtonStyle } from "./Header.module.css";
+import React, { ReactElement, useEffect, useState } from "react";
+import { pageName as pageNameStyle, header as headerStyle, scopeButton as scopeButtonStyle, sidebarButtonToggle as sidebarButtonToggleStyle, homeButton as homeButtonStyle, backButton as backButtonStyle } from "./Header.module.css";
 import CloudIcon from "#icons/CloudIcon";
 import Skeleton from "#components/Skeleton/Skeleton";
 import MenuIcon from "#icons/MenuIcon";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "#icons/HomeIcon";
 import { Instance, Project, Workspace } from "@waltzgroup/javascript-sdk";
 import ClipboardIcon from "#icons/ClipboardIcon";
 import WorldIcon from "#icons/WorldIcon";
 import BackArrowIcon from "#icons/BackArrowIcon";
 
-function Header({onSidebarToggle, scope, isUpdatingResources}: {onSidebarToggle?: () => void, scope: Instance | Workspace | Project | null, isUpdatingResources: boolean}): ReactElement {
+function Header({onSidebarToggle, scope, isUpdatingResources, fallbackBackPathname, title}: {onSidebarToggle?: () => void, scope: Instance | Workspace | Project | null, isUpdatingResources: boolean, title: string | null, fallbackBackPathname: string | null}): ReactElement {
+
+  const [backURLStack, setBackURLStack] = useState<string[]>([]);
 
   const scopeIcon = scope ? (
     scope instanceof Project ? <ClipboardIcon /> : (
@@ -24,11 +26,27 @@ function Header({onSidebarToggle, scope, isUpdatingResources}: {onSidebarToggle?
     )
   ) : "Select a resource";
 
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+
+  }, [pathname, backURLStack]);
+
   return (
     <header id={headerStyle}>
-      <button type="button" onClick={onSidebarToggle} id={backButtonStyle}>
-        <BackArrowIcon />
-      </button>
+      {
+        backURLStack.length > 0 || fallbackBackPathname ? (
+          <button type="button" onClick={() => navigate(backURLStack[backURLStack.length - 1] ?? fallbackBackPathname)} id={backButtonStyle}>
+            <BackArrowIcon />
+          </button>
+        ) : null
+      }
+      {
+        title ? (
+          <h1 id={pageNameStyle}>{title}</h1>
+        ) : null
+      }
       <button type="button" onClick={onSidebarToggle} id={sidebarButtonToggleStyle}>
         <MenuIcon />
       </button>

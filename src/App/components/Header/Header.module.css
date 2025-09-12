@@ -6,6 +6,7 @@
   box-sizing: border-box;
   transition: 0.3s;
   align-items: center;
+  flex-shrink: 0;
 }
 
 #backButton, #sidebarButtonToggle {
@@ -18,9 +19,13 @@
   display: none;
 }
 
+#pageName {
+  font-size: 1.5rem;
+}
+
 @media screen and (min-width: 400px) {
 
-  #backButton {
+  #backButton, #pageName {
     display: none;
   }
 
