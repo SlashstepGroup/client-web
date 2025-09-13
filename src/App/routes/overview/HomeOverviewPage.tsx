@@ -4,6 +4,7 @@ import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
 import Spinner from "#components/Spinner/Spinner";
 import Tip from "#components/Tip/Tip";
+import FlagIcon from "#icons/FlagIcon";
 import HomeIcon from "#icons/HomeIcon";
 import React, { useEffect } from "react";
 
@@ -27,11 +28,11 @@ function HomeOverviewPage({setHeaderTitle, setFallbackBackPathname}: {setHeaderT
         <section>
           <h2>Your recent work</h2>
           <MenuList>
-            <MenuListLinkItem link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Viewed 1 day ago • Story" />
-            <MenuListLinkItem link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Updated 1 day ago • Task" />
-            <MenuListLinkItem link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Assigned 1 day ago • Task" />
-            <MenuListLinkItem link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Created 1 day ago • Epic" />
-            <MenuListLinkItem link="/recent" label="More items" />
+            <MenuListLinkItem icon={<FlagIcon />} link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Viewed 1 day ago • Story" />
+            <MenuListLinkItem icon={<FlagIcon />} link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Updated 1 day ago • Task" />
+            <MenuListLinkItem icon={<FlagIcon />} link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Assigned 1 day ago • Task" />
+            <MenuListLinkItem icon={<FlagIcon />} link="/instances/beastslash.com/workspaces/staff/projects/general/items/12342" label="Do something" description="Created 1 day ago • Epic" />
+            <MenuListLinkItem link="/items?query=hasStakeholder(authenticatedUser)" label="Show all assigned items" />
           </MenuList>
         </section>
         <section>
