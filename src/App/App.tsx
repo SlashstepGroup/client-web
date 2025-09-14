@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes, matchPath, useLocation } from "react-router-dom";
 import "./global.css";
 import WorkspaceListPage from "./routes/instances/[instance-id]/workspaces/WorkspaceListPage";
@@ -9,7 +9,7 @@ import InstanceSidebar from "./components/InstanceSidebar/InstanceSidebar";
 import InstanceOverviewPage from "./routes/instances/[instance-id]/InstanceOverviewPage";
 import ProjectOverviewPage from "./routes/instances/[instance-id]/workspaces/[workspace-id]/projects/[project-id]/ProjectOverviewPage";
 import ProjectSidebar from "./components/ProjectSidebar/ProjectSidebar";
-import { Client, Instance, Project, User, Workspace } from "@waltzgroup/javascript-sdk"
+import { Client, Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk"
 import InstanceSetupPage from "./routes/instances/[instance-id]/setup/InstanceSetupPage";
 import ProjectBoardPage from "./routes/instances/[instance-id]/workspaces/[workspace-id]/projects/[project-id]/board/ProjectBoardPage";
 import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
@@ -27,14 +27,24 @@ import HomePage from "./routes/HomePage";
 import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
 import HomeSidebar from "#components/HomeSidebar/HomeSidebar";
 import HomeOverviewPage from "./routes/overview/HomeOverviewPage";
+import InstanceListPage from "./routes/instances/InstanceListPage";
+import PopupContainer from "#components/PopupContainer/PopupContainer";
+
+export type PopupID = "AddInstancePopup";
+export type OpenPopupIDListSetter = (newOpenPopupIDs: PopupID[]) => void;
 
 export default function App() {
 
+  const client = useMemo(() => {
+
+    return new Client();
+
+  }, []);
   const [instance, setInstance] = useState<Instance | null>(null);
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [project, setProject] = useState<Project | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
-  const [openPopupIDs, setOpenPopupIDs] = useState<string[]>([]);
+  const [openPopupIDs, setOpenPopupIDs] = useState<PopupID[]>([]);
   const [headerTitle, setHeaderTitle] = useState<string | null>(null);
   const [fallbackBackPathname, setFallbackBackPathname] = useState<string | null>(null);
 
@@ -64,7 +74,7 @@ export default function App() {
           description: "A Slashstep instance for Beastslash.",
           creationTime: new Date(),
           updateTime: new Date(),
-        }, {} as Client));
+        }, client));
 
       } else {
 
@@ -80,7 +90,7 @@ export default function App() {
 
   return (
     <>
-      {/* <PopupContainer openPopupIDs={openPopupIDs} setPopupConfig={setOpenPopupIDs} /> */}
+      <PopupContainer openPopupIDs={openPopupIDs} setOpenPopupIDs={setOpenPopupIDs} client={client} />
       <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} scope={project ?? workspace ?? instance} isUpdatingResources={shouldUpdateResources} title={headerTitle} fallbackBackPathname={fallbackBackPathname} />
       <section id="content" className={isSidebarOpen ? "sidebar-open" : ""}>
         {
@@ -97,7 +107,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="/overview" element={<HomeOverviewPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
-          <Route path="/instances" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="/instances" element={<InstanceListPage client={client} setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} openPopupIDs={openPopupIDs} setOpenPopupIDs={setOpenPopupIDs} />} />
           <Route path="/instances/:instanceID" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="/instances/:instanceID/groups" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="/instances/:instanceID/overview" element={<InstanceOverviewPage instance={instance} isLoadingResources={shouldUpdateResources} />} />

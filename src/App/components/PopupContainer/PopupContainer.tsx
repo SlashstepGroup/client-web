@@ -1,52 +1,55 @@
-// import React, { ReactElement, useEffect } from "react";
-// import { popupContainer as popupContainerStyle, open as openStyle } from "./PopupContainer.module.css";
-// import UserDeletionConfirmationPopup from "#components/UserDeletionConfirmationPopup/UserDeletionConfirmationPopup";
-// import { DeleteUsersPopupConfig, PopupConfig } from "../../App";
+import React, { ReactElement, useCallback, useEffect } from "react";
+import { popupContainer as popupContainerStyle, open as openStyle } from "./PopupContainer.module.css";
+import { OpenPopupIDListSetter, PopupID } from "../../App";
+import Popup from "#components/Popup/Popup";
+import AddInstancePopup from "#components/AddInstancePopup/AddInstancePopup";
+import { Client } from "@slashstepgroup/javascript-sdk";
 
-// function PopupContainer({popupConfig, setPopupConfig}: {popupConfig: PopupConfig | null, setPopupConfig: (popupConfig: PopupConfig | null) => void}) {
-  
-//   const [shouldShowContainer, setShouldShowContainer] = React.useState(false);
-//   const [shownPopupConfig, setShownPopupConfig] = React.useState<PopupConfig | null>(null);
-//   const popups = {
-//     "delete-users": shownPopupConfig ? <UserDeletionConfirmationPopup popupConfig={shownPopupConfig} shouldOpen={shouldShowContainer} onCloseRequest={() => setPopupConfig(null)} onClose={() => setShownPopupConfig(null)} /> : null,
-//   }
+function PopupContainer({openPopupIDs, setOpenPopupIDs, client}: {openPopupIDs: PopupID[], setOpenPopupIDs: OpenPopupIDListSetter, client: Client}) {
 
-//   const [shouldMount, setShouldMount] = React.useState(false);
+  const closePopup = useCallback((closedPopupID: PopupID) => {
 
-//   useEffect(() => {
+    setOpenPopupIDs(openPopupIDs.filter((possibleMatchedPopupID) => possibleMatchedPopupID !== closedPopupID));
+    setShouldShowContainer(false);
 
-//     const popup = popupConfig ? popups[popupConfig.action] !== undefined : null;
-//     if (popup) {
+  }, [openPopupIDs, setOpenPopupIDs]);
+
+  const [shouldShowContainer, setShouldShowContainer] = React.useState(false);
+  const [shownPopupID, setShownPopupID] = React.useState<PopupID | null>(null);
+  const popups: Record<PopupID, ReactElement | null> = {
+    AddInstancePopup: <AddInstancePopup client={client} shouldOpen={shouldShowContainer} requestClose={() => closePopup("AddInstancePopup")} onClose={() => setShownPopupID(null)} />,
+  }
+
+  useEffect(() => {
+
+    const selectedPopupID = openPopupIDs[openPopupIDs.length - 1]
+    const popup = selectedPopupID ? popups[selectedPopupID] !== undefined : null;
+    if (popup) {
       
-//       if (!shownPopupConfig) {
+      if (!shownPopupID) {
 
-//         setShownPopupConfig(popupConfig);
-//         setShouldMount(true);
+        setShownPopupID(selectedPopupID);
       
-//       } else if (!shouldShowContainer) {
+      } else if (!shouldShowContainer) {
 
-//         setTimeout(() => setShouldShowContainer(true), 10);
+        setTimeout(() => setShouldShowContainer(true), 10);
 
-//       }
+      }
 
-//     } else if (shouldShowContainer) {
+    } else if (shouldShowContainer) {
 
-//       setShouldShowContainer(false);
+      setShouldShowContainer(false);
 
-//     } else if (!shownPopupConfig) {
+    }
 
-//       setShouldMount(false);
+  }, [openPopupIDs, shownPopupID, shouldShowContainer]);
 
-//     }
+  return shownPopupID ? (
+    <section className={`${popupContainerStyle} ${shouldShowContainer ? openStyle : ""}`}>
+      {popups[shownPopupID]}
+    </section>
+  ) : null;
 
-//   }, [popupConfig, shownPopupConfig, shouldShowContainer]);
+}
 
-//   return shouldMount ? (
-//     <section className={`${popupContainerStyle} ${shouldShowContainer ? openStyle : ""}`}>
-//       {shownPopupConfig ? popups[shownPopupConfig.action] : null}
-//     </section>
-//   ) : null;
-
-// }
-
-// export default React.memo(PopupContainer);
+export default React.memo(PopupContainer);

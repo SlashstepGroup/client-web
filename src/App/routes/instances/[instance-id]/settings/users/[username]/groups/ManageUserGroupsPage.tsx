@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import SettingsIcon from "#icons/SettingsIcon";
-import { Client, Role, User } from "@waltzgroup/javascript-sdk";
+import { Client, Role, User } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
 import PersonIcon from "#icons/PersonIcon";
 import Tip from "#components/Tip/Tip";

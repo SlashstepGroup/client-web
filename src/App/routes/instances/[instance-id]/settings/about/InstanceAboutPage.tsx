@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import MenuList from "#components/MenuList/MenuList";
 import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
 import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 
 function InstanceAboutPage({instance, isLoadingResources}: {instance: Instance | null, isLoadingResources: boolean}) {

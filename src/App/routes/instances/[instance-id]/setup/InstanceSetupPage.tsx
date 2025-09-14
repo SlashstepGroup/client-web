@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { options as optionsStyle, profileToolbar as profileToolbarStyle } from "./InstanceOverviewPage.module.css";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 import BreadcrumbList from "../../../../components/BreadcrumbList/BreadcrumbList";
 import Spinner from "../../../../components/Spinner/Spinner";
 import Tip from "../../../../components/Tip/Tip";

@@ -4,7 +4,7 @@ import MenuList from "#components/MenuList/MenuList";
 import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
 import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
 import PersonIcon from "#icons/PersonIcon";
-import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, User } from "@waltzgroup/javascript-sdk";
+import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, User } from "@slashstepgroup/javascript-sdk";
 import React, { useEffect, useMemo } from "react";
 
 function MenuListUserAccessPoliciesDropdownItem({user}: { user: User }) {

@@ -3,7 +3,7 @@ import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 import QuestionMarkIcon from "#icons/QuestionMarkIcon";
 import SettingsIcon from "#icons/SettingsIcon";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 

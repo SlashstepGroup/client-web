@@ -6,7 +6,7 @@ import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import WorldIcon from "#icons/WorldIcon";
 import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
-import { Client, Instance, Workspace } from "@waltzgroup/javascript-sdk";
+import { Client, Instance, Workspace } from "@slashstepgroup/javascript-sdk";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 
 function WorkspaceListPage({instance, isLoadingResources}: {instance: Instance | null, isLoadingResources: boolean}) {

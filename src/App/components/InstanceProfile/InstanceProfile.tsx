@@ -5,7 +5,7 @@ import ProfileFeaturedUserList from "../ProfileFeaturedUserList/ProfileFeaturedU
 import ProfileFeaturedUserItem from "../ProfileFeaturedUserItem/ProfileFeaturedUserItem";
 import ProfileLinkList from "../MenuList/MenuList";
 import ProfileLinkItem from "../MenuListLinkItem/MenuListLinkItem";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 import Skeleton from "#components/Skeleton/Skeleton";
 
 export type WorkspaceProperties = {

@@ -1,4 +1,4 @@
-import { AccessPolicy, AccessPolicyPermissionLevel, AccessPolicyInheritanceLevel, Client } from "@waltzgroup/javascript-sdk";
+import { AccessPolicy, AccessPolicyPermissionLevel, AccessPolicyInheritanceLevel, Client } from "@slashstepgroup/javascript-sdk";
 import React, { useCallback } from "react";
 import { actionCell as actionCellStyle, pendingDeleteRow as pendingDeleteRowStyle } from "./AccessPolicyTableRow.module.css";
 import AccessPolicyInheritanceDropdown from "#components/AccessPolicyInheritanceDropdown/AccessPolicyInheritanceDropdown";

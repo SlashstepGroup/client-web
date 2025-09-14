@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Tip from "../../../Tip/Tip";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 
 export type WorkspaceProperties = {
   name: string;

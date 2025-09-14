@@ -1,6 +1,6 @@
 import Dropdown from "#components/Dropdown/Dropdown";
 import React, { useCallback } from "react";
-import { AccessPolicyPermissionLevel } from "@waltzgroup/javascript-sdk";
+import { AccessPolicyPermissionLevel } from "@slashstepgroup/javascript-sdk";
 import DropdownItem from "#components/DropdownItem/DropdownItem";
 import DropdownItemList from "#components/DropdownItemList/DropdownItemList";
 

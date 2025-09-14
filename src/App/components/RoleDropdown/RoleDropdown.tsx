@@ -2,7 +2,7 @@ import Dropdown from "#components/Dropdown/Dropdown";
 import DropdownItem from "#components/DropdownItem/DropdownItem";
 import DropdownItemList from "#components/DropdownItemList/DropdownItemList";
 import Spinner from "#components/Spinner/Spinner";
-import { Client, Role } from "@waltzgroup/javascript-sdk";
+import { Client, Role } from "@slashstepgroup/javascript-sdk";
 import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 

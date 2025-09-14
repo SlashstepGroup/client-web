@@ -9,9 +9,14 @@
   border-radius: 5px;
 }
 
-.popup:has(:global(.PopupFooter-module-popupFooter)) > :global(.PopupContent-module-popupContent) {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.popup > form {
+  gap: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.popup > form > section {
+  flex-direction: row;
 }
 
 .popup.visible {

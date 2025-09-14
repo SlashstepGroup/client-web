@@ -10,7 +10,7 @@ import AboutIcon from "#icons/AboutIcon";
 import GroupIcon from "#icons/GroupIcon";
 import EncryptedIcon from "#icons/EncryptedIcon";
 import { useParams } from "react-router-dom";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
 import Tip from "#components/Tip/Tip";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";

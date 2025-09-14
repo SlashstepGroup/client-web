@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import MenuList from "#components/MenuList/MenuList";
 import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
 import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
-import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, Instance, User } from "@waltzgroup/javascript-sdk";
+import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, Instance, User } from "@slashstepgroup/javascript-sdk";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 import KeyIcon from "#icons/KeyIcon";
 import Spinner from "#components/Spinner/Spinner";

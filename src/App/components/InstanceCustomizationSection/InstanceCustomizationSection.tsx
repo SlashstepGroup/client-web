@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import InstanceCustomizationDetailsSection from "./components/InstanceCustomizationDetailsSection/InstanceCustomizationDetailsSection";
 import InstanceCustomizationLayoutSection from "./components/InstanceCustomizationLayoutSection/InstanceCustomizationLayoutSection";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 
 export type InstanceCustomizationSectionProperties = {
   instance: Instance;

@@ -1,6 +1,6 @@
 import Dropdown from "#components/Dropdown/Dropdown";
 import React, { useCallback } from "react";
-import { AccessPolicyInheritanceLevel } from "@waltzgroup/javascript-sdk";
+import { AccessPolicyInheritanceLevel } from "@slashstepgroup/javascript-sdk";
 import DropdownItem from "#components/DropdownItem/DropdownItem";
 import DropdownItemList from "#components/DropdownItemList/DropdownItemList";
 

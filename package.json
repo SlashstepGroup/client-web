@@ -25,7 +25,7 @@
     "#icons/*": "./dist/App/icons/*"
   },
   "dependencies": {
-    "@waltzgroup/javascript-sdk": "file:../javascript-sdk",
+    "@slashstepgroup/javascript-sdk": "file:../javascript-sdk",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.1"

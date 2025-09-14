@@ -1,6 +1,6 @@
 import React from "react";
 import Tip from "../../../Tip/Tip";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 
 export type WorkspaceProperties = {
   name: string;

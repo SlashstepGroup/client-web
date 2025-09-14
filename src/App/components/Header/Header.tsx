@@ -5,7 +5,7 @@ import Skeleton from "#components/Skeleton/Skeleton";
 import MenuIcon from "#icons/MenuIcon";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "#icons/HomeIcon";
-import { Instance, Project, Workspace } from "@waltzgroup/javascript-sdk";
+import { Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk";
 import ClipboardIcon from "#icons/ClipboardIcon";
 import WorldIcon from "#icons/WorldIcon";
 import BackArrowIcon from "#icons/BackArrowIcon";

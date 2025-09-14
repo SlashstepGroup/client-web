@@ -1,4 +1,4 @@
-import { Role } from "@waltzgroup/javascript-sdk";
+import { Role } from "@slashstepgroup/javascript-sdk";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { permissionCell as permissionCellStyle } from "./UserRoleTableBodyRow.module.css";

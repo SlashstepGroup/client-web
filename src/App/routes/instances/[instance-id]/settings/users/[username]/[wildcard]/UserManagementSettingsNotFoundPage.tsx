@@ -5,7 +5,7 @@ import PersonIcon from "#icons/PersonIcon";
 import QuestionMarkIcon from "#icons/QuestionMarkIcon";
 import SettingsIcon from "#icons/SettingsIcon";
 import UserSettingsIcon from "#icons/UserSettingsIcon";
-import { Client, User } from "@waltzgroup/javascript-sdk";
+import { Client, User } from "@slashstepgroup/javascript-sdk";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import PencilIcon from "#icons/PencilIcon";
-import { AccessPolicy, Group, User } from "@waltzgroup/javascript-sdk";
+import { AccessPolicy, Group, User } from "@slashstepgroup/javascript-sdk";
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { permissionCell as permissionCellStyle } from "./UserTableBodyRow.module.css";

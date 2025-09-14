@@ -2,7 +2,7 @@ import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import Skeleton from "#components/Skeleton/Skeleton";
 import CloudIcon from "#icons/CloudIcon";
 import QuestionMarkIcon from "#icons/QuestionMarkIcon";
-import { Instance } from "@waltzgroup/javascript-sdk";
+import { Instance } from "@slashstepgroup/javascript-sdk";
 import React from "react";
 
 function InstanceBreadcrumb({instance, instanceID, isLoadingResources}: {instance: Instance | null, instanceID: string, isLoadingResources: boolean}) {
