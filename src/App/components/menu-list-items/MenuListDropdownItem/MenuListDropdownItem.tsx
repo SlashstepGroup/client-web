@@ -1,6 +1,6 @@
 import React from "react";
 import { item as itemStyle, open as openStyle, information as informationStyle, toggle as toggleStyle, children as childrenStyle, iconContainer as iconContainerStyle } from "./MenuListDropdownItem.module.css";
-import DropdownArrowIcon from "#icons/DropdownArrowIcon";
+import DropdownArrowIcon from "#components/icons/DropdownArrowIcon";
 import MenuList from "#components/MenuList/MenuList";
 
 function MenuListDropdownItem({label, icon, description, children = null}: {label: React.ReactNode, icon?: React.ReactNode, description?: React.ReactNode, children?: React.ReactNode}) {

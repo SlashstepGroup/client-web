@@ -4,10 +4,10 @@ import { useParams, useSearchParams } from "react-router-dom";
 import InstanceProfile from "../../../components/InstanceProfile/InstanceProfile";
 import { Instance } from "@slashstepgroup/javascript-sdk";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import CloudIcon from "#icons/CloudIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 import Skeleton from "#components/Skeleton/Skeleton";
 import Tip from "#components/Tip/Tip";
-import QuestionMarkIcon from "#icons/QuestionMarkIcon";
+import QuestionMarkIcon from "#components/icons/QuestionMarkIcon";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 
 function InstanceOverviewPage({instance, isLoadingResources}: {instance: Instance | null, isLoadingResources: boolean}) {

@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { dropdown as dropdownStyle, dropdownBackground as dropdownBackgroundStyle, dropdownTitle as dropdownTitleStyle, toggleButton as toggleButtonStyle } from "./Dropdown.module.css";
-import DropdownArrowIcon from "#icons/DropdownArrowIcon";
+import DropdownArrowIcon from "#components/icons/DropdownArrowIcon";
 import Spinner from "#components/Spinner/Spinner";
 
 function Dropdown({name, isOpen, onClick, selectedItem, children, isDisabled = false}: { name: string, isOpen: boolean, onClick: () => void, selectedItem?: ReactNode, children?: React.ReactNode, isDisabled?: boolean }) {

@@ -1,11 +1,11 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
+import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import Spinner from "#components/Spinner/Spinner";
 import Tip from "#components/Tip/Tip";
-import FlagIcon from "#icons/FlagIcon";
-import HomeIcon from "#icons/HomeIcon";
+import FlagIcon from "#components/icons/FlagIcon";
+import HomeIcon from "#components/icons/HomeIcon";
 import React, { useEffect } from "react";
 
 function HomeOverviewPage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (newHeaderTitle: string | null) => void, setFallbackBackPathname: (newPathname: string | null) => void}) {

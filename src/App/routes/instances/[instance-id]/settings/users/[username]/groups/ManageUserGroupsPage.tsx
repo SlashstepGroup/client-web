@@ -2,16 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import SettingsIcon from "#icons/SettingsIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { Client, Role, User } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
-import PersonIcon from "#icons/PersonIcon";
+import PersonIcon from "#components/icons/PersonIcon";
 import Tip from "#components/Tip/Tip";
-import UserSettingsIcon from "#icons/UserSettingsIcon";
-import GroupIcon from "#icons/GroupIcon";
+import UserSettingsIcon from "#components/icons/UserSettingsIcon";
+import GroupIcon from "#components/icons/GroupIcon";
 import RoleDropdown from "#components/RoleDropdown/RoleDropdown";
 import UserRoleTableBodyRow from "#components/UserRoleTableBodyRow/UserRoleTableBodyRow";
-import CloudIcon from "#icons/CloudIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 
 function ManageUserGroupsPage() {
 

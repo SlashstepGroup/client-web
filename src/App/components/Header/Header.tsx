@@ -1,14 +1,14 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { pageName as pageNameStyle, header as headerStyle, scopeButton as scopeButtonStyle, sidebarButtonToggle as sidebarButtonToggleStyle, homeButton as homeButtonStyle, backButton as backButtonStyle } from "./Header.module.css";
-import CloudIcon from "#icons/CloudIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 import Skeleton from "#components/Skeleton/Skeleton";
-import MenuIcon from "#icons/MenuIcon";
+import MenuIcon from "#components/icons/MenuIcon";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import HomeIcon from "#icons/HomeIcon";
+import HomeIcon from "#components/icons/HomeIcon";
 import { Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk";
-import ClipboardIcon from "#icons/ClipboardIcon";
-import WorldIcon from "#icons/WorldIcon";
-import BackArrowIcon from "#icons/BackArrowIcon";
+import ClipboardIcon from "#components/icons/ClipboardIcon";
+import WorldIcon from "#components/icons/WorldIcon";
+import BackArrowIcon from "#components/icons/BackArrowIcon";
 
 function Header({onSidebarToggle, scope, isUpdatingResources, fallbackBackPathname, title}: {onSidebarToggle?: () => void, scope: Instance | Workspace | Project | null, isUpdatingResources: boolean, title: string | null, fallbackBackPathname: string | null}): ReactElement {
 

@@ -1,10 +1,10 @@
 import React, { FormEvent, useCallback, useEffect, useState } from "react";
-import PopupHeader from "../Popup/components/PopupHeader/PopupHeader";
-import PopupContent from "../Popup/components/PopupContent/PopupContent";
-import Popup from "../Popup/Popup";
-import PopupFooter from "../Popup/components/PopupFooter/PopupFooter";
+import PopupHeader from "#components/Popup/components/PopupHeader/PopupHeader";
+import PopupContent from "#components/Popup/components/PopupContent/PopupContent";
+import Popup from "#components/Popup/Popup";
+import PopupFooter from "#components/Popup/components/PopupFooter/PopupFooter";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "#components/Spinner/Spinner";
 import { Client } from "@slashstepgroup/javascript-sdk";
 
 function AddInstancePopup({client, shouldOpen, requestClose, onClose}: {client: Client, shouldOpen: boolean, requestClose: () => void, onClose: () => void}) {
@@ -29,6 +29,8 @@ function AddInstancePopup({client, shouldOpen, requestClose, onClose}: {client: 
 
         transaction.oncomplete = function() {
 
+          const broadcastChannel = new BroadcastChannel("LocalInstanceAddedChannel");
+          broadcastChannel.postMessage(instanceHostname);
           setDidUserRequestClose(true);
 
         }

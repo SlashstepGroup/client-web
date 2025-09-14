@@ -1,9 +1,9 @@
 import AccessPolicyTableRow from "#components/AccessPolicyTableRow/AccessPolicyTableRow";
 import Dropdown from "#components/Dropdown/Dropdown";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
-import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
-import PersonIcon from "#icons/PersonIcon";
+import MenuListDisplayItem from "#components/menu-list-items/MenuListDisplayItem/MenuListDisplayItem";
+import MenuListDropdownItem from "#components/menu-list-items/MenuListDropdownItem/MenuListDropdownItem";
+import PersonIcon from "#components/icons/PersonIcon";
 import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, User } from "@slashstepgroup/javascript-sdk";
 import React, { useEffect, useMemo } from "react";
 

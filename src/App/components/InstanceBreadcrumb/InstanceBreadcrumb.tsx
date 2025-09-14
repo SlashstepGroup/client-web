@@ -1,7 +1,7 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import Skeleton from "#components/Skeleton/Skeleton";
-import CloudIcon from "#icons/CloudIcon";
-import QuestionMarkIcon from "#icons/QuestionMarkIcon";
+import CloudIcon from "#components/icons/CloudIcon";
+import QuestionMarkIcon from "#components/icons/QuestionMarkIcon";
 import { Instance } from "@slashstepgroup/javascript-sdk";
 import React from "react";
 

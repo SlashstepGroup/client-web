@@ -1,7 +1,7 @@
 import React, { Fragment, ReactNode } from "react";
 import { breadcrumbList as breadcrumbListStyle } from "./BreadcrumbList.module.css";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import HomeIcon from "../../icons/HomeIcon";
+import HomeIcon from "../icons/HomeIcon";
 
 function Separator() {
 

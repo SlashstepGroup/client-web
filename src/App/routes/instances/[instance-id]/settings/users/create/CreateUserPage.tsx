@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import SettingsIcon from "#icons/SettingsIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { Client, User } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
 import PrincipalTableBodyRow from "#components/UserTableBodyRow/UserTableBodyRow";
-import AddPersonIcon from "#icons/AddPersonIcon";
-import PersonIcon from "#icons/PersonIcon";
-import CloudIcon from "#icons/CloudIcon";
+import AddPersonIcon from "#components/icons/AddPersonIcon";
+import PersonIcon from "#components/icons/PersonIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 
 function CreateUserPage() {
 

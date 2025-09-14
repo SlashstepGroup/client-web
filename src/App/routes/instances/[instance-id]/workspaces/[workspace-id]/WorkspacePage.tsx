@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import BreadcrumbList from "../../../../../components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "../../../../../components/Breadcrumb/Breadcrumb";
-import WorldIcon from "../../../../../icons/WorldIcon";
+import WorldIcon from "../../../../../components/icons/WorldIcon";
 import { banner as bannerStyle } from "./WorkspacePage.module.css";
 
 export type WorkspaceProperties = {

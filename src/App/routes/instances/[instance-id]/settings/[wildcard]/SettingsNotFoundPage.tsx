@@ -1,8 +1,8 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
-import QuestionMarkIcon from "#icons/QuestionMarkIcon";
-import SettingsIcon from "#icons/SettingsIcon";
+import QuestionMarkIcon from "#components/icons/QuestionMarkIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { Instance } from "@slashstepgroup/javascript-sdk";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";

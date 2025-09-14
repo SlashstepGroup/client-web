@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ProfileFeaturedUserList from "../ProfileFeaturedUserList/ProfileFeaturedUserList";
 import ProfileFeaturedUserItem from "../ProfileFeaturedUserItem/ProfileFeaturedUserItem";
 import ProfileLinkList from "../MenuList/MenuList";
-import ProfileLinkItem from "../MenuListLinkItem/MenuListLinkItem";
+import ProfileLinkItem from "../menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import { Instance } from "@slashstepgroup/javascript-sdk";
 import Skeleton from "#components/Skeleton/Skeleton";
 

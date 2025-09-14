@@ -1,11 +1,11 @@
 import React from "react";
 import SidebarSection from "../SidebarSection/SidebarSection";
 import SidebarItem from "../SidebarItem/SidebarItem";
-import WorldIcon from "../../icons/WorldIcon";
-import ActivityIcon from "../../icons/ActivityIcon";
-import ClipboardIcon from "../../icons/ClipboardIcon";
+import WorldIcon from "../icons/WorldIcon";
+import ActivityIcon from "../icons/ActivityIcon";
+import ClipboardIcon from "../icons/ClipboardIcon";
 import Sidebar from "../Sidebar/Sidebar";
-import KeyIcon from "../../icons/KeyIcon";
+import KeyIcon from "../icons/KeyIcon";
 
 function WorkspaceSidebar() {
 

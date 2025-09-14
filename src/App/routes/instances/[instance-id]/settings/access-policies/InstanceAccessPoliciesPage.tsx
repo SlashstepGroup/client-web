@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo } from "react";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import AboutIcon from "#icons/AboutIcon";
-import SettingsIcon from "#icons/SettingsIcon";
+import AboutIcon from "#components/icons/AboutIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { useParams } from "react-router-dom";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
-import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
+import MenuListDropdownItem from "#components/menu-list-items/MenuListDropdownItem/MenuListDropdownItem";
+import MenuListDisplayItem from "#components/menu-list-items/MenuListDisplayItem/MenuListDisplayItem";
 import { AccessPolicy, AccessPolicyInheritanceLevel, AccessPolicyPermissionLevel, Action, Client, Instance, User } from "@slashstepgroup/javascript-sdk";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
-import KeyIcon from "#icons/KeyIcon";
+import KeyIcon from "#components/icons/KeyIcon";
 import Spinner from "#components/Spinner/Spinner";
 import AccessPolicyTableRow from "#components/AccessPolicyTableRow/AccessPolicyTableRow";
-import MenuListUserAccessPoliciesDropdownItem from "#components/MenuListUserAccessPoliciesDropdownItem/MenuListUserAccessPoliciesDropdownItem";
+import MenuListUserAccessPoliciesDropdownItem from "#components/menu-list-items/MenuListUserAccessPoliciesDropdownItem/MenuListUserAccessPoliciesDropdownItem";
 
 function InstanceAccessPoliciesPage({instance, isLoadingResources}: {instance: Instance | null, isLoadingResources: boolean}) {
 

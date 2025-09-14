@@ -1,10 +1,10 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
-import CloudIcon from "#icons/CloudIcon";
-import PersonIcon from "#icons/PersonIcon";
-import QuestionMarkIcon from "#icons/QuestionMarkIcon";
-import SettingsIcon from "#icons/SettingsIcon";
-import UserSettingsIcon from "#icons/UserSettingsIcon";
+import CloudIcon from "#components/icons/CloudIcon";
+import PersonIcon from "#components/icons/PersonIcon";
+import QuestionMarkIcon from "#components/icons/QuestionMarkIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
+import UserSettingsIcon from "#components/icons/UserSettingsIcon";
 import { Client, User } from "@slashstepgroup/javascript-sdk";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";

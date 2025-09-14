@@ -1,4 +1,4 @@
-import PencilIcon from "#icons/PencilIcon";
+import PencilIcon from "#components/icons/PencilIcon";
 import { AccessPolicy, Group, User } from "@slashstepgroup/javascript-sdk";
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";

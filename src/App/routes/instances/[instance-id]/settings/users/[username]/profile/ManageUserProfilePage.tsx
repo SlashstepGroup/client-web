@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import SettingsIcon from "#icons/SettingsIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { Client, User } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
-import AddPersonIcon from "#icons/AddPersonIcon";
-import PersonIcon from "#icons/PersonIcon";
+import AddPersonIcon from "#components/icons/AddPersonIcon";
+import PersonIcon from "#components/icons/PersonIcon";
 import Tip from "#components/Tip/Tip";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
+import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import { avatarImageContainer as avatarImageContainerStyle, detailsContainer as detailsContainerStyle, userDataBox as userDataBoxStyle, username as usernameStyle } from "./ManageUserProfilePage.module.css";
-import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
-import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
-import MenuListActionItem from "#components/MenuListActionItem/MenuListActionItem";
-import NoAccountIcon from "#icons/NoAccountIcon";
-import SignatureIcon from "#icons/SignatureIcon";
-import PhotoCameraFrontIcon from "#icons/PhotoCameraFrontIcon";
-import AtIcon from "#icons/AtIcon";
-import UserSettingsIcon from "#icons/UserSettingsIcon";
-import CloudIcon from "#icons/CloudIcon";
+import MenuListDisplayItem from "#components/menu-list-items/MenuListDisplayItem/MenuListDisplayItem";
+import MenuListDropdownItem from "#components/menu-list-items/MenuListDropdownItem/MenuListDropdownItem";
+import MenuListActionItem from "#components/menu-list-items/MenuListActionItem/MenuListActionItem";
+import NoAccountIcon from "#components/icons/NoAccountIcon";
+import SignatureIcon from "#components/icons/SignatureIcon";
+import PhotoCameraFrontIcon from "#components/icons/PhotoCameraFrontIcon";
+import AtIcon from "#components/icons/AtIcon";
+import UserSettingsIcon from "#components/icons/UserSettingsIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 
 function ManageUserProfilePage() {
 

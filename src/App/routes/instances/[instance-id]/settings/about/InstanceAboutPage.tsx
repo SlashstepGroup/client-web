@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import AboutIcon from "#icons/AboutIcon";
-import SettingsIcon from "#icons/SettingsIcon";
+import AboutIcon from "#components/icons/AboutIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { useParams } from "react-router-dom";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
-import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
+import MenuListDropdownItem from "#components/menu-list-items/MenuListDropdownItem/MenuListDropdownItem";
+import MenuListDisplayItem from "#components/menu-list-items/MenuListDisplayItem/MenuListDisplayItem";
 import { Instance } from "@slashstepgroup/javascript-sdk";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 

@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Tip from "#components/Tip/Tip";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import WorldIcon from "#icons/WorldIcon";
+import WorldIcon from "#components/icons/WorldIcon";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
+import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import { Client, Instance, Workspace } from "@slashstepgroup/javascript-sdk";
 import InstanceBreadcrumb from "#components/InstanceBreadcrumb/InstanceBreadcrumb";
 

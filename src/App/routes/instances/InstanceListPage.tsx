@@ -1,14 +1,16 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
-import CloudIcon from "#icons/CloudIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PopupID } from "../../App";
-import { Client } from "@slashstepgroup/javascript-sdk";
+import { Client, Instance } from "@slashstepgroup/javascript-sdk";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
+import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import Spinner from "#components/Spinner/Spinner";
 import Skeleton from "#components/Skeleton/Skeleton";
+import CloudOffIcon from "#components/icons/CloudOffIcon";
+import MenuListInstanceItem from "#components/menu-list-items/MenuListInstanceItem/MenuListInstanceItem";
 
 function InstanceListPage({client, setHeaderTitle, setFallbackBackPathname, openPopupIDs, setOpenPopupIDs}: {setHeaderTitle: (newHeaderTitle: string | null) => void, setFallbackBackPathname: (newPathname: string | null) => void, openPopupIDs: PopupID[], setOpenPopupIDs: (newOpenPopupIDs: PopupID[]) => void, client: Client}) {
 
@@ -19,7 +21,7 @@ function InstanceListPage({client, setHeaderTitle, setFallbackBackPathname, open
 
   useEffect(() => {
 
-    (async () => {
+    const refreshInstances = async () => {
       
       const database = await client.getIndexedDBDatabase();
       const transaction = database.transaction(["instances"], "readonly");
@@ -32,7 +34,18 @@ function InstanceListPage({client, setHeaderTitle, setFallbackBackPathname, open
 
       }
 
-    })();
+    };
+
+    const broadcastChannel = new BroadcastChannel("LocalInstanceAddedChannel");
+    broadcastChannel.addEventListener("message", refreshInstances);
+
+    refreshInstances();
+
+    return () => {
+
+      broadcastChannel.removeEventListener("message", refreshInstances);
+
+    }
 
   }, []);
 
@@ -73,13 +86,13 @@ function InstanceListPage({client, setHeaderTitle, setFallbackBackPathname, open
             <button onClick={() => navigate("/instances/personal")}>Use offline instance</button>
           </li>
           <li>
-            <button onClick={() => navigate("?local-action=remove-instance")} className="destructive-button">Remove selected instances</button>
+            <button onClick={() => navigate("?local-action=remove-instance")} className="destructive-button" disabled>Remove selected instances</button>
           </li>
         </ul>
         <MenuList>
           {
             instances.map((instance) => (
-              <MenuListLinkItem icon={<Spinner />} label={instance.hostname} key={instance.hostname} description={"Connecting..."} link={`/instances/${instance.hostname}`} />
+              <MenuListInstanceItem key={instance.hostname} client={client} hostname={instance.hostname} />
             ))
           }
         </MenuList>

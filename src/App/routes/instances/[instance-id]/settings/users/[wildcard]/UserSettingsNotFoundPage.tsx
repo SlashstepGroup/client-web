@@ -1,9 +1,9 @@
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
-import CloudIcon from "#icons/CloudIcon";
-import PersonIcon from "#icons/PersonIcon";
-import QuestionMarkIcon from "#icons/QuestionMarkIcon";
-import SettingsIcon from "#icons/SettingsIcon";
+import CloudIcon from "#components/icons/CloudIcon";
+import PersonIcon from "#components/icons/PersonIcon";
+import QuestionMarkIcon from "#components/icons/QuestionMarkIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 

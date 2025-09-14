@@ -2,11 +2,11 @@ import React from "react";
 import SidebarSection from "../SidebarSection/SidebarSection";
 import SidebarItem from "../SidebarItem/SidebarItem";
 import Sidebar from "../Sidebar/Sidebar";
-import SettingsIcon from "#icons/SettingsIcon";
-import CloudIcon from "#icons/CloudIcon";
-import HomeIcon from "#icons/HomeIcon";
-import ShieldIcon from "#icons/ShieldIcon";
-import ContractIcon from "#icons/ContractIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
+import CloudIcon from "#components/icons/CloudIcon";
+import HomeIcon from "#components/icons/HomeIcon";
+import ShieldIcon from "#components/icons/ShieldIcon";
+import ContractIcon from "#components/icons/ContractIcon";
 
 function HomeSidebar() {
 

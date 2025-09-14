@@ -1,11 +1,11 @@
 import MenuList from "#components/MenuList/MenuList";
-import MenuListLinkItem from "#components/MenuListLinkItem/MenuListLinkItem";
-import CloudIcon from "#icons/CloudIcon";
-import ContractIcon from "#icons/ContractIcon";
-import DashboardIcon from "#icons/DashboardIcon";
-import HomeIcon from "#icons/HomeIcon";
-import SettingsIcon from "#icons/SettingsIcon";
-import ShieldIcon from "#icons/ShieldIcon";
+import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
+import CloudIcon from "#components/icons/CloudIcon";
+import ContractIcon from "#components/icons/ContractIcon";
+import DashboardIcon from "#components/icons/DashboardIcon";
+import HomeIcon from "#components/icons/HomeIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
+import ShieldIcon from "#components/icons/ShieldIcon";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

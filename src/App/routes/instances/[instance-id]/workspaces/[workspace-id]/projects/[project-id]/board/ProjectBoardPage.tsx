@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import WorldIcon from "#icons/WorldIcon";
-import ClipboardIcon from "#icons/ClipboardIcon";
-import ListIcon from "#icons/ListIcon";
+import WorldIcon from "#components/icons/WorldIcon";
+import ClipboardIcon from "#components/icons/ClipboardIcon";
+import ListIcon from "#components/icons/ListIcon";
 import { viewSettingsSection as viewSettingsSectionStyle, searchBar as searchBarStyle, main as mainStyle, itemGroup as itemGroupStyle, itemGroupContainer as itemGroupContainerStyle, addItemRow as addItemRowStyle } from "./ProjectBoardPage.module.css";
 import TabList from "#components/TabList/TabList";
 import Tab from "#components/Tab/Tab";
 import Spinner from "#components/Spinner/Spinner";
-import AddIcon from "#icons/AddIcon";
-import DropdownArrowIcon from "#icons/DropdownArrowIcon";
-import MoreHorizontalIcon from "#icons/MoreHorizontalIcon";
+import AddIcon from "#components/icons/AddIcon";
+import DropdownArrowIcon from "#components/icons/DropdownArrowIcon";
+import MoreHorizontalIcon from "#components/icons/MoreHorizontalIcon";
 
 function ProjectBoardPage() {
 

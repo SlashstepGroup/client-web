@@ -1,12 +1,12 @@
 import React from "react";
 import SidebarSection from "../SidebarSection/SidebarSection";
 import SidebarItem from "../SidebarItem/SidebarItem";
-import WorldIcon from "../../icons/WorldIcon";
+import WorldIcon from "../icons/WorldIcon";
 import Sidebar from "../Sidebar/Sidebar";
-import SettingsIcon from "#icons/SettingsIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { matchPath, useLocation, useParams } from "react-router-dom";
-import CloudIcon from "#icons/CloudIcon";
-import GroupIcon from "#icons/GroupIcon";
+import CloudIcon from "#components/icons/CloudIcon";
+import GroupIcon from "#components/icons/GroupIcon";
 
 function InstanceSidebar() {
 

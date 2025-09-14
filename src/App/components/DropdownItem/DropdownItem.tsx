@@ -1,4 +1,4 @@
-import CheckCircleIcon from "#icons/CheckCircleIcon";
+import CheckCircleIcon from "#components/icons/CheckCircleIcon";
 import React from "react";
 import { item as itemStyle } from "./DropdownItem.module.css";
 

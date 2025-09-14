@@ -2,21 +2,21 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
-import SettingsIcon from "#icons/SettingsIcon";
+import SettingsIcon from "#components/icons/SettingsIcon";
 import { Client, Role, User } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
-import PersonIcon from "#icons/PersonIcon";
+import PersonIcon from "#components/icons/PersonIcon";
 import Tip from "#components/Tip/Tip";
-import UserSettingsIcon from "#icons/UserSettingsIcon";
+import UserSettingsIcon from "#components/icons/UserSettingsIcon";
 import RoleDropdown from "#components/RoleDropdown/RoleDropdown";
 import UserRoleTableBodyRow from "#components/UserRoleTableBodyRow/UserRoleTableBodyRow";
-import OpenDoorIcon from "#icons/OpenDoorIcon";
+import OpenDoorIcon from "#components/icons/OpenDoorIcon";
 import MenuList from "#components/MenuList/MenuList";
-import MenuListDropdownItem from "#components/MenuListDropdownItem/MenuListDropdownItem";
-import MenuListDisplayItem from "#components/MenuListDisplayItem/MenuListDisplayItem";
-import DesktopIcon from "#icons/DesktopIcon";
-import PhoneIcon from "#icons/PhoneIcon";
-import CloudIcon from "#icons/CloudIcon";
+import MenuListDropdownItem from "#components/menu-list-items/MenuListDropdownItem/MenuListDropdownItem";
+import MenuListDisplayItem from "#components/menu-list-items/MenuListDisplayItem/MenuListDisplayItem";
+import DesktopIcon from "#components/icons/DesktopIcon";
+import PhoneIcon from "#components/icons/PhoneIcon";
+import CloudIcon from "#components/icons/CloudIcon";
 
 function ManageUserSessionsPage() {
 

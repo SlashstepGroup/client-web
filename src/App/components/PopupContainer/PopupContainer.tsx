@@ -2,7 +2,7 @@ import React, { ReactElement, useCallback, useEffect } from "react";
 import { popupContainer as popupContainerStyle, open as openStyle } from "./PopupContainer.module.css";
 import { OpenPopupIDListSetter, PopupID } from "../../App";
 import Popup from "#components/Popup/Popup";
-import AddInstancePopup from "#components/AddInstancePopup/AddInstancePopup";
+import AddInstancePopup from "#components/popups/AddInstancePopup/AddInstancePopup";
 import { Client } from "@slashstepgroup/javascript-sdk";
 
 function PopupContainer({openPopupIDs, setOpenPopupIDs, client}: {openPopupIDs: PopupID[], setOpenPopupIDs: OpenPopupIDListSetter, client: Client}) {
