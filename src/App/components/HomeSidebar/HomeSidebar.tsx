@@ -7,6 +7,7 @@ import CloudIcon from "#components/icons/CloudIcon";
 import HomeIcon from "#components/icons/HomeIcon";
 import ShieldIcon from "#components/icons/ShieldIcon";
 import ContractIcon from "#components/icons/ContractIcon";
+import WorkIcon from "#components/icons/WorkIcon";
 
 function HomeSidebar() {
 
@@ -15,7 +16,8 @@ function HomeSidebar() {
       <SidebarSection name="Home">
         <SidebarItem icon={<HomeIcon />} link={`/overview`}>Overview</SidebarItem>
         <SidebarItem icon={<CloudIcon />} link={`/instances`}>Instances</SidebarItem>
-        <SidebarItem icon={<SettingsIcon />} link={`/settings`}>Client settings</SidebarItem>
+        <SidebarItem icon={<WorkIcon />} link={`/items`}>Items</SidebarItem>
+        <SidebarItem icon={<SettingsIcon />} link={`/settings`}>Settings</SidebarItem>
       </SidebarSection>
       <SidebarSection name="Disclosures">
         <SidebarItem icon={<ShieldIcon />} link={`/privacy-policy`}>Privacy policy</SidebarItem>
