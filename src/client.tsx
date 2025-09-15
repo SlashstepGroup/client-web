@@ -1,7 +1,6 @@
 import App from "./App/Router";
-import React, { StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, createBrowserRouter } from "react-router-dom";
 
 console.log("Running Slashstep Client Web version 0.1.0");
 
