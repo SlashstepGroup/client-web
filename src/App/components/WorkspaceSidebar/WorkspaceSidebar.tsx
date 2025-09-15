@@ -4,7 +4,7 @@ import SidebarItem from "../SidebarItem/SidebarItem";
 import WorldIcon from "../icons/WorldIcon";
 import ActivityIcon from "../icons/ActivityIcon";
 import ClipboardIcon from "../icons/ClipboardIcon";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../sidebars/Sidebar/Sidebar";
 import KeyIcon from "../icons/KeyIcon";
 
 function WorkspaceSidebar() {

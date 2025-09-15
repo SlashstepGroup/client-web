@@ -1,13 +1,15 @@
 import Header from "#components/Header/Header";
-import HomeSidebar from "#components/HomeSidebar/HomeSidebar";
-import InstanceSidebar from "#components/InstanceSidebar/InstanceSidebar";
+import HomeSidebar from "#components/sidebars/HomeSidebar/HomeSidebar";
+import InstanceSidebar from "#components/sidebars/InstanceSidebar/InstanceSidebar";
 import ProjectSidebar from "#components/ProjectSidebar/ProjectSidebar";
 import WorkspaceSidebar from "#components/WorkspaceSidebar/WorkspaceSidebar";
 import { Client, Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { matchPath, Outlet, useLocation } from "react-router-dom";
 
-function App({project, workspace, headerTitle, instance, isSidebarOpen, setIsSidebarOpen, shouldUpdateResources, fallbackBackPathname, setShouldUpdateResources, setInstance, client}: {fallbackBackPathname: string | null, shouldUpdateResources: boolean, headerTitle: string | null, project: Project | null, instance: Instance | null, workspace: Workspace | null, isSidebarOpen: boolean, setIsSidebarOpen: (isSidebarOpen: boolean) => void, setShouldUpdateResources: (shouldUpdateResources: boolean) => void, setInstance: (instance: Instance | null) => void, client: Client}) {
+function App({project, workspace, headerTitle, instance, shouldUpdateResources, fallbackBackPathname, setShouldUpdateResources, setInstance, client}: {fallbackBackPathname: string | null, shouldUpdateResources: boolean, headerTitle: string | null, project: Project | null, instance: Instance | null, workspace: Workspace | null, setShouldUpdateResources: (shouldUpdateResources: boolean) => void, setInstance: (instance: Instance | null) => void, client: Client}) {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
 
   const location = useLocation();
   const instanceID = matchPath("/instances/:instanceID/*", location.pathname)?.params.instanceID;

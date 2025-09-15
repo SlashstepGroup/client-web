@@ -1,10 +1,10 @@
 import React from "react";
-import SidebarSection from "../SidebarSection/SidebarSection";
-import SidebarItem from "../SidebarItem/SidebarItem";
-import WorldIcon from "../icons/WorldIcon";
-import Sidebar from "../Sidebar/Sidebar";
+import SidebarSection from "#components/SidebarSection/SidebarSection";
+import SidebarItem from "#components/SidebarItem/SidebarItem";
+import WorldIcon from "#icons/WorldIcon";
+import Sidebar from "#components/sidebars/Sidebar/Sidebar";
 import SettingsIcon from "#components/icons/SettingsIcon";
-import { matchPath, useLocation, useParams } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 import CloudIcon from "#components/icons/CloudIcon";
 import GroupIcon from "#components/icons/GroupIcon";
 
