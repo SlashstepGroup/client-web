@@ -22,12 +22,15 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (n
 
   }, [setHeaderTitle, setFallbackBackPathname]);
 
-  if (window.screen.width > 400) {
+  useEffect(() => {
 
-    navigate("/overview", {replace: true});
-    return null;
+    if (window.screen.width > 400) {
 
-  }
+      navigate("/overview", {replace: true});
+
+    }
+
+  }, []);
 
   return (
     <section id="main-container">

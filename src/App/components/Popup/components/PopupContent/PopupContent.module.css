@@ -1,4 +1,4 @@
-.popupContent {
+.popupContent, :global(.Popup-module-popup) .popupContent {
   background-color: var(--popup-background);
   padding: 15px;
   flex-grow: 1;

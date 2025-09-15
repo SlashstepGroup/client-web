@@ -1,0 +1,21 @@
+.checkbox {
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: var(--secondary-button-background);
+  transition: 0.15s;
+  padding: 0;
+}
+
+button.checkbox > svg {
+  opacity: 0;
+  fill: white;
+}
+
+.checked {
+  background-color: var(--primary);
+}
+
+button.checkbox.checked > svg {
+  opacity: 1;
+}

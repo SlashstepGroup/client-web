@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import BreadcrumbList from "../../../components/BreadcrumbList/BreadcrumbList";
+import BreadcrumbList from "../../../../components/BreadcrumbList/BreadcrumbList";
 import { useParams, useSearchParams } from "react-router-dom";
-import InstanceProfile from "../../../components/InstanceProfile/InstanceProfile";
+import InstanceProfile from "../../../../components/InstanceProfile/InstanceProfile";
 import { Instance } from "@slashstepgroup/javascript-sdk";
 import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import CloudIcon from "#components/icons/CloudIcon";

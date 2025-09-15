@@ -37,8 +37,10 @@ function Popup({shouldOpen, children, onClose}: {shouldOpen: boolean, children: 
   }, [isExpanded]);
 
   return (
-    <section className={`${popupStyle} ${isExpanded ? openStyle : ""} ${isVisible ? visibleStyle : ""}`} onTransitionEnd={handleTransitionEnd}>
-      {children}
+    <section className={`${popupContainerStyle} ${isExpanded ? openStyle : ""}`}>
+      <section className={`${popupStyle} ${isVisible ? visibleStyle : ""}`} onTransitionEnd={handleTransitionEnd}>
+        {children}
+      </section>
     </section>
   );
 }

@@ -1,3 +1,21 @@
+.popupContainer {
+  position: fixed;
+  top: 0;
+  background-color: var(--popup-container-background);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.popupContainer.open {
+  opacity: 1;
+}
+
 .popup {
   width: 100%;
   height: 100%;
@@ -23,7 +41,7 @@
   display: flex;
 }
 
-.popup.open {
+.open > .popup {
   transform: scale(1);
   opacity: 1;
 }

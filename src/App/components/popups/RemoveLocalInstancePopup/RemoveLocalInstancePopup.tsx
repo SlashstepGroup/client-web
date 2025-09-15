@@ -7,38 +7,32 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "#components/Spinner/Spinner";
 import { Client } from "@slashstepgroup/javascript-sdk";
 
-function AddInstancePopup({client, shouldOpen, requestClose, onClose, onAdd}: {client: Client, shouldOpen: boolean, requestClose: () => void, onClose: () => void, onAdd: () => void}) {
+function RemoveLocalInstancePopup({client, shouldOpen, requestClose, onClose, instanceHostnames, onRemove}: {client: Client, shouldOpen: boolean, requestClose: () => void, onClose: () => void, instanceHostnames: string[], onRemove: () => void}) {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const [instanceHostname, setInstanceHostname] = React.useState("");
-  const [shouldAddInstance, setShouldAddInstance] = React.useState(false);
+  const [shouldRemoveInstances, setshouldRemoveInstances] = React.useState(false);
   const [didUserRequestClose, setDidUserRequestClose] = useState(false);
 
   useEffect(() => {
 
     (async () => {
 
-      if (shouldAddInstance) {
+      if (shouldRemoveInstances) {
 
         // Add the instance metadata to the local database.
         const database = await client.getIndexedDBDatabase();
         const transaction = database.transaction("instances", "readwrite");
         const instances = transaction.objectStore("instances");
-        instances.put({hostname: instanceHostname});
-
-        transaction.oncomplete = function() {
-
-          onAdd();
-          setDidUserRequestClose(true);
-
-        }
+        for (const instanceHostname of instanceHostnames) instances.delete(instanceHostname);
+        setDidUserRequestClose(true);
+        onRemove();
 
       }
 
     })();
 
-  }, [client, onAdd, shouldAddInstance, instanceHostname]);
+  }, [client, shouldRemoveInstances, instanceHostnames, onRemove]);
 
   const [searchParams] = useSearchParams();
   const localAction = searchParams.get("local-action");
@@ -47,7 +41,7 @@ function AddInstancePopup({client, shouldOpen, requestClose, onClose, onAdd}: {c
 
     if (didUserRequestClose) {
       
-      if (localAction === "add-instance") {
+      if (localAction === "remove-instance") {
 
         navigate(location.pathname);
 
@@ -70,25 +64,28 @@ function AddInstancePopup({client, shouldOpen, requestClose, onClose, onAdd}: {c
   return (
     <Popup shouldOpen={shouldOpen} onClose={onClose}>
       <form onSubmit={handleSubmit}>
-        <PopupHeader onClose={() => setDidUserRequestClose(true)} canClose={!shouldAddInstance}>Add instance</PopupHeader>
+        <PopupHeader onClose={() => setDidUserRequestClose(true)} canClose={!shouldRemoveInstances}>Remove instance</PopupHeader>
         <PopupContent>
+          <p>This will remove instances from your personal list. You can add them back whenever you want.</p>
           <section>
-            <label htmlFor="workspaceName">Instance hostname</label>
-            <input type="text" id="workspaceName" name="workspaceName" placeholder="public.slashstep.com" required disabled={shouldAddInstance} onChange={(event) => setInstanceHostname(event.target.value)} />
+            <h2>Removed instances</h2>
+            <ul>
+              {instanceHostnames.map((instanceHostname) => <li key={instanceHostname}>{instanceHostname}</li>)}
+            </ul>
           </section>
         </PopupContent>
         <PopupFooter>
-          <button type="submit" className="primary-button" disabled={!instanceHostname.trim() || shouldAddInstance} onClick={() => setShouldAddInstance(true)}>
-            <span>Add instance</span>
+          <button type="submit" className="destructive-button-filled" disabled={shouldRemoveInstances} onClick={() => setshouldRemoveInstances(true)}>
+            <span>Remove instances</span>
             {
-              shouldAddInstance ? <Spinner /> : null
+              shouldRemoveInstances ? <Spinner /> : null
             }
           </button>
-          <button type="button" disabled={shouldAddInstance} onClick={() => setDidUserRequestClose(true)}>Cancel</button>
+          <button type="button" disabled={shouldRemoveInstances} onClick={() => setDidUserRequestClose(true)}>Cancel</button>
         </PopupFooter>
       </form>
     </Popup>
   );
 }
 
-export default React.memo(AddInstancePopup);
+export default React.memo(RemoveLocalInstancePopup);

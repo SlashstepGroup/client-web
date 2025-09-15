@@ -1,4 +1,4 @@
-import App from "./App";
+import App from "./Router";
 import React from "react";
 import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";

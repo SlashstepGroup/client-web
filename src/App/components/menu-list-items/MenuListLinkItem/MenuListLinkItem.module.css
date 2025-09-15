@@ -16,10 +16,6 @@
   opacity: 1;
 }
 
-.item > a:hover:active {
-  transform: scale(0.98);
-}
-
 .item > a > svg {
   width: 30px;
   height: 30px;

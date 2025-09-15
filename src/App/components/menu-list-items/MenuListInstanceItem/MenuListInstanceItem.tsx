@@ -4,8 +4,9 @@ import { Client, Instance } from "@slashstepgroup/javascript-sdk";
 import Spinner from "#components/Spinner/Spinner";
 import CloudOffIcon from "#components/icons/CloudOffIcon";
 import CloudIcon from "#components/icons/CloudIcon";
+import Checkbox from "#components/input/Checkbox/Checkbox";
 
-function MenuListInstanceItem({client, hostname}: {client: Client, hostname: string}) {
+function MenuListInstanceItem({client, hostname, isSelected, onSelectionChange}: {client: Client, hostname: string, isSelected: boolean, onSelectionChange: (isSelected: boolean) => void}) {
 
   const [instance, setInstance] = useState<Instance | null>(null);
   const [isSearching, setIsSearching] = useState(true);
@@ -50,7 +51,13 @@ function MenuListInstanceItem({client, hostname}: {client: Client, hostname: str
   const description = useMemo(() => instance ? hostname : (isSearching ? "Connecting..." : "Couldn't connect"), [instance, hostname, isSearching]);
 
   return (
-    <MenuListLinkItem icon={icon} label={instance ? instance.displayName : hostname} description={description} link={`/instances/${hostname}`} />
+    <MenuListLinkItem icon={<><Checkbox isChecked={isSelected} onClick={(event) => {
+                    
+      event.stopPropagation();
+      event.preventDefault();
+      onSelectionChange(!isSelected);
+    
+    }} />{icon}</>} label={instance ? instance.displayName : hostname} description={description} link={`/instances/${hostname}`} />
   )
 
 }

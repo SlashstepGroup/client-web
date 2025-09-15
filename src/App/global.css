@@ -359,7 +359,6 @@ main > h1 {
 
   #content.sidebar-open {
     width: 100%;
-    transform: translateX(0);
   }
 
 }
