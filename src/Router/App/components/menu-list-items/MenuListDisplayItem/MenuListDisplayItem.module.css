@@ -2,9 +2,8 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: var(--menu-list-button-background);
+  background-color: var(--secondary-button-background);
   padding: 15px;
-  border: 1px solid var(--border);
   border-radius: 5px;
   gap: 15px;
 }

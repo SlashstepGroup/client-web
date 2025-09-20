@@ -10,8 +10,9 @@ const config = {
   mode: "development",
   resolve: {
     alias: {
-      '#components': resolve(__dirname, 'src/App/components'),
-      '#icons': resolve(__dirname, 'src/App/components/icons'),
+      '#components': resolve(__dirname, 'src/Router/App/components'),
+      '#icons': resolve(__dirname, 'src/Router/App/components/icons'),
+      '#routes': resolve(__dirname, 'src/Router/App/routes'),
     },
     fallback: { 
       zlib: require.resolve("browserify-zlib"),

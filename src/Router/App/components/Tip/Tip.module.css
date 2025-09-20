@@ -1,7 +1,6 @@
 .tip {
   padding: 15px;
   border-radius: 5px;
-  border: 1px solid var(--border);
   box-sizing: border-box;
   display: flex;
   flex-direction: row;

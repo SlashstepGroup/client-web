@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import "./global.css";
 import InstanceOverviewPage from "#routes/instances/[instance-id]/overview/InstanceOverviewPage";
 import { Client, Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk"
 import NotFoundPage from "#routes/[wildcard]/NotFoundPage";

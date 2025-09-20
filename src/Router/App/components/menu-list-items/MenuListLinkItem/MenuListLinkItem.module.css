@@ -1,8 +1,7 @@
 .item > a {
   margin: 0;
   padding: 15px;
-  background-color: var(--menu-list-button-background);
-  border: 1px solid var(--border);
+  background-color: var(--secondary-button-background);
   color: inherit;
   display: flex;
   opacity: 0.7;

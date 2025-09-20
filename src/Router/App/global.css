@@ -83,7 +83,6 @@ h1, h2, p {
 code {
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid var(--border);
 }
 
 .column-section {
@@ -195,7 +194,6 @@ main {
   gap: 30px;
   flex-direction: column;
   box-sizing: border-box;
-  max-width: 1080px;
   margin: 0 auto;
   flex-grow: 1;
   overflow-y: auto;
@@ -364,7 +362,7 @@ main > h1 {
   }
 
   main {
-    padding: 30px 15px;
+    padding: 30px;
   }
 
   #content.sidebar-open {

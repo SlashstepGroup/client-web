@@ -29,7 +29,7 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: HomePageProperties)
 
   useEffect(() => {
 
-    if (window.screen.width > 400) {
+    if (window.innerWidth >= 400) {
 
       navigate("/overview", {replace: true});
 
