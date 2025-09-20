@@ -18,9 +18,9 @@ function PermissionLevelDropdown({selectedPermissionLevel, onChange, isDisabled 
   return (
     <Dropdown name="Permission level" isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} selectedItem={selectedPermissionLevel} isDisabled={isDisabled}>
       <DropdownItemList>
-        <DropdownItem isSelected={selectedPermissionLevel === AccessPolicyPermissionLevel.None} onClick={() => handleChange(AccessPolicyPermissionLevel.None)} label={AccessPolicyPermissionLevel.None} description="The principal cannot perform this action." />
-        <DropdownItem isSelected={selectedPermissionLevel === AccessPolicyPermissionLevel.User} onClick={() => handleChange(AccessPolicyPermissionLevel.User)} label={AccessPolicyPermissionLevel.User} description="The principal can perform this action." />
-        <DropdownItem isSelected={selectedPermissionLevel === AccessPolicyPermissionLevel.Admin} onClick={() => handleChange(AccessPolicyPermissionLevel.Admin)} label={AccessPolicyPermissionLevel.Admin} description="The principal can perform this action, along with managing the permission level of other principals." />
+        <DropdownItem isSelected={selectedPermissionLevel === AccessPolicyPermissionLevel.None} onClick={() => handleChange(AccessPolicyPermissionLevel.None)} description="The principal cannot perform this action.">{AccessPolicyPermissionLevel.None}</DropdownItem>
+        <DropdownItem isSelected={selectedPermissionLevel === AccessPolicyPermissionLevel.User} onClick={() => handleChange(AccessPolicyPermissionLevel.User)} description="The principal can perform this action.">{AccessPolicyPermissionLevel.User}</DropdownItem>
+        <DropdownItem isSelected={selectedPermissionLevel === AccessPolicyPermissionLevel.Admin} onClick={() => handleChange(AccessPolicyPermissionLevel.Admin)} description="The principal can perform this action, along with managing the permission level of other principals.">{AccessPolicyPermissionLevel.Admin}</DropdownItem>
       </DropdownItemList>
     </Dropdown>
   )

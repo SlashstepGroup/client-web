@@ -1,22 +1,19 @@
 import { useMemo, useState } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import "./global.css";
-import InstanceOverviewPage from "./routes/instances/[instance-id]/overview/InstanceOverviewPage";
+import InstanceOverviewPage from "#routes/instances/[instance-id]/overview/InstanceOverviewPage";
 import { Client, Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk"
-import NotFoundPage from "./routes/[wildcard]/NotFoundPage";
-import InstanceSettingsPage from "./routes/instances/[instance-id]/settings/InstanceSettingsPage";
-import InstanceAboutPage from "./routes/instances/[instance-id]/settings/about/InstanceAboutPage";
-import SettingsNotFoundPage from "./routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
-import HomePage from "./routes/HomePage";
-import InstanceAccessPoliciesPage from "./routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
-import HomeOverviewPage from "./routes/overview/HomeOverviewPage";
-import InstanceListPage from "./routes/instances/InstanceListPage";
-import App from "./App";
-import InstanceHomePage from "./routes/instances/[instance-id]/InstanceHomePage";
-import ItemListPage from "./routes/items/ItemListPage";
-
-export type PopupID = "AddInstancePopup" | "RemoveLocalInstancePopup";
-export type OpenPopupIDListSetter = (newOpenPopupIDs: PopupID[]) => void;
+import NotFoundPage from "#routes/[wildcard]/NotFoundPage";
+import InstanceSettingsPage from "#routes/instances/[instance-id]/settings/InstanceSettingsPage";
+import InstanceAboutPage from "#routes/instances/[instance-id]/settings/about/InstanceAboutPage";
+import SettingsNotFoundPage from "#routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
+import HomePage from "#routes/HomePage";
+import InstanceAccessPoliciesPage from "#routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
+import HomeOverviewPage from "#routes/overview/HomeOverviewPage";
+import InstanceListPage from "#routes/instances/InstanceListPage";
+import App from "./App/App";
+import InstanceHomePage from "#routes/instances/[instance-id]/InstanceHomePage";
+import ItemListPage from "#routes/items/ItemListPage";
 
 export default function Router() {
 

@@ -2,7 +2,6 @@ import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
 import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
 import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
-import Spinner from "#components/Spinner/Spinner";
 import Tip from "#components/Tip/Tip";
 import FlagIcon from "#components/icons/FlagIcon";
 import HomeIcon from "#components/icons/HomeIcon";
@@ -22,6 +21,7 @@ function HomeOverviewPage({setHeaderTitle, setFallbackBackPathname}: {setHeaderT
   return (
     <section id="main-container">
       <BreadcrumbList>
+        <Breadcrumb icon={<HomeIcon />} link="/overview">Overview</Breadcrumb>
       </BreadcrumbList>
       <main>
         <h1>Welcome to Slashstep</h1>

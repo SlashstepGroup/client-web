@@ -2,14 +2,19 @@ import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import CloudIcon from "#components/icons/CloudIcon";
 import ContractIcon from "#components/icons/ContractIcon";
-import DashboardIcon from "#components/icons/DashboardIcon";
 import HomeIcon from "#components/icons/HomeIcon";
 import SettingsIcon from "#components/icons/SettingsIcon";
 import ShieldIcon from "#components/icons/ShieldIcon";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import WorkIcon from "#components/icons/WorkIcon";
 
-function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (newHeaderTitle: string | null) => void, setFallbackBackPathname: (newPathname: string | null) => void}) {
+export type HomePageProperties = {
+  setHeaderTitle: (newHeaderTitle: string | null) => void; 
+  setFallbackBackPathname: (newPathname: string | null) => void;
+}
+
+function HomePage({setHeaderTitle, setFallbackBackPathname}: HomePageProperties) {
 
   const navigate = useNavigate();
 
@@ -38,9 +43,7 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (n
         <MenuList>
           <MenuListLinkItem icon={<HomeIcon />} link={`/overview`} label={"Overview"} />
           <MenuListLinkItem icon={<CloudIcon />} link={`/instances`} label={"Instances"} />
-          {/* <MenuListLinkItem icon={<DashboardIcon />} link={`/dashboards`} label={"Dashboards"} /> */}
-        </MenuList>
-        <MenuList>
+          <MenuListLinkItem icon={<WorkIcon />} link={`/items`} label={"Items"} />
           <MenuListLinkItem icon={<SettingsIcon />} link={`/settings`} label={"Client settings"} />
         </MenuList>
         <MenuList>

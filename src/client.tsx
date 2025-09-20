@@ -1,4 +1,4 @@
-import App from "./App/Router";
+import App from "./Router/Router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 

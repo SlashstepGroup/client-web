@@ -35,7 +35,7 @@ function RoleDropdown({isOpen, onClick, onChange, isDisabled = false, selectedIt
             <DropdownItemList>
               {
                 groups.map((role) => (
-                  <DropdownItem key={role.id} label={role.name} description={role.description} onClick={() => onChange(role)} />
+                  <DropdownItem key={role.id} description={role.description} onClick={() => onChange(role)}>{role.name}</DropdownItem>
                 ))
               }
             </DropdownItemList>
