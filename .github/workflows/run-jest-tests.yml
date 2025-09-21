@@ -1,8 +1,18 @@
-name: Run Tests
+name: Run Jest tests
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.issue.number }}
+  cancel-in-progress: true
 
 on:
   pull_request:
   push:
+    paths-ignore:
+      - "README.md"
+      - "CONTRIBUTORS.md"
+      - "SECURITY.md"
+      - ".github/**"
+      - ".vscode/**"
 
 jobs:
   test:
