@@ -50,7 +50,7 @@ describe("HomePage", () => {
 
   });
 
-  it("redirects to the Overview page if the viewport is at least 400px wide when the page first loads", () => {
+  it("redirects to the instances page if the viewport is at least 400px wide when the page first loads", () => {
 
     const setFallbackBackPathname = jest.fn();
 
@@ -64,7 +64,7 @@ describe("HomePage", () => {
 
     render(<RouterProvider router={router} />);
 
-    expect(router.state.location.pathname).toBe("/overview");
+    expect(router.state.location.pathname).toBe("/instances");
 
   });
 
