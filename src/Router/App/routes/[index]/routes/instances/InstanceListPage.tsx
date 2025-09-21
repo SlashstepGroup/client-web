@@ -6,8 +6,8 @@ import { useBlocker, useLocation, useNavigate, useSearchParams } from "react-rou
 import { Client } from "@slashstepgroup/javascript-sdk";
 import MenuList from "#components/MenuList/MenuList";
 import MenuListInstanceItem from "#components/menu-list-items/MenuListInstanceItem/MenuListInstanceItem";
-import AddInstancePopup from "#components/popups/AddInstancePopup/AddInstancePopup";
-import RemoveLocalInstancePopup from "#components/popups/RemoveLocalInstancePopup/RemoveLocalInstancePopup";
+import AddInstancePopup from "#routes/[index]/routes/instances/components/AddInstancePopup/AddInstancePopup";
+import RemoveLocalInstancePopup from "#routes/[index]/routes/instances/components/RemoveLocalInstancePopup/RemoveLocalInstancePopup";
 
 function InstanceListPage({client, setHeaderTitle, setFallbackBackPathname}: {setHeaderTitle: (newHeaderTitle: string | null) => void, setFallbackBackPathname: (newPathname: string | null) => void, client: Client}) {
 

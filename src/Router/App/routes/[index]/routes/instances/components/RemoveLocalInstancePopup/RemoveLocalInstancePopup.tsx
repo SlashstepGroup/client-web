@@ -7,7 +7,16 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "#components/Spinner/Spinner";
 import { Client } from "@slashstepgroup/javascript-sdk";
 
-function RemoveLocalInstancePopup({client, shouldOpen, requestClose, onClose, instanceHostnames, onRemove}: {client: Client, shouldOpen: boolean, requestClose: () => void, onClose: () => void, instanceHostnames: string[], onRemove: () => void}) {
+export type RemoveLocalInstancePopupProperties = {
+  client: Client; 
+  shouldOpen: boolean; 
+  requestClose: () => void; 
+  onClose: () => void; 
+  instanceHostnames: string[]; 
+  onRemove: () => void
+}
+
+function RemoveLocalInstancePopup({client, shouldOpen, requestClose, onClose, instanceHostnames, onRemove}: RemoveLocalInstancePopupProperties) {
 
   const location = useLocation();
   const navigate = useNavigate();

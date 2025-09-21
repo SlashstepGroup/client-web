@@ -4,14 +4,14 @@ import Dropdown from "#components/Dropdown/Dropdown";
 import DropdownItem from "#components/DropdownItem/DropdownItem";
 import DropdownItemList from "#components/DropdownItemList/DropdownItemList";
 import CheckIcon from "#components/icons/CheckIcon";
+import StopSignIcon from "#components/icons/StopSignIcon";
 import WorkIcon from "#components/icons/WorkIcon";
-import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
-import MenuList from "#components/MenuList/MenuList";
 import Spinner from "#components/Spinner/Spinner";
 import { Client, Item } from "@slashstepgroup/javascript-sdk";
-import { error } from "console";
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import ItemSearchError from "./ItemSearchError";
+import ViewSearchErrorsPopup from "./components/ViewSearchErrorsPopup/ViewSearchErrorsPopup";
 
 type ItemListPageProperties = {
   setHeaderTitle: (newHeaderTitle: string | null) => void; 
@@ -30,7 +30,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
   const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [currentSearchQuery, setCurrentSearchQuery] = useState<string | null>(requestedQuery ?? null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [searchRequestResult, setSearchRequestResult] = useState<PromiseSettledResult<Item[]>[] | null>(null);
 
   useEffect(() => {
 
@@ -49,13 +49,26 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
       const indexedDBSavedInstances = await client.getIndexedDBSavedInstances();
 
-      const matchingItems = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
+      const searchRequestResult = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
 
-        return Item.list(currentSearchQuery, client);
+        return new Promise<Item[]>((resolve, reject) => {
+          
+          Item.list(currentSearchQuery, client).then((items) => resolve(items)).catch((originalError) => {
+
+            const error = new ItemSearchError({
+              hostname: savedInstance.hostname,
+              message: originalError.message
+            });
+
+            reject(error);
+
+          })
+
+        });
 
       }));
 
-      console.log(matchingItems);
+      setSearchRequestResult(searchRequestResult);
 
       setCurrentSearchQuery(null);
 
@@ -74,92 +87,124 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
   }, [shownQuery, location]);
 
+  const didAllRequestsFail = searchRequestResult && searchRequestResult.filter((result) => result.status === "rejected").length === searchRequestResult.length; 
+  const [isViewSearchErrorsPopupOpen, setIsViewSearchErrorsPopupOpen] = useState<boolean>(false);
+  const [isViewSearchErrorsPopupMounted, setIsViewSearchErrorsPopupMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+
+    if (isViewSearchErrorsPopupMounted) {
+
+      setIsViewSearchErrorsPopupOpen(true);
+
+    }
+
+  }, [isViewSearchErrorsPopupMounted]);
+
   return (
-    <section id="main-container">
-      <BreadcrumbList>
-        <Breadcrumb icon={<WorkIcon />} link="/items">Items</Breadcrumb>
-      </BreadcrumbList>
-      <main>
-        <section>
-          <section className="button-list">
-            <button type="button" className={isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(true)} disabled>
-              <span>Easy mode</span>
-              {isEasyModeEnabled ? <CheckIcon /> : null}
-            </button>
-            <button type="button" className={!isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(false)}>
-              <span>Advanced mode</span>
-              {isEasyModeEnabled ? null : <CheckIcon />}
-            </button>
-          </section>
-          {
-            isEasyModeEnabled ? (
-              <section className="button-list">
-                <input type="text" placeholder="Type to search" value={shownQuery} onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
-                <Dropdown name="Assignee" selectedItem={"Assignee"} isOpen={false} onClick={() => null} />
-                <Dropdown name="Filter" isOpen={isFilterDropdownOpen} onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)} selectedItem={"Add filter"}>
-                  <DropdownItemList>
-                    <DropdownItem onClick={() => null}>
-                      Assignee
-                    </DropdownItem>
-                    <DropdownItem onClick={() => null}>
-                      Type
-                    </DropdownItem>
-                  </DropdownItemList>
-                </Dropdown>
-              </section>
-            ) : <input type="text" className="query-input" value={shownQuery} placeholder="Whatcha lookin' for?" onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
-          }
-          {
-            currentSearchQuery ? (
-              <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
-                <Spinner />
-                <p>Searching...</p>
-              </section>
-            ) : (
-              requestedQuery ? (
-                <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
-                  <span style={{width: "20px", height: "20px"}}>
-                    {errorMessage ? null : <CheckIcon />}
-                  </span>
-                  <p>{errorMessage ?? `Found ${totalItemCount} items.`}</p>
+    <>
+      {
+        searchRequestResult && isViewSearchErrorsPopupMounted ? (
+          <ViewSearchErrorsPopup searchRequestResult={searchRequestResult} isOpen={isViewSearchErrorsPopupOpen} requestClose={() => setIsViewSearchErrorsPopupOpen(false)} onClose={() => setIsViewSearchErrorsPopupMounted(false)} />
+        ) : null
+      }
+      <section id="main-container">
+        <BreadcrumbList>
+          <Breadcrumb icon={<WorkIcon />} link="/items">Items</Breadcrumb>
+        </BreadcrumbList>
+        <main>
+          <section>
+            <section className="button-list">
+              <button type="button" className={isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(true)} disabled>
+                <span>Easy mode</span>
+                {isEasyModeEnabled ? <CheckIcon /> : null}
+              </button>
+              <button type="button" className={!isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(false)}>
+                <span>Advanced mode</span>
+                {isEasyModeEnabled ? null : <CheckIcon />}
+              </button>
+            </section>
+            {
+              isEasyModeEnabled ? (
+                <section className="button-list">
+                  <input type="text" placeholder="Type to search" value={shownQuery} onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
+                  <Dropdown name="Assignee" selectedItem={"Assignee"} isOpen={false} onClick={() => null} />
+                  <Dropdown name="Filter" isOpen={isFilterDropdownOpen} onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)} selectedItem={"Add filter"}>
+                    <DropdownItemList>
+                      <DropdownItem onClick={() => null}>
+                        Assignee
+                      </DropdownItem>
+                      <DropdownItem onClick={() => null}>
+                        Type
+                      </DropdownItem>
+                    </DropdownItemList>
+                  </Dropdown>
                 </section>
-              ) : <p>Type a query to get started.</p>
-            )
-          }
-        </section>
-        {/* <section>
-          <MenuList>
-            <MenuListLinkItem label="Add feature: Stage Maker" description="Beastslash ⦁ Everyone Destroys the World ⦁ Stage Maker" link="/instances/0/workspaces/0/projects/0/items/0" />
-            <MenuListLinkItem label="Do something else" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do another thing" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-          </MenuList>
-          <section className="pagination-dropdown-container">
-            <p>Showing</p>
-            <Dropdown name="Maximum shown items" isOpen={false} onClick={() => null} selectedItem={"15"} isDisabled>
-              <DropdownItem onClick={() => null}>15</DropdownItem>
-              <DropdownItem onClick={() => setMaximumItemCount(25)}>25</DropdownItem>
-              <DropdownItem onClick={() => setMaximumItemCount(50)}>50</DropdownItem>
-              <DropdownItem onClick={() => setMaximumItemCount(100)}>100</DropdownItem>
-              <DropdownItem onClick={() => setMaximumItemCount(250)}>250</DropdownItem>
-              <DropdownItem onClick={() => setMaximumItemCount(500)}>500</DropdownItem>
-            </Dropdown>
-            <p>items of {totalItemCount}</p>
+              ) : <input type="text" className="query-input" value={shownQuery} placeholder="Whatcha lookin' for?" onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
+            }
+            {
+              currentSearchQuery ? (
+                <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+                  <Spinner />
+                  <p>Searching...</p>
+                </section>
+              ) : (
+                requestedQuery ? (
+                  <section style={{display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px"}}>
+                    <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+                      <span style={{width: "20px", height: "20px", flexShrink: 0}}>
+                        {didAllRequestsFail ? <StopSignIcon /> : <CheckIcon />}
+                      </span>
+                      {
+                        didAllRequestsFail ? <p>Couldn't find anything from any instances.</p> : <p>Found {totalItemCount} items.</p>
+                      }
+                    </section>
+                    {
+                      didAllRequestsFail ? (
+                        <span>
+                          <button type="button" onClick={() => setIsViewSearchErrorsPopupMounted(true)}>View errors</button>
+                        </span>
+                      ) : null
+                    }
+                  </section>
+                ) : <p>Type a query to get started.</p>
+              )
+            }
           </section>
-        </section> */}
-      </main>
-    </section>
+          {/* <section>
+            <MenuList>
+              <MenuListLinkItem label="Add feature: Stage Maker" description="Beastslash ⦁ Everyone Destroys the World ⦁ Stage Maker" link="/instances/0/workspaces/0/projects/0/items/0" />
+              <MenuListLinkItem label="Do something else" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do another thing" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
+            </MenuList>
+            <section className="pagination-dropdown-container">
+              <p>Showing</p>
+              <Dropdown name="Maximum shown items" isOpen={false} onClick={() => null} selectedItem={"15"} isDisabled>
+                <DropdownItem onClick={() => null}>15</DropdownItem>
+                <DropdownItem onClick={() => setMaximumItemCount(25)}>25</DropdownItem>
+                <DropdownItem onClick={() => setMaximumItemCount(50)}>50</DropdownItem>
+                <DropdownItem onClick={() => setMaximumItemCount(100)}>100</DropdownItem>
+                <DropdownItem onClick={() => setMaximumItemCount(250)}>250</DropdownItem>
+                <DropdownItem onClick={() => setMaximumItemCount(500)}>500</DropdownItem>
+              </Dropdown>
+              <p>items of {totalItemCount}</p>
+            </section>
+          </section> */}
+        </main>
+      </section>
+    </>
   );
 
 }

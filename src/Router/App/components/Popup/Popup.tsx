@@ -1,7 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { popup as popupStyle, open as openStyle, visible as visibleStyle, popupContainer as popupContainerStyle } from "./Popup.module.css";
 
-function Popup({shouldOpen, children, onClose}: {shouldOpen: boolean, children: React.ReactNode, onClose: () => void}) {
+export type PopupProperties = {
+  shouldOpen: boolean;
+  children: React.ReactNode; 
+  onClose: () => void;
+}
+
+function Popup({shouldOpen, children, onClose}: PopupProperties) {
 
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
