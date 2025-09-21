@@ -12,6 +12,11 @@
   max-width: 360px;
 }
 
+.dropdownContainer {
+  display: flex;
+  align-items: center;
+}
+
 .toggleButton > span {
   align-items: center;
   display: flex;

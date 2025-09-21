@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { dropdown as dropdownStyle, dropdownBackground as dropdownBackgroundStyle, dropdownTitle as dropdownTitleStyle, toggleButton as toggleButtonStyle } from "./Dropdown.module.css";
+import { dropdownContainer as dropdownContainerStyle, dropdown as dropdownStyle, dropdownBackground as dropdownBackgroundStyle, dropdownTitle as dropdownTitleStyle, toggleButton as toggleButtonStyle } from "./Dropdown.module.css";
 import DropdownArrowIcon from "#components/icons/DropdownArrowIcon";
 import Spinner from "#components/Spinner/Spinner";
 
@@ -44,7 +44,7 @@ function Dropdown({name, isOpen, onClick, selectedItem, children, isDisabled = f
      * Using a button container because the button element's bounding rect transitions when the dropdown is opened, 
      * making it not reliable for positioning the dropdown. 
      */
-    <section ref={buttonContainerRef}>
+    <section ref={buttonContainerRef} className={dropdownContainerStyle}>
       <button type="button" onClick={onClick} disabled={isDisabled || !children} className={toggleButtonStyle}>
         <span>{selectedItem ?? (children ? "Select an item" : "No items available")}</span>
         <DropdownArrowIcon />

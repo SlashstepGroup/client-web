@@ -1,18 +1,17 @@
 import { useMemo, useState } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import InstanceOverviewPage from "#routes/instances/[instance-id]/overview/InstanceOverviewPage";
+import InstanceOverviewPage from "#routes/[index]/routes/instances/routes/[instance-id]/routes/overview/InstanceOverviewPage";
 import { Client, Instance, Project, Workspace } from "@slashstepgroup/javascript-sdk"
-import NotFoundPage from "#routes/[wildcard]/NotFoundPage";
-import InstanceSettingsPage from "#routes/instances/[instance-id]/settings/InstanceSettingsPage";
-import InstanceAboutPage from "#routes/instances/[instance-id]/settings/about/InstanceAboutPage";
-import SettingsNotFoundPage from "#routes/instances/[instance-id]/settings/[wildcard]/SettingsNotFoundPage";
-import HomePage from "#routes/HomePage";
-import InstanceAccessPoliciesPage from "#routes/instances/[instance-id]/settings/access-policies/InstanceAccessPoliciesPage";
-import HomeOverviewPage from "#routes/overview/HomeOverviewPage";
-import InstanceListPage from "#routes/instances/InstanceListPage";
+import NotFoundPage from "#routes/[index]/routes/[wildcard]/NotFoundPage";
+import InstanceSettingsPage from "#routes/[index]/routes/instances/routes/[instance-id]/routes/settings/InstanceSettingsPage";
+import InstanceAboutPage from "#routes/[index]/routes/instances/routes/[instance-id]/routes/settings/routes/about/InstanceAboutPage";
+import SettingsNotFoundPage from "#routes/[index]/routes/instances/routes/[instance-id]/routes/settings/routes/[wildcard]/SettingsNotFoundPage";
+import HomePage from "#routes/[index]/HomePage";
+import InstanceAccessPoliciesPage from "#routes/[index]/routes/instances/routes/[instance-id]/routes/settings/routes/access-policies/InstanceAccessPoliciesPage";
+import InstanceListPage from "#routes/[index]/routes/instances/InstanceListPage";
 import App from "./App/App";
-import InstanceHomePage from "#routes/instances/[instance-id]/InstanceHomePage";
-import ItemListPage from "#routes/items/ItemListPage";
+import InstanceHomePage from "#routes/[index]/routes/instances/routes/[instance-id]/InstanceHomePage";
+import ItemListPage from "#routes/[index]/routes/items/ItemListPage";
 
 export default function Router() {
 
@@ -48,7 +47,6 @@ export default function Router() {
             </Route>
           </Route>
           <Route path="items" element={<ItemListPage />} />
-          <Route path="overview" element={<HomeOverviewPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="*" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
         </Route>
       )

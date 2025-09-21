@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { options as optionsStyle, profileToolbar as profileToolbarStyle } from "./InstanceOverviewPage.module.css";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Instance } from "@slashstepgroup/javascript-sdk";
-import BreadcrumbList from "../../../../components/BreadcrumbList/BreadcrumbList";
-import Spinner from "../../../../components/Spinner/Spinner";
-import Tip from "../../../../components/Tip/Tip";
+import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
+import Spinner from "#components/Spinner/Spinner";
+import Tip from "#components/Tip/Tip";
 
 export type WorkspaceProperties = {
   name: string;

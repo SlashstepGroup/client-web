@@ -3,7 +3,7 @@ import SidebarSection from "../SidebarSection/SidebarSection";
 import SidebarItem from "../SidebarItem/SidebarItem";
 import ActivityIcon from "../icons/ActivityIcon";
 import ClipboardIcon from "../icons/ClipboardIcon";
-import Sidebar from "../sidebars/Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import FlagIcon from "../icons/FlagIcon";
 import ListIcon from "../icons/ListIcon";
 import KeyIcon from "../icons/KeyIcon";

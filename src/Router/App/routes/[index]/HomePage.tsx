@@ -31,7 +31,7 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: HomePageProperties)
 
     if (window.innerWidth >= 400) {
 
-      navigate("/overview", {replace: true});
+      navigate("/instances", {replace: true});
 
     }
 
@@ -41,7 +41,6 @@ function HomePage({setHeaderTitle, setFallbackBackPathname}: HomePageProperties)
     <section id="main-container">
       <main>
         <MenuList>
-          <MenuListLinkItem icon={<HomeIcon />} link={`/overview`} label={"Overview"} />
           <MenuListLinkItem icon={<CloudIcon />} link={`/instances`} label={"Instances"} />
           <MenuListLinkItem icon={<WorkIcon />} link={`/items`} label={"Items"} />
           <MenuListLinkItem icon={<SettingsIcon />} link={`/settings`} label={"Client settings"} />

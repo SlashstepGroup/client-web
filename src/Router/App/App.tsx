@@ -1,5 +1,5 @@
 import Header from "#components/Header/Header";
-import HomeSidebar from "#components/sidebars/HomeSidebar/HomeSidebar";
+import HomeSidebar from "#routes/[index]/components/HomeSidebar/HomeSidebar";
 import InstanceSidebar from "#components/sidebars/InstanceSidebar/InstanceSidebar";
 import ProjectSidebar from "#components/ProjectSidebar/ProjectSidebar";
 import WorkspaceSidebar from "#components/WorkspaceSidebar/WorkspaceSidebar";

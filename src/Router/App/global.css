@@ -134,6 +134,10 @@ button.primary-button, input[type="submit"].primary-button {
   color: var(--text-button);
 }
 
+.primary-button > svg {
+  fill: var(--text-button);
+} 
+
 button.destructive-button, input[type="submit"].destructive-button {
   color: rgb(255, 85, 85);
 }
@@ -167,9 +171,8 @@ form > section, .input-section {
 
 input[type="text"], input[type="password"], textarea {
   border-radius: 5px;
-  padding: 15px;
+  padding: 10px 15px;
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   font-size: 1rem;
   background-color: var(--text-input-background);
   color: var(--text);
@@ -198,6 +201,7 @@ main {
   flex-grow: 1;
   overflow-y: auto;
   width: 100%;
+  flex-basis: 0;
 }
 
 #scroll-container {

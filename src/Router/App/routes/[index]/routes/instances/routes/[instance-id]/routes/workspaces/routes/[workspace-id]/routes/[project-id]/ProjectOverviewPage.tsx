@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { banner as bannerStyle } from "./ProjectOverviewPage.module.css";
-import ClipboardIcon from "../../../../../../../components/icons/ClipboardIcon";
-import BreadcrumbList from "../../../../../../../components/BreadcrumbList/BreadcrumbList";
-import Breadcrumb from "../../../../../../../components/Breadcrumb/Breadcrumb";
-import WorldIcon from "../../../../../../../components/icons/WorldIcon";
+import ClipboardIcon from "#components/icons/ClipboardIcon";
+import BreadcrumbList from "#components/BreadcrumbList/BreadcrumbList";
+import Breadcrumb from "#components/Breadcrumb/Breadcrumb";
+import WorldIcon from "#components/icons/WorldIcon";
 
 export type WorkspaceProperties = {
   name: string;

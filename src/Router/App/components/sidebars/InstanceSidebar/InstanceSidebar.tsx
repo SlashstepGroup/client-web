@@ -2,7 +2,7 @@ import React from "react";
 import SidebarSection from "#components/SidebarSection/SidebarSection";
 import SidebarItem from "#components/SidebarItem/SidebarItem";
 import WorldIcon from "#icons/WorldIcon";
-import Sidebar from "#components/sidebars/Sidebar/Sidebar";
+import Sidebar from "#components/Sidebar/Sidebar";
 import SettingsIcon from "#components/icons/SettingsIcon";
 import { matchPath, useLocation } from "react-router-dom";
 import CloudIcon from "#components/icons/CloudIcon";
