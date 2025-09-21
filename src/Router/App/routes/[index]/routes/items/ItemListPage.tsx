@@ -22,7 +22,7 @@ type ItemListPageProperties = {
 function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemListPageProperties) {
 
   const [searchParams] = useSearchParams();
-  const requestedQuery = searchParams.get("query");
+  const requestedQuery = decodeURIComponent(searchParams.get("query") ?? "");
   const navigate = useNavigate();
   const [shownQuery, setShownQuery] = useState(requestedQuery ?? "");
   const [maximumItemCount, setMaximumItemCount] = useState<number | null>(null);
@@ -91,7 +91,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
     if (event.key === "Enter") {
 
-      navigate(`${location.pathname}?query=${shownQuery}`);
+      navigate(`${location.pathname}?query=${encodeURIComponent(shownQuery)}`);
       setCurrentSearchQuery(shownQuery);
 
     }
