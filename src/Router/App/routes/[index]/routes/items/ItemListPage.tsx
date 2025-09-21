@@ -91,7 +91,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
     if (event.key === "Enter") {
 
-      navigate(`${location.pathname}?query=${encodeURIComponent(shownQuery)}`);
+      navigate(`${location.pathname}?query=${encodeURIComponent(shownQuery)}`, {replace: true});
       setCurrentSearchQuery(shownQuery);
 
     }
