@@ -217,7 +217,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
                         areAllInstancesUnavailable ? (
                           <p>You need to <Link to="/instances">add an instance</Link> before searching for items.</p>
                         ) : (
-                          didAllRequestsFail ? <p>Couldn't find anything from any instances.</p> : <p>Found {totalItemCount} items across {searchRequestResult.length - failedRequestCount} instance{searchRequestResult.length - failedRequestCount > 1 ? "s" : ""}.{failedRequestCount > 0 ? ` ${failedRequestCount} instance${failedRequestCount > 1 ? "s" : ""} had a problem and couldn't return results.` : ""}</p>
+                          didAllRequestsFail ? <p>Your instances had problems returning results.</p> : <p>Found {totalItemCount} items across {searchRequestResult.length - failedRequestCount} instance{searchRequestResult.length - failedRequestCount > 1 ? "s" : ""}.{failedRequestCount > 0 ? ` ${failedRequestCount} instance${failedRequestCount > 1 ? "s had problems" : "had a problem"} returning results.` : ""}</p>
                         )
                       }
                     </section>
