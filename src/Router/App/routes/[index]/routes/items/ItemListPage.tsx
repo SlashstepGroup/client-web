@@ -12,6 +12,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ItemSearchError from "./ItemSearchError";
 import ViewSearchErrorsPopup from "./components/ViewSearchErrorsPopup/ViewSearchErrorsPopup";
+import { ItemListResponse } from "node_modules/@slashstepgroup/javascript-sdk/dist/resources/Item/Item";
 
 type ItemListPageProperties = {
   setHeaderTitle: (newHeaderTitle: string | null) => void; 
@@ -19,7 +20,9 @@ type ItemListPageProperties = {
   client: Client;
 }
 
-export type InstanceItemSearchRequestResult = PromiseSettledResult<{hostname: string; items: Item[]}>;
+export type SearchResult = {hostname: string; response: ItemListResponse};
+
+export type InstanceItemSearchRequestResult = PromiseSettledResult<SearchResult>;
 
 function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemListPageProperties) {
 
@@ -64,15 +67,15 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
         const searchRequestResult = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
 
-          return new Promise<{hostname: string; items: Item[]}>(async (resolve, reject) => {
+          return new Promise<SearchResult>(async (resolve, reject) => {
             
             try {
 
               const apiURI = await Instance.getHostnameFromAlias(savedInstance.hostname, abortController.signal) ?? savedInstance.hostname;
-              const items = await Item.list(currentSearchQuery, `https://${apiURI}`, client);
+              const response = await Item.list(currentSearchQuery, `https://${apiURI}`, client);
               resolve({
                 hostname: savedInstance.hostname,
-                items
+                response
               });
 
             } catch (originalError) {
