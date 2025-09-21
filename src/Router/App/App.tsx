@@ -47,8 +47,6 @@ function App({ project, workspace, headerTitle, instance, shouldUpdateResources,
 
   }, [shouldUpdateResources, instanceID, workspaceID, projectID]);
 
-  console.log(shouldUpdateResources);
-
   return (
     <>
       <Header onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} scope={project ?? workspace ?? instance} isUpdatingResources={shouldUpdateResources} title={headerTitle} fallbackBackPathname={fallbackBackPathname} />

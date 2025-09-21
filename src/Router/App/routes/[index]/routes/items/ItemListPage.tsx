@@ -8,23 +8,71 @@ import WorkIcon from "#components/icons/WorkIcon";
 import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import MenuList from "#components/MenuList/MenuList";
 import Spinner from "#components/Spinner/Spinner";
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Client, Item } from "@slashstepgroup/javascript-sdk";
+import { error } from "console";
+import React, { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-function ItemListPage() {
+type ItemListPageProperties = {
+  setHeaderTitle: (newHeaderTitle: string | null) => void; 
+  setFallbackBackPathname: (newPathname: string | null) => void;
+  client: Client;
+}
+
+function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemListPageProperties) {
 
   const [searchParams] = useSearchParams();
   const requestedQuery = searchParams.get("query");
-  const [query, setQuery] = useState(requestedQuery);
-  const [shownQuery, setShownQuery] = useState(query ?? "");
+  const navigate = useNavigate();
+  const [shownQuery, setShownQuery] = useState(requestedQuery ?? "");
   const [maximumItemCount, setMaximumItemCount] = useState<number | null>(null);
-  const [totalItemCount, setTotalItemCount] = useState<number>(15);
+  const [totalItemCount, setTotalItemCount] = useState<number>(0);
   const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
+  const [currentSearchQuery, setCurrentSearchQuery] = useState<string | null>(requestedQuery ?? null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
 
+    document.title = "Items • Slashstep"
+
+    setHeaderTitle("Items");
+    setFallbackBackPathname("/");
+
   }, []);
+
+  useEffect(() => {
+
+    if (!currentSearchQuery || currentSearchQuery && currentSearchQuery !== requestedQuery) return;
+
+    (async () => {
+
+      const indexedDBSavedInstances = await client.getIndexedDBSavedInstances();
+
+      const matchingItems = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
+
+        return Item.list(currentSearchQuery, client);
+
+      }));
+
+      console.log(matchingItems);
+
+      setCurrentSearchQuery(null);
+
+    })();
+
+  }, [requestedQuery, currentSearchQuery, client]);
+
+  const handleSearchKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+
+    if (event.key === "Enter") {
+
+      navigate(`${location.pathname}?query=${shownQuery}`);
+      setCurrentSearchQuery(shownQuery);
+
+    }
+
+  }, [shownQuery, location]);
 
   return (
     <section id="main-container">
@@ -46,7 +94,7 @@ function ItemListPage() {
           {
             isEasyModeEnabled ? (
               <section className="button-list">
-                <input type="text" placeholder="Type to search" />
+                <input type="text" placeholder="Type to search" value={shownQuery} onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
                 <Dropdown name="Assignee" selectedItem={"Assignee"} isOpen={false} onClick={() => null} />
                 <Dropdown name="Filter" isOpen={isFilterDropdownOpen} onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)} selectedItem={"Add filter"}>
                   <DropdownItemList>
@@ -59,21 +107,27 @@ function ItemListPage() {
                   </DropdownItemList>
                 </Dropdown>
               </section>
-            ) : <input type="text" className="query-input" value={shownQuery} placeholder="Enter a query. Any item that matches this condition will be returned." onChange={(event) => setShownQuery(event.target.value)} />
+            ) : <input type="text" className="query-input" value={shownQuery} placeholder="Whatcha lookin' for?" onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
           }
-          {/* <p>Type a query to get started.</p>
-          <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
-            <Spinner />
-            <p>Searching...</p>
-          </section> */}
-          <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
-            <span style={{width: "20px", height: "20px"}}>
-              <CheckIcon />
-            </span>
-            <p>Found {totalItemCount} items.</p>
-          </section>
+          {
+            currentSearchQuery ? (
+              <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+                <Spinner />
+                <p>Searching...</p>
+              </section>
+            ) : (
+              requestedQuery ? (
+                <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+                  <span style={{width: "20px", height: "20px"}}>
+                    {errorMessage ? null : <CheckIcon />}
+                  </span>
+                  <p>{errorMessage ?? `Found ${totalItemCount} items.`}</p>
+                </section>
+              ) : <p>Type a query to get started.</p>
+            )
+          }
         </section>
-        <section>
+        {/* <section>
           <MenuList>
             <MenuListLinkItem label="Add feature: Stage Maker" description="Beastslash ⦁ Everyone Destroys the World ⦁ Stage Maker" link="/instances/0/workspaces/0/projects/0/items/0" />
             <MenuListLinkItem label="Do something else" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
@@ -102,8 +156,8 @@ function ItemListPage() {
               <DropdownItem onClick={() => setMaximumItemCount(500)}>500</DropdownItem>
             </Dropdown>
             <p>items of {totalItemCount}</p>
-          </section>2
-        </section>
+          </section>
+        </section> */}
       </main>
     </section>
   );

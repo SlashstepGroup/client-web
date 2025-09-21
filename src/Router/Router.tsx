@@ -42,7 +42,7 @@ export default function Router() {
               </Route>
             </Route>
           </Route>
-          <Route path="items" element={<ItemListPage />} />
+          <Route path="items" element={<ItemListPage client={client} setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="*" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
         </Route>
       )
