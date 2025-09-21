@@ -15,17 +15,13 @@ import ItemListPage from "#routes/[index]/routes/items/ItemListPage";
 
 export default function Router() {
 
-  const client = useMemo(() => {
-
-    return new Client();
-
-  }, []);
+  const client = useMemo(() => new Client(), []);
   const [instance, setInstance] = useState<Instance | null>(null);
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [project, setProject] = useState<Project | null>(null);
   const [headerTitle, setHeaderTitle] = useState<string | null>(null);
   const [fallbackBackPathname, setFallbackBackPathname] = useState<string | null>(null);
-  const [shouldUpdateResources, setShouldUpdateResources] = useState(true);
+  const [shouldUpdateResources, setShouldUpdateResources] = useState<boolean>(true);
 
   const router = useMemo(() => {
 
@@ -54,7 +50,7 @@ export default function Router() {
 
     return router;
 
-  }, []);
+  }, [shouldUpdateResources, headerTitle, fallbackBackPathname, client, instance, workspace, project]);
 
   return (
     <RouterProvider router={router} />

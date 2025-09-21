@@ -8,7 +8,7 @@ import WorkIcon from "#components/icons/WorkIcon";
 import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import MenuList from "#components/MenuList/MenuList";
 import Spinner from "#components/Spinner/Spinner";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function ItemListPage() {
@@ -18,9 +18,13 @@ function ItemListPage() {
   const [query, setQuery] = useState(requestedQuery);
   const [shownQuery, setShownQuery] = useState(query ?? "");
   const [maximumItemCount, setMaximumItemCount] = useState<number | null>(null);
-  const [totalItemCount, setTotalItemCount] = useState<number>(0);
+  const [totalItemCount, setTotalItemCount] = useState<number>(15);
   const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+
+  }, []);
 
   return (
     <section id="main-container">
@@ -35,7 +39,7 @@ function ItemListPage() {
               {isEasyModeEnabled ? <CheckIcon /> : null}
             </button>
             <button type="button" className={!isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(false)}>
-              Advanced mode
+              <span>Advanced mode</span>
               {isEasyModeEnabled ? null : <CheckIcon />}
             </button>
           </section>
@@ -57,10 +61,21 @@ function ItemListPage() {
               </section>
             ) : <input type="text" className="query-input" value={shownQuery} placeholder="Enter a query. Any item that matches this condition will be returned." onChange={(event) => setShownQuery(event.target.value)} />
           }
+          {/* <p>Type a query to get started.</p>
+          <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+            <Spinner />
+            <p>Searching...</p>
+          </section> */}
+          <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+            <span style={{width: "20px", height: "20px"}}>
+              <CheckIcon />
+            </span>
+            <p>Found {totalItemCount} items.</p>
+          </section>
         </section>
         <section>
-          {/* <MenuList>
-            <MenuListLinkItem label="Add feature: Stage Maker" description="Beastslash ⦁ Everyone Destroys the World ⦁ Stage Maker" link="#" />
+          <MenuList>
+            <MenuListLinkItem label="Add feature: Stage Maker" description="Beastslash ⦁ Everyone Destroys the World ⦁ Stage Maker" link="/instances/0/workspaces/0/projects/0/items/0" />
             <MenuListLinkItem label="Do something else" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
             <MenuListLinkItem label="Do another thing" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
             <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
@@ -76,8 +91,8 @@ function ItemListPage() {
             <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
             <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
           </MenuList>
-          <p className="pagination-dropdown-container">
-            <span>Showing</span>
+          <section className="pagination-dropdown-container">
+            <p>Showing</p>
             <Dropdown name="Maximum shown items" isOpen={false} onClick={() => null} selectedItem={"15"} isDisabled>
               <DropdownItem onClick={() => null}>15</DropdownItem>
               <DropdownItem onClick={() => setMaximumItemCount(25)}>25</DropdownItem>
@@ -86,9 +101,8 @@ function ItemListPage() {
               <DropdownItem onClick={() => setMaximumItemCount(250)}>250</DropdownItem>
               <DropdownItem onClick={() => setMaximumItemCount(500)}>500</DropdownItem>
             </Dropdown>
-            <span>items of {totalItemCount}</span>
-          </p> */}
-          <p>Type a query to get started.</p>
+            <p>items of {totalItemCount}</p>
+          </section>2
         </section>
       </main>
     </section>

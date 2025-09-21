@@ -8,7 +8,19 @@ import React, { useEffect, useState } from "react";
 import { matchPath, Outlet, useLocation } from "react-router-dom";
 import "./global.css";
 
-function App({project, workspace, headerTitle, instance, shouldUpdateResources, fallbackBackPathname, setShouldUpdateResources, setInstance, client}: {fallbackBackPathname: string | null, shouldUpdateResources: boolean, headerTitle: string | null, project: Project | null, instance: Instance | null, workspace: Workspace | null, setShouldUpdateResources: (shouldUpdateResources: boolean) => void, setInstance: (instance: Instance | null) => void, client: Client}) {
+type AppProperties = {
+  fallbackBackPathname: string | null;
+  shouldUpdateResources: boolean;
+  headerTitle: string | null;
+  project: Project | null;
+  instance: Instance | null;
+  workspace: Workspace | null;
+  setShouldUpdateResources: (shouldUpdateResources: boolean) => void;
+  setInstance: (instance: Instance | null) => void;
+  client: Client;
+}
+
+function App({ project, workspace, headerTitle, instance, shouldUpdateResources, fallbackBackPathname, setShouldUpdateResources, setInstance, client }: AppProperties) {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.screen.width > 1080);
 
@@ -28,22 +40,6 @@ function App({project, workspace, headerTitle, instance, shouldUpdateResources, 
     if (!shouldUpdateResources) return;
 
     (async () => {
-
-      if (instanceID) {
-
-        setInstance(new Instance({
-          name: "beastslash.com",
-          displayName: "Beastslash",
-          description: "A Slashstep instance for Beastslash.",
-          creationTime: new Date(),
-          updateTime: new Date(),
-        }, client));
-
-      } else {
-
-        setInstance(null);
-
-      }
 
       setShouldUpdateResources(false);
 
