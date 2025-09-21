@@ -3,12 +3,13 @@ import PopupHeader from "#components/Popup/components/PopupHeader/PopupHeader";
 import Popup, { PopupProperties } from "#components/Popup/Popup";
 import { Item } from "@slashstepgroup/javascript-sdk";
 import React from "react";
+import { InstanceItemSearchRequestResult } from "../../ItemListPage";
 
 export type ViewSearchErrorsPopupProperties = {
   isOpen: boolean; 
   requestClose: () => void; 
   onClose: () => void; 
-  searchRequestResult: PromiseSettledResult<Item[]>[];
+  searchRequestResult: InstanceItemSearchRequestResult[];
 }
 
 function ViewSearchErrorsPopup({searchRequestResult, requestClose, onClose, isOpen}: ViewSearchErrorsPopupProperties) {

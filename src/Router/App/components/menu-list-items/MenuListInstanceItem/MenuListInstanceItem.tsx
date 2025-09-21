@@ -20,7 +20,7 @@ function MenuListInstanceItem({client, hostname, isSelected, onSelectionChange}:
       try {
 
         const actualHostname = await Instance.getHostnameFromAlias(hostname, abortController.signal) ?? hostname;
-        const newInstance = await Instance.getFromHostname(`http://${actualHostname}`, client, abortController.signal);
+        const newInstance = await Instance.getFromHostname(`https://${actualHostname}`, client, abortController.signal);
         setInstance(newInstance);
 
       } catch (error) {

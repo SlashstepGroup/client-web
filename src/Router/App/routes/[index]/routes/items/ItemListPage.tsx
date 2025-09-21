@@ -7,7 +7,7 @@ import CheckIcon from "#components/icons/CheckIcon";
 import StopSignIcon from "#components/icons/StopSignIcon";
 import WorkIcon from "#components/icons/WorkIcon";
 import Spinner from "#components/Spinner/Spinner";
-import { Client, Item } from "@slashstepgroup/javascript-sdk";
+import { Client, Instance, Item } from "@slashstepgroup/javascript-sdk";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ItemSearchError from "./ItemSearchError";
@@ -18,6 +18,8 @@ type ItemListPageProperties = {
   setFallbackBackPathname: (newPathname: string | null) => void;
   client: Client;
 }
+
+export type InstanceItemSearchRequestResult = PromiseSettledResult<{hostname: string; items: Item[]}>;
 
 function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemListPageProperties) {
 
@@ -30,7 +32,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
   const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [currentSearchQuery, setCurrentSearchQuery] = useState<string | null>(requestedQuery ?? null);
-  const [searchRequestResult, setSearchRequestResult] = useState<PromiseSettledResult<Item[]>[] | null>(null);
+  const [searchRequestResult, setSearchRequestResult] = useState<InstanceItemSearchRequestResult[] | null>(null);
   const [areAllInstancesUnavailable, setAreAllInstancesUnavailable] = useState<boolean>(false);
 
   useEffect(() => {
@@ -46,6 +48,8 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
     if (!currentSearchQuery || currentSearchQuery && currentSearchQuery !== requestedQuery) return;
 
+    const abortController = new AbortController();
+
     (async () => {
 
       const indexedDBSavedInstances = await client.getIndexedDBSavedInstances();
@@ -60,22 +64,39 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
         const searchRequestResult = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
 
-          return new Promise<Item[]>((resolve, reject) => {
+          return new Promise<{hostname: string; items: Item[]}>(async (resolve, reject) => {
             
-            Item.list(currentSearchQuery, client).then((items) => resolve(items)).catch((originalError) => {
+            try {
+
+              const apiURI = await Instance.getHostnameFromAlias(savedInstance.hostname, abortController.signal) ?? savedInstance.hostname;
+              const items = await Item.list(currentSearchQuery, `https://${apiURI}`, client);
+              resolve({
+                hostname: savedInstance.hostname,
+                items
+              });
+
+            } catch (originalError) {
+
+              if (!abortController.signal.aborted) {
+
+                console.error(originalError);
+
+              }
 
               const error = new ItemSearchError({
                 hostname: savedInstance.hostname,
-                message: originalError.message
+                message: originalError instanceof Error ? originalError.message : "Unknown error"
               });
 
               reject(error);
 
-            })
+            }
 
           });
 
         }));
+
+        if (abortController.signal.aborted) return;
 
         setSearchRequestResult(searchRequestResult);
 
@@ -84,6 +105,12 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
       setCurrentSearchQuery(null);
 
     })();
+
+    return () => {
+
+      abortController.abort();
+
+    }
 
   }, [requestedQuery, currentSearchQuery, client]);
 
