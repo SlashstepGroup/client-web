@@ -9,7 +9,7 @@ import WorkIcon from "#components/icons/WorkIcon";
 import Spinner from "#components/Spinner/Spinner";
 import { Client, Item } from "@slashstepgroup/javascript-sdk";
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ItemSearchError from "./ItemSearchError";
 import ViewSearchErrorsPopup from "./components/ViewSearchErrorsPopup/ViewSearchErrorsPopup";
 
@@ -31,6 +31,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [currentSearchQuery, setCurrentSearchQuery] = useState<string | null>(requestedQuery ?? null);
   const [searchRequestResult, setSearchRequestResult] = useState<PromiseSettledResult<Item[]>[] | null>(null);
+  const [areAllInstancesUnavailable, setAreAllInstancesUnavailable] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -48,27 +49,37 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
     (async () => {
 
       const indexedDBSavedInstances = await client.getIndexedDBSavedInstances();
+      if (indexedDBSavedInstances.length === 0) {
 
-      const searchRequestResult = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
+        setAreAllInstancesUnavailable(true);
+        setSearchRequestResult(null);
 
-        return new Promise<Item[]>((resolve, reject) => {
-          
-          Item.list(currentSearchQuery, client).then((items) => resolve(items)).catch((originalError) => {
+      } else {
 
-            const error = new ItemSearchError({
-              hostname: savedInstance.hostname,
-              message: originalError.message
-            });
+        setAreAllInstancesUnavailable(false);
 
-            reject(error);
+        const searchRequestResult = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
 
-          })
+          return new Promise<Item[]>((resolve, reject) => {
+            
+            Item.list(currentSearchQuery, client).then((items) => resolve(items)).catch((originalError) => {
 
-        });
+              const error = new ItemSearchError({
+                hostname: savedInstance.hostname,
+                message: originalError.message
+              });
 
-      }));
+              reject(error);
 
-      setSearchRequestResult(searchRequestResult);
+            })
+
+          });
+
+        }));
+
+        setSearchRequestResult(searchRequestResult);
+
+      }
 
       setCurrentSearchQuery(null);
 
@@ -153,10 +164,14 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
                   <section style={{display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px"}}>
                     <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
                       <span style={{width: "20px", height: "20px", flexShrink: 0}}>
-                        {didAllRequestsFail ? <StopSignIcon /> : <CheckIcon />}
+                        {areAllInstancesUnavailable || didAllRequestsFail ? <StopSignIcon /> : <CheckIcon />}
                       </span>
                       {
-                        didAllRequestsFail ? <p>Couldn't find anything from any instances.</p> : <p>Found {totalItemCount} items.</p>
+                        areAllInstancesUnavailable ? (
+                          <p>You need to <Link to="/instances">add an instance</Link> before searching for items.</p>
+                        ) : (
+                          didAllRequestsFail ? <p>Couldn't find anything from any instances.</p> : <p>Found {totalItemCount} items.</p>
+                        )
                       }
                     </section>
                     {
