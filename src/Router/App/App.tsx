@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { matchPath, Outlet, useLocation } from "react-router-dom";
 import "./global.css";
 
-type AppProperties = {
+export type AppProperties = {
   fallbackBackPathname: string | null;
   shouldUpdateResources: boolean;
   headerTitle: string | null;

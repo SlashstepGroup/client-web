@@ -9,7 +9,7 @@ import SettingsNotFoundPage from "#routes/[index]/routes/instances/routes/[insta
 import HomePage from "#routes/[index]/HomePage";
 import InstanceAccessPoliciesPage from "#routes/[index]/routes/instances/routes/[instance-id]/routes/settings/routes/access-policies/InstanceAccessPoliciesPage";
 import InstanceListPage from "#routes/[index]/routes/instances/InstanceListPage";
-import App from "./App/App";
+import App, { AppProperties } from "./App/App";
 import InstanceHomePage from "#routes/[index]/routes/instances/routes/[instance-id]/InstanceHomePage";
 import ItemListPage from "#routes/[index]/routes/items/ItemListPage";
 
@@ -25,9 +25,11 @@ export default function Router() {
 
   const router = useMemo(() => {
 
+    const appProperties: AppProperties = {client, setShouldUpdateResources, setInstance, fallbackBackPathname, shouldUpdateResources, headerTitle, project, instance, workspace};
+
     const router = createBrowserRouter(
       createRoutesFromElements(
-        <Route path="/" element={<App client={client} setShouldUpdateResources={setShouldUpdateResources} setInstance={setInstance} fallbackBackPathname={fallbackBackPathname} shouldUpdateResources={shouldUpdateResources} headerTitle={headerTitle} project={project} instance={instance} workspace={workspace} />}>
+        <Route path="/" element={<App {...appProperties} />}>
           <Route index element={<HomePage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="instances">
             <Route index element={<InstanceListPage client={client} setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
