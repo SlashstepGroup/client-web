@@ -8,11 +8,14 @@ import StopSignIcon from "#components/icons/StopSignIcon";
 import WorkIcon from "#components/icons/WorkIcon";
 import Spinner from "#components/Spinner/Spinner";
 import { Client, Instance, Item } from "@slashstepgroup/javascript-sdk";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ItemSearchError from "./ItemSearchError";
 import ViewSearchErrorsPopup from "./components/ViewSearchErrorsPopup/ViewSearchErrorsPopup";
 import { ItemListResponse } from "node_modules/@slashstepgroup/javascript-sdk/dist/resources/Item/Item";
+import MenuList from "#components/MenuList/MenuList";
+import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
+import ExclamationMarkCircleIcon from "#components/icons/ExclamationMarkCircleIcon";
 
 type ItemListPageProperties = {
   setHeaderTitle: (newHeaderTitle: string | null) => void; 
@@ -30,7 +33,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
   const requestedQuery = decodeURIComponent(searchParams.get("query") ?? "");
   const navigate = useNavigate();
   const [shownQuery, setShownQuery] = useState(requestedQuery ?? "");
-  const [maximumItemCount, setMaximumItemCount] = useState<number | null>(null);
+  const [maximumItemCount, setMaximumItemCount] = useState<number>(0);
   const [totalItemCount, setTotalItemCount] = useState<number>(0);
   const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
@@ -128,7 +131,8 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
   }, [shownQuery, location]);
 
-  const didAllRequestsFail = searchRequestResult && searchRequestResult.filter((result) => result.status === "rejected").length === searchRequestResult.length; 
+  const failedRequestCount = searchRequestResult?.filter((result) => result.status === "rejected").length ?? 0;
+  const didAllRequestsFail = searchRequestResult && failedRequestCount === searchRequestResult.length; 
   const [isViewSearchErrorsPopupOpen, setIsViewSearchErrorsPopupOpen] = useState<boolean>(false);
   const [isViewSearchErrorsPopupMounted, setIsViewSearchErrorsPopupMounted] = useState<boolean>(false);
 
@@ -141,6 +145,17 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
     }
 
   }, [isViewSearchErrorsPopupMounted]);
+
+  const sortedResults: Item[] = useMemo(() => {
+
+    if (!searchRequestResult) return [];
+
+    const mergedItems = searchRequestResult.filter((result) => result.status === "fulfilled").map((result) => result.value.response.items).flat();
+    const sortedItems = mergedItems;
+
+    return sortedItems.slice(0, maximumItemCount);
+
+  }, [searchRequestResult, maximumItemCount]);
 
   return (
     <>
@@ -190,22 +205,24 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
                   <p>Searching...</p>
                 </section>
               ) : (
-                requestedQuery ? (
+                requestedQuery && searchRequestResult ? (
                   <section style={{display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px"}}>
                     <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
                       <span style={{width: "20px", height: "20px", flexShrink: 0}}>
-                        {areAllInstancesUnavailable || didAllRequestsFail ? <StopSignIcon /> : <CheckIcon />}
+                        {areAllInstancesUnavailable || didAllRequestsFail ? <StopSignIcon /> : (
+                          failedRequestCount > 0 ? <ExclamationMarkCircleIcon /> : <CheckIcon />
+                        )}
                       </span>
                       {
                         areAllInstancesUnavailable ? (
                           <p>You need to <Link to="/instances">add an instance</Link> before searching for items.</p>
                         ) : (
-                          didAllRequestsFail ? <p>Couldn't find anything from any instances.</p> : <p>Found {totalItemCount} items.</p>
+                          didAllRequestsFail ? <p>Couldn't find anything from any instances.</p> : <p>Found {totalItemCount} items across {searchRequestResult.length - failedRequestCount} instance{searchRequestResult.length - failedRequestCount > 1 ? "s" : ""}.{failedRequestCount > 0 ? ` ${failedRequestCount} instance${failedRequestCount > 1 ? "s" : ""} had a problem and couldn't return results.` : ""}</p>
                         )
                       }
                     </section>
                     {
-                      didAllRequestsFail ? (
+                      failedRequestCount > 0 ? (
                         <span>
                           <button type="button" onClick={() => setIsViewSearchErrorsPopupMounted(true)}>View errors</button>
                         </span>
@@ -216,37 +233,33 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
               )
             }
           </section>
-          {/* <section>
-            <MenuList>
-              <MenuListLinkItem label="Add feature: Stage Maker" description="Beastslash ⦁ Everyone Destroys the World ⦁ Stage Maker" link="/instances/0/workspaces/0/projects/0/items/0" />
-              <MenuListLinkItem label="Do something else" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do another thing" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-              <MenuListLinkItem label="Do something" description="Beastslash ⦁ Everyone Destroys the World ⦁ STAGEMAKER-1" link="#" />
-            </MenuList>
-            <section className="pagination-dropdown-container">
-              <p>Showing</p>
-              <Dropdown name="Maximum shown items" isOpen={false} onClick={() => null} selectedItem={"15"} isDisabled>
-                <DropdownItem onClick={() => null}>15</DropdownItem>
-                <DropdownItem onClick={() => setMaximumItemCount(25)}>25</DropdownItem>
-                <DropdownItem onClick={() => setMaximumItemCount(50)}>50</DropdownItem>
-                <DropdownItem onClick={() => setMaximumItemCount(100)}>100</DropdownItem>
-                <DropdownItem onClick={() => setMaximumItemCount(250)}>250</DropdownItem>
-                <DropdownItem onClick={() => setMaximumItemCount(500)}>500</DropdownItem>
-              </Dropdown>
-              <p>items of {totalItemCount}</p>
-            </section>
-          </section> */}
+          <section>
+            {
+              sortedResults.length > 0 ? (
+                <>
+                  <MenuList>
+                    {
+                      sortedResults.map((item) => (
+                        <MenuListLinkItem key={`${item.apiURI}/${item.id}`} label={item.summary} description={`${item.apiURI} ⦁ Workspace name ⦁ Project name`} link={`/instances/${item.apiURI}/workspaces/0/projects/0/items/${item.id}`} />
+                      ))
+                    }
+                  </MenuList>
+                  <section className="pagination-dropdown-container">
+                    <p>Showing</p>
+                    <Dropdown name="Maximum shown items" isOpen={false} onClick={() => null} selectedItem={maximumItemCount} isDisabled>
+                      <DropdownItem onClick={() => null}>15</DropdownItem>
+                      <DropdownItem onClick={() => setMaximumItemCount(25)}>25</DropdownItem>
+                      <DropdownItem onClick={() => setMaximumItemCount(50)}>50</DropdownItem>
+                      <DropdownItem onClick={() => setMaximumItemCount(100)}>100</DropdownItem>
+                      <DropdownItem onClick={() => setMaximumItemCount(250)}>250</DropdownItem>
+                      <DropdownItem onClick={() => setMaximumItemCount(500)}>500</DropdownItem>
+                    </Dropdown>
+                    <p>items of {totalItemCount}</p>
+                  </section>
+                </>
+              ) : null
+            }
+          </section>
         </main>
       </section>
     </>
