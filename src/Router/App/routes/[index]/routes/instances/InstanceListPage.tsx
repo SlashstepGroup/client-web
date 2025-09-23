@@ -103,9 +103,6 @@ function InstanceListPage({client, setHeaderTitle, setFallbackBackPathname}: {se
               <button className="primary-button" onClick={() => navigate("?local-action=add-instance")}>Add instance</button>
             </li>
             <li>
-              <button onClick={() => navigate("/instances/personal")}>Use offline instance</button>
-            </li>
-            <li>
               <button className="destructive-button" disabled={selectedInstanceHostnames.length === 0} onClick={() => navigate("?local-action=remove-instance")}>Remove selected instances</button>
             </li>
           </ul>

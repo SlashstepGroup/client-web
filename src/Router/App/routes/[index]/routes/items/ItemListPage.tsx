@@ -7,7 +7,7 @@ import CheckIcon from "#components/icons/CheckIcon";
 import StopSignIcon from "#components/icons/StopSignIcon";
 import WorkIcon from "#components/icons/WorkIcon";
 import Spinner from "#components/Spinner/Spinner";
-import { Client, Instance, Item } from "@slashstepgroup/javascript-sdk";
+import { Client, Instance, Item, Project } from "@slashstepgroup/javascript-sdk";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ItemSearchError from "./ItemSearchError";
@@ -18,24 +18,24 @@ import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuL
 import ExclamationMarkCircleIcon from "#components/icons/ExclamationMarkCircleIcon";
 
 type ItemListPageProperties = {
-  setHeaderTitle: (newHeaderTitle: string | null) => void; 
+  setHeaderTitle: (newHeaderTitle: string | null) => void;
   setFallbackBackPathname: (newPathname: string | null) => void;
   client: Client;
 }
 
-export type SearchResult = {hostname: string; response: ItemListResponse};
+export type SearchResult = { hostname: string; response: ItemListResponse };
 
 export type InstanceItemSearchRequestResult = PromiseSettledResult<SearchResult>;
 
-function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemListPageProperties) {
+function ItemListPage({ client, setHeaderTitle, setFallbackBackPathname }: ItemListPageProperties) {
 
   const [searchParams] = useSearchParams();
   const requestedQuery = decodeURIComponent(searchParams.get("query") ?? "");
   const navigate = useNavigate();
   const [shownQuery, setShownQuery] = useState(requestedQuery ?? "");
-  const [maximumItemCount, setMaximumItemCount] = useState<number>(0);
+  const [maximumItemCount, setMaximumItemCount] = useState<number>(15);
   const [totalItemCount, setTotalItemCount] = useState<number>(0);
-  const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(false);
+  const [isEasyModeEnabled, setIsEasyModeEnabled] = useState<boolean>(true);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [currentSearchQuery, setCurrentSearchQuery] = useState<string | null>(requestedQuery ?? null);
   const [searchRequestResult, setSearchRequestResult] = useState<InstanceItemSearchRequestResult[] | null>(null);
@@ -71,11 +71,11 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
         const searchRequestResult = await Promise.allSettled(indexedDBSavedInstances.map((savedInstance) => {
 
           return new Promise<SearchResult>(async (resolve, reject) => {
-            
+
             try {
 
               const apiURI = await Instance.getHostnameFromAlias(savedInstance.hostname, abortController.signal) ?? savedInstance.hostname;
-              const response = await Item.list(currentSearchQuery, `https://${apiURI}`, client);
+              const response = await Item.list(currentSearchQuery, `https://${apiURI}`, client, {Project});
               resolve({
                 hostname: savedInstance.hostname,
                 response
@@ -104,6 +104,8 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
         if (abortController.signal.aborted) return;
 
+        const totalItemCount = searchRequestResult.filter((result) => result.status === "fulfilled").map((result) => result.value.response.totalItemCount).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+        setTotalItemCount(totalItemCount);
         setSearchRequestResult(searchRequestResult);
 
       }
@@ -124,7 +126,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
 
     if (event.key === "Enter") {
 
-      navigate(`${location.pathname}?query=${encodeURIComponent(shownQuery)}`, {replace: true});
+      navigate(`${location.pathname}?query=${encodeURIComponent(shownQuery)}`, { replace: true });
       setCurrentSearchQuery(shownQuery);
 
     }
@@ -132,7 +134,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
   }, [shownQuery, location]);
 
   const failedRequestCount = searchRequestResult?.filter((result) => result.status === "rejected").length ?? 0;
-  const didAllRequestsFail = searchRequestResult && failedRequestCount === searchRequestResult.length; 
+  const didAllRequestsFail = searchRequestResult && failedRequestCount === searchRequestResult.length;
   const [isViewSearchErrorsPopupOpen, setIsViewSearchErrorsPopupOpen] = useState<boolean>(false);
   const [isViewSearchErrorsPopupMounted, setIsViewSearchErrorsPopupMounted] = useState<boolean>(false);
 
@@ -171,7 +173,7 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
         <main>
           <section>
             <section className="button-list">
-              <button type="button" className={isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(true)} disabled>
+              <button type="button" className={isEasyModeEnabled ? "primary-button" : undefined} onClick={() => setIsEasyModeEnabled(true)}>
                 <span>Easy mode</span>
                 {isEasyModeEnabled ? <CheckIcon /> : null}
               </button>
@@ -184,40 +186,37 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
               isEasyModeEnabled ? (
                 <section className="button-list">
                   <input type="text" placeholder="Type to search" value={shownQuery} onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
-                  <Dropdown name="Assignee" selectedItem={"Assignee"} isOpen={false} onClick={() => null} />
-                  <Dropdown name="Filter" isOpen={isFilterDropdownOpen} onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)} selectedItem={"Add filter"}>
-                    <DropdownItemList>
-                      <DropdownItem onClick={() => null}>
-                        Assignee
-                      </DropdownItem>
-                      <DropdownItem onClick={() => null}>
-                        Type
-                      </DropdownItem>
-                    </DropdownItemList>
-                  </Dropdown>
                 </section>
               ) : <input type="text" className="query-input" value={shownQuery} placeholder="Whatcha lookin' for?" onChange={(event) => setShownQuery(event.target.value)} onKeyDown={handleSearchKeyDown} />
             }
             {
               currentSearchQuery ? (
-                <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
+                <section style={{ display: "flex", alignItems: "center", gap: "15px" }}>
                   <Spinner />
                   <p>Searching...</p>
                 </section>
               ) : (
                 requestedQuery && searchRequestResult ? (
-                  <section style={{display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px"}}>
-                    <section style={{display: "flex", alignItems: "center", gap: "15px"}}>
-                      <span style={{width: "20px", height: "20px", flexShrink: 0}}>
-                        {areAllInstancesUnavailable || didAllRequestsFail ? <StopSignIcon /> : (
-                          failedRequestCount > 0 ? <ExclamationMarkCircleIcon /> : <CheckIcon />
-                        )}
+                  <section style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px" }}>
+                    <section style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                      <span style={{ width: "20px", height: "20px", flexShrink: 0 }}>
+                        {
+                          areAllInstancesUnavailable || didAllRequestsFail ? (
+                            <StopSignIcon />
+                          ) : (
+                            failedRequestCount > 0 ? <ExclamationMarkCircleIcon /> : <CheckIcon />
+                          )
+                        }
                       </span>
                       {
                         areAllInstancesUnavailable ? (
                           <p>You need to <Link to="/instances">add an instance</Link> before searching for items.</p>
                         ) : (
-                          didAllRequestsFail ? <p>Your instances had problems returning results.</p> : <p>Found {totalItemCount} items across {searchRequestResult.length - failedRequestCount} instance{searchRequestResult.length - failedRequestCount > 1 ? "s" : ""}.{failedRequestCount > 0 ? ` ${failedRequestCount} instance${failedRequestCount > 1 ? "s had problems" : "had a problem"} returning results.` : ""}</p>
+                          didAllRequestsFail ? (
+                            <p>Your instances had problems returning results.</p>
+                          ) : (
+                            <p>Found {totalItemCount} items{searchRequestResult.length - failedRequestCount > 1 ? ` across ${searchRequestResult.length - failedRequestCount} instances` : ""}.{failedRequestCount > 0 ? ` ${failedRequestCount} instance${failedRequestCount > 1 ? "s had problems" : "had a problem"} returning results.` : ""}</p>
+                          )
                         )
                       }
                     </section>
@@ -240,7 +239,12 @@ function ItemListPage({client, setHeaderTitle, setFallbackBackPathname}: ItemLis
                   <MenuList>
                     {
                       sortedResults.map((item) => (
-                        <MenuListLinkItem key={`${item.apiURI}/${item.id}`} label={item.summary} description={`${item.apiURI} ⦁ Workspace name ⦁ Project name`} link={`/instances/${item.apiURI}/workspaces/0/projects/0/items/${item.id}`} />
+                        <MenuListLinkItem key={`${item.apiURI}/${item.id}`} label={
+                          <section style={{display: "flex", alignItems: "center", gap: "10px"}}>
+                            <b style={{backgroundColor: "var(--body-background)", padding: "5px 10px", borderRadius: "5px"}}>{item.project?.key}-{item.number}</b>
+                            <b>{item.summary}</b>
+                          </section>
+                        } description={`${item.apiURI.replace("https://", "")} ⦁ Workspace name ⦁ ${item.project?.displayName}`} link={`/instances/${item.apiURI.replace("https://", "")}/workspaces/0/projects/${item.project?.name}/items/${item.number}`} />
                       ))
                     }
                   </MenuList>
