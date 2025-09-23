@@ -199,7 +199,7 @@ function ItemListPage({ client, setHeaderTitle, setFallbackBackPathname }: ItemL
                 requestedQuery && searchRequestResult ? (
                   <section style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px" }}>
                     <section style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-                      <span style={{ width: "20px", height: "20px", flexShrink: 0 }}>
+                      <span style={{ width: "20px", height: "20px", flexShrink: 0, fill: "var(--text)" }}>
                         {
                           areAllInstancesUnavailable || didAllRequestsFail ? (
                             <StopSignIcon />
