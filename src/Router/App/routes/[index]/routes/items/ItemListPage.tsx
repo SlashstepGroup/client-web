@@ -17,7 +17,7 @@ import MenuList from "#components/MenuList/MenuList";
 import MenuListLinkItem from "#components/menu-list-items/MenuListLinkItem/MenuListLinkItem";
 import ExclamationMarkCircleIcon from "#components/icons/ExclamationMarkCircleIcon";
 
-type ItemListPageProperties = {
+export type ItemListPageProperties = {
   setHeaderTitle: (newHeaderTitle: string | null) => void;
   setFallbackBackPathname: (newPathname: string | null) => void;
   client: Client;
