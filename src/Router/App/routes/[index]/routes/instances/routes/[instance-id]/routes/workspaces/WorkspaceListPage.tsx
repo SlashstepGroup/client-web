@@ -19,7 +19,7 @@ function WorkspaceListPage({instance, isLoadingResources}: {instance: Instance |
       name: "everyone-destroys-the-world",
       displayName: "Everyone Destroys the World Group",
       description: "Workspace for anything related to Everyone Destroys the World."
-    }, {} as Client)
+    }, "localhost", {} as Client)
   ]);
 
   useEffect(() => {

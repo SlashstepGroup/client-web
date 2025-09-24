@@ -7,7 +7,7 @@ import CheckIcon from "#components/icons/CheckIcon";
 import StopSignIcon from "#components/icons/StopSignIcon";
 import WorkIcon from "#components/icons/WorkIcon";
 import Spinner from "#components/Spinner/Spinner";
-import { Client, Instance, Item, Project } from "@slashstepgroup/javascript-sdk";
+import { Client, Instance, Item, Project, Workspace } from "@slashstepgroup/javascript-sdk";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ItemSearchError from "./ItemSearchError";
@@ -75,7 +75,7 @@ function ItemListPage({ client, setHeaderTitle, setFallbackBackPathname }: ItemL
             try {
 
               const apiURI = await Instance.getHostnameFromAlias(savedInstance.hostname, abortController.signal) ?? savedInstance.hostname;
-              const response = await Item.list(currentSearchQuery, `https://${apiURI}`, client, {Project});
+              const response = await Item.list(currentSearchQuery, `https://${apiURI}`, client, {Project, Workspace});
               resolve({
                 hostname: savedInstance.hostname,
                 response
@@ -244,7 +244,7 @@ function ItemListPage({ client, setHeaderTitle, setFallbackBackPathname }: ItemL
                             <b style={{backgroundColor: "var(--body-background)", padding: "5px 10px", borderRadius: "5px"}}>{item.project?.key}-{item.number}</b>
                             <b>{item.summary}</b>
                           </section>
-                        } description={`${item.apiURI.replace("https://", "")} ⦁ Workspace name ⦁ ${item.project?.displayName}`} link={`/instances/${item.apiURI.replace("https://", "")}/workspaces/0/projects/${item.project?.name}/items/${item.number}`} />
+                        } description={`${item.apiURI.replace("https://", "")} ⦁ ${item.project?.workspace?.displayName} ⦁ ${item.project?.displayName}`} link={`/instances/${item.apiURI.replace("https://", "")}/workspaces/${item.project?.workspace?.name}/projects/${item.project?.name}/items/${item.number}`} />
                       ))
                     }
                   </MenuList>
