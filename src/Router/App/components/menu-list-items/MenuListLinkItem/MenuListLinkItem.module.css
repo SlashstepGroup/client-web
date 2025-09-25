@@ -26,6 +26,7 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  flex-direction: row;
 }
 
 .item > a > section > svg {
@@ -38,6 +39,7 @@
 .information {
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .information > span {

@@ -27,10 +27,10 @@ html {
   font-size: 16px;
 }
 
-main > section {
+main section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 html, #root {
@@ -51,8 +51,9 @@ body {
   transition: 0.3s;
 }
 
-p {
+p, li {
   line-height: 1.5;
+  color: var(--text);
 }
 
 .query-input {
@@ -68,8 +69,8 @@ a {
   color: var(--primary)
 }
 
-p {
-  color: var(--text);
+h1, h2, h3, h4 {
+  margin: 0;
 }
 
 h1 {
@@ -83,6 +84,7 @@ h1, h2, p {
 code {
   padding: 5px;
   border-radius: 5px;
+  border: 1px solid var(--border);
 }
 
 .column-section {
@@ -189,6 +191,9 @@ button {
 
 ul {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 main {
@@ -385,6 +390,18 @@ main > h1 {
     --menu-list-button-background: rgb(18, 18, 20);
     --border: rgb(27, 27, 27);
     --secondary-button-background: rgb(18, 18, 20);
+  }
+
+}
+
+@media print {
+
+  main > h1 {
+    display: block;
+  }
+
+  #main-container {
+    overflow-y: auto;
   }
 
 }

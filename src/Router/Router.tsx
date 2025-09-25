@@ -13,6 +13,7 @@ import App, { AppProperties } from "./App/App";
 import InstanceHomePage from "#routes/[index]/routes/instances/routes/[instance-id]/InstanceHomePage";
 import ItemListPage from "#routes/[index]/routes/items/ItemListPage";
 import HomeSettingsPage from "#routes/[index]/routes/settings/HomeSettingsPage";
+import PrivacyPolicyPage from "#routes/[index]/routes/privacy-policy/PrivacyPolicyPage";
 
 export default function Router() {
 
@@ -46,6 +47,7 @@ export default function Router() {
             </Route>
           </Route>
           <Route path="items" element={<ItemListPage client={client} setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
+          <Route path="privacy-policy" element={<PrivacyPolicyPage client={client} setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="settings" element={<HomeSettingsPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
           <Route path="*" element={<NotFoundPage setHeaderTitle={setHeaderTitle} setFallbackBackPathname={setFallbackBackPathname} />} />
         </Route>
